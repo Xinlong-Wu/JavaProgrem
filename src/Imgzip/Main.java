@@ -12,6 +12,7 @@ public class Main extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         Scene scene = new Scene(new ImgBlock(),300,380);
+        scene.getStylesheets().add("css/imgblock.css");
 //        Scene scene = new Scene(new ImgBlock(), 1024, 700);     //真正尺寸
 
         primaryStage.setTitle("图像压缩处理");

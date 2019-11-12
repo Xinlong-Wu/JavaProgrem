@@ -1,3 +1,9 @@
-.downLoadBar {
+.block-bg {
     -fx-background-color: #ffffff;
+}
+.menu-basic:hover {
+    -fx-background-color: rgb(102, 102, 153);
+}
+.menu-bt {
+    -fx-pref-width: 100;
 }
