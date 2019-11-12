@@ -7,11 +7,9 @@ import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.layout.Background;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.GridPane;
 import javafx.scene.layout.HBox;
@@ -26,30 +24,54 @@ import javafx.scene.image.ImageView;
  * @date 2019/11/12
  */
 class ImgBlock extends BorderPane {
-    static String WAITING = "file:res/icon/waiting.png";
-    static String DONE = "file:res/icon/done.png";
-    ImageView img = null;
-    ImageView state = new ImageView(new Image(WAITING));
+    static String WAITING = "icon/waiting.png";
+    static String DONE = "icon/done.png";
+    static String DOWNLOAD = "icon/download.png";
+
+    private ImageView ivimg = null;
+    private ImageView ivstate = new ImageView(new Image(WAITING));
+    private ImageView ivDwonLoad = new ImageView(new Image(DOWNLOAD));
+
     GridPane topBar = new GridPane();
 
 //    Menu
     public ImgBlock(){
+        //父属性设定
         super.setHeight(380);
         super.setWidth(300);
         super.setTop(topBar);
+        this.setStyle("-fx-background-color: #ffffff;");
 
+        //私有属性设定
+        ivstate.setFitHeight(20);
+        ivstate.setFitWidth(20);
+        ivDwonLoad.setFitHeight(20);
+        ivDwonLoad.setFitWidth(20);
+
+        // 顶部栏属性设定
         topBar.setGridLinesVisible(true);
-        topBar.setAlignment(Pos.CENTER);
+        topBar.setAlignment(Pos.CENTER_LEFT);
         topBar.setHgap(6);
         topBar.setVgap(6);
+        topBar.setPadding(new Insets(5,10,5,10));
+        topBar.setPrefSize(370,20);
 
-        state.setFitHeight(20);
-        state.setFitWidth(20);
-        topBar.add(state,0,0);
+        // 状态图标设定
+        topBar.add(ivstate,0,0);
+
+        //保存菜单设定
+        MenuBar downLoadBar = new MenuBar();
+        downLoadBar.getStyleClass().add("downLoadBar");
+        Menu downLoad = new Menu();
+//        downLoad.getStyleClass().addAll()
+        downLoad.setGraphic(ivDwonLoad);
+        downLoadBar.getMenus().add(downLoad);
+
+        topBar.add(downLoadBar,1,0);
 
     }
     public ImgBlock(String imgUrl){
-        img = new ImageView(new Image(imgUrl));
+        ivimg = new ImageView(new Image(imgUrl));
     }
 
 
