@@ -5,7 +5,7 @@ import javafx.scene.Scene;
 import javafx.scene.layout.FlowPane;
 import javafx.stage.Stage;
 
-public class Main extends Application {
+public class MainBox extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
