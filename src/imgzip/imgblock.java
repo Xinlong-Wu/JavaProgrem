@@ -30,7 +30,7 @@ class ImgBlock extends BorderPane {
 //    Menu
     /**
      *
-     * XXX class function description.
+     * 图片预览框 构造方法
      *
      */
     public ImgBlock(){
