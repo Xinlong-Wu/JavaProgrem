@@ -4,6 +4,8 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.layout.FlowPane;
+import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
 
 public class Main extends Application {
@@ -11,12 +13,19 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
 
-        Scene scene = new Scene(new ImgBlock(),300,380);
+//        Scene scene = new Scene(new ImgBlock(),300,380);
+        ImgBlock test = new ImgBlock();
+        FlowPane test1 = new FlowPane();
+        test1.getChildren().add(test);
+        test1.getStyleClass().add("main-box");
+
+        //真正尺寸
+        Scene scene = new Scene(test1, 1024, 700);
         scene.getStylesheets().add("css/imgblock.css");
-//        Scene scene = new Scene(new ImgBlock(), 1024, 700);     //真正尺寸
 
         primaryStage.setTitle("图像压缩处理");
         primaryStage.setScene(scene);
+        primaryStage.setResizable(false);
         primaryStage.show();
     }
 
