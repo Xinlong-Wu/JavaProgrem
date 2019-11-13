@@ -85,12 +85,19 @@ class ImgBlock extends BorderPane {
         MenuItem saveAs = new MenuItem("另存为");
         save.getStyleClass().addAll("block-menu-basic");
         saveAs.getStyleClass().addAll("block-menu-basic");
-        downLoad.getItems().addAll(save,saveAs);
+        downLoad.getItems().add(save);
+        downLoad.getItems().add(saveAs);
         downLoad.setGraphic(ivDwonLoad);
         downLoad.getStyleClass().addAll("block-menu-bt");
 
 
-        //底部转换菜单设定
+        // 状态及关闭图标设定
+        topBar.getChildren().add(ivstate);
+        topBar.getChildren().add(downLoad);
+        topBar.getChildren().add(btBox);
+
+
+        //底部栏设定
         MenuButton trans = new MenuButton();
         trans.setPadding(new Insets(0,0,0,10));
         MenuItem toJpg = new MenuItem("To JPG");
@@ -99,7 +106,6 @@ class ImgBlock extends BorderPane {
         saveAs.getStyleClass().addAll("block-menu-basic");
         trans.getItems().addAll(toJpg,toPng);
         trans.getStyleClass().addAll("block-menu-bt");
-        // 状态及关闭图标设定
         butBar.getChildren().add(trans);
 
 
