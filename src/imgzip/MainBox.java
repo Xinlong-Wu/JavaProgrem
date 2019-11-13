@@ -11,9 +11,9 @@ public class MainBox extends Application {
     public void start(Stage primaryStage) throws Exception{
 
 //        Scene scene = new Scene(new ImgBlock(),300,380);
-        ImgBlock test = new ImgBlock();
+        ImgBlock test = new ImgBlock("E:\\360MoveData\\Users\\fenglinger\\Desktop\\20191019233718.jpg");
         FlowPane test1 = new FlowPane();
-        test1.getChildren().add(test);
+        test1.getChildren().addAll(test);
         test1.getStyleClass().add("main-box");
 
         //真正尺寸

@@ -23,7 +23,7 @@ class ImgBlock extends BorderPane {
     static Image DOWNLOAD = new Image("res/icon/download.png");
     static Image CLOSE = new Image("res/icon/close.png");
 
-    private ImageView ivimg = null;
+    private ImageView ivimg = new ImageView();
     private ImageView ivstate = new ImageView(WAITING);
     private ImageView ivDwonLoad = new ImageView(DOWNLOAD);
     private ImageView ivClose = new ImageView(CLOSE);
@@ -37,12 +37,16 @@ class ImgBlock extends BorderPane {
      * 图片预览框 构造方法
      *
      */
-    public ImgBlock(){
+    public ImgBlock(String imgUrl){
         //父属性及子属性设定
         this.setPadding(new Insets(10));
         this.setTop(topBar);
         this.setBottom(butBar);
         this.getStyleClass().add("block-bg");
+        this.setCenter(ivimg);
+
+
+
 
         // 边框阴影设置
         DropShadow dropShadow =new DropShadow();
@@ -55,6 +59,12 @@ class ImgBlock extends BorderPane {
 
 
         //私有属性设定
+        Image tmp = new Image("file:"+imgUrl);
+        ivimg.setImage(tmp);
+        ivimg.setPreserveRatio(true);
+        ivimg.setFitWidth(270);
+//        ivimg.setFitHeight(290);
+
         ivstate.setFitHeight(15);
         ivstate.setFitWidth(15);
         ivDwonLoad.setFitHeight(15);
@@ -98,19 +108,19 @@ class ImgBlock extends BorderPane {
 
 
         //底部栏设定
-        MenuButton trans = new MenuButton();
+        ComboBox<String> trans = new ComboBox<>();
         trans.setPadding(new Insets(0,0,0,10));
-        MenuItem toJpg = new MenuItem("To JPG");
-        MenuItem toPng = new MenuItem("To PNG");
-        save.getStyleClass().addAll("block-menu-basic");
-        saveAs.getStyleClass().addAll("block-menu-basic");
-        trans.getItems().addAll(toJpg,toPng);
-        trans.getStyleClass().addAll("block-menu-bt");
+        trans.getItems().addAll("To JPG","To PNG","To BMP");
+        trans.setValue("To JPG");
+        trans.getStyleClass().addAll("block-combo");
         butBar.getChildren().add(trans);
 
 
-    }
-    public ImgBlock(String imgUrl){
-        ivimg = new ImageView(new Image(imgUrl));
+
+
+
+        // 事件响应部分
+
+
     }
 }

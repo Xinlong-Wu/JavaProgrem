@@ -4,8 +4,13 @@
     -fx-border-color: rgba(0, 0, 0, 0.48);
     -fx-border-width: 1px;
     -fx-border-radius: 5px;
-    -fx-pref-width: 225px;
-    -fx-pref-height: 250px;
+    -fx-pref-width: 280px;
+    -fx-max-width: 280px;
+    -fx-min-width: 280px;
+    -fx-min-height: 300px;
+    -fx-max-height: 300px;
+    -fx-pref-height: 300px;
+    -fx-spacing: 20px;
 }
 
 
@@ -21,7 +26,7 @@
     -fx-alignment: center-left;
     -fx-pref-width: 240px;
     -fx-pref-height: 30px;
-    -fx-background-color: #ff565b;
+    -fx-background-color: #ffffff;
 }
 
 
@@ -53,6 +58,13 @@
     -fx-pref-height: 15px;
 }
 
+.block-combo {
+    -fx-alignment: center-right;
+    -fx-background-color: #ffffff;
+    -fx-pref-width: 115px;
+    -fx-pref-height: 15px;
+}
 .main-box {
-    -fx-padding: 10px;
+    -fx-padding: 20px;
+    -fx-hgap: 30px;
 }
