@@ -1,13 +1,10 @@
-package Imgzip;
+package imgzip;
 
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
-import javafx.geometry.Side;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.GridPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
@@ -31,6 +28,11 @@ class ImgBlock extends BorderPane {
     HBox topBar = new HBox();
 
 //    Menu
+    /**
+     *
+     * XXX class function description.
+     *
+     */
     public ImgBlock(){
         //父属性及子属性设定
         this.setPadding(new Insets(10));
