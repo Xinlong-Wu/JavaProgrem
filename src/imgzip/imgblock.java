@@ -1,6 +1,7 @@
 package imgzip;
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -17,15 +18,18 @@ import javafx.scene.paint.Color;
  * @date 2019/11/12
  */
 class ImgBlock extends BorderPane {
-    static String WAITING = "res/icon/waiting.png";
-    static String DONE = "res/icon/done.png";
-    static String DOWNLOAD = "res/icon/download.png";
+    static Image WAITING = new Image("res/icon/waiting.png");
+    static Image DONE = new Image("res/icon/done.png");
+    static Image DOWNLOAD = new Image("res/icon/download.png");
+    static Image CLOSE = new Image("res/icon/close.png");
 
     private ImageView ivimg = null;
-    private ImageView ivstate = new ImageView(new Image(WAITING));
-    private ImageView ivDwonLoad = new ImageView(new Image(DOWNLOAD));
-
+    private ImageView ivstate = new ImageView(WAITING);
+    private ImageView ivDwonLoad = new ImageView(DOWNLOAD);
+    private ImageView ivClose = new ImageView(CLOSE);
+    private Button btClose = new Button();
     HBox topBar = new HBox();
+    HBox butBar = new HBox();
 
 //    Menu
     /**
@@ -36,7 +40,8 @@ class ImgBlock extends BorderPane {
     public ImgBlock(){
         //父属性及子属性设定
         this.setPadding(new Insets(10));
-        super.setTop(topBar);
+        this.setTop(topBar);
+        this.setBottom(butBar);
         this.getStyleClass().add("block-bg");
 
         // 边框阴影设置
@@ -50,18 +55,28 @@ class ImgBlock extends BorderPane {
 
 
         //私有属性设定
-        ivstate.setFitHeight(20);
-        ivstate.setFitWidth(20);
-        ivDwonLoad.setFitHeight(20);
-        ivDwonLoad.setFitWidth(20);
+        ivstate.setFitHeight(15);
+        ivstate.setFitWidth(15);
+        ivDwonLoad.setFitHeight(15);
+        ivDwonLoad.setFitWidth(15);
+        ivClose.setFitHeight(20);
+        ivClose.setFitWidth(20);
+
+
+        //关闭按钮设定
+        btClose.setGraphic(ivClose);
+        btClose.getStyleClass().add("block-box-close");
+        HBox btBox = new HBox();
+        btBox.getStyleClass().add("block-box");
+        btBox.getChildren().add(btClose);
 
         // 顶部栏属性设定
         topBar.getStyleClass().setAll("block-topbar");
         topBar.setPadding(new Insets(0,0,0,10));
 
-        // 状态图标设定
-        topBar.getChildren().add(ivstate);
-
+        //底部栏属性设定
+        butBar.getStyleClass().setAll("block-butbar");
+        butBar.setPadding(new Insets(0,0,0,10));
 
         //保存菜单设定
         MenuButton downLoad = new MenuButton();
@@ -70,11 +85,23 @@ class ImgBlock extends BorderPane {
         MenuItem saveAs = new MenuItem("另存为");
         save.getStyleClass().addAll("block-menu-basic");
         saveAs.getStyleClass().addAll("block-menu-basic");
-        downLoad.getItems().add(save);
-        downLoad.getItems().add(saveAs);
+        downLoad.getItems().addAll(save,saveAs);
         downLoad.setGraphic(ivDwonLoad);
         downLoad.getStyleClass().addAll("block-menu-bt");
-        topBar.getChildren().add(downLoad);
+
+
+        //底部转换菜单设定
+        MenuButton trans = new MenuButton();
+        trans.setPadding(new Insets(0,0,0,10));
+        MenuItem toJpg = new MenuItem("To JPG");
+        MenuItem toPng = new MenuItem("To PNG");
+        save.getStyleClass().addAll("block-menu-basic");
+        saveAs.getStyleClass().addAll("block-menu-basic");
+        trans.getItems().addAll(toJpg,toPng);
+        trans.getStyleClass().addAll("block-menu-bt");
+        // 状态及关闭图标设定
+        butBar.getChildren().add(trans);
+
 
     }
     public ImgBlock(String imgUrl){
