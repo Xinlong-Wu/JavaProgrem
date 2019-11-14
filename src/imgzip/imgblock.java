@@ -1,8 +1,11 @@
 package imgzip;
 
+
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
@@ -11,11 +14,20 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+import javafx.stage.FileChooser;
+import javafx.stage.Stage;
 
 import javax.imageio.ImageIO;
+import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.awt.image.MemoryImageSource;
+import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+
+
 
 
 /**
@@ -26,10 +38,15 @@ import java.io.IOException;
  */
 class ImgBlock extends BorderPane {
     static Image WAITING = new Image("res/icon/waiting.png");
+    static Image LOADING = new Image("res/icon/loading.gif");
     static Image DONE = new Image("res/icon/done.png");
     static Image DOWNLOAD = new Image("res/icon/download.png");
     static Image CLOSE = new Image("res/icon/close.png");
-    static int imgCount = 0;
+    static String JPG = "To JPG";
+    static String PNG = "To PNG";
+    static String BMP = "To BMP";
+    static String TIF = "To TIF";
+
 
     private ImageView ivimg = new ImageView();
     private ImageView ivstate = new ImageView(WAITING);
@@ -37,11 +54,15 @@ class ImgBlock extends BorderPane {
     private ImageView ivClose = new ImageView(CLOSE);
     private Button btClose = new Button();
     private StackPane cent = new StackPane();
+    private ComboBox<String> trans = new ComboBox<>();
+    private ExecutorService saverPool = Executors.newCachedThreadPool();
     private String url;
+    private String Dialog = "";
     private Label size;
     private int index;
     HBox topBar = new HBox();
     HBox butBar = new HBox();
+
 
 //    Menu
     /**
@@ -49,14 +70,14 @@ class ImgBlock extends BorderPane {
      * 图片预览框 构造方法
      *
      */
-    public ImgBlock(String imgUrl){
+    public ImgBlock(int imgCount,String imgUrl){
         //父属性及子属性设定
         this.setPadding(new Insets(10));
         this.setTop(topBar);
         this.setBottom(butBar);
         this.getStyleClass().add("block-bg");
         this.setCenter(cent);
-        this.index = imgCount++;
+        this.index = imgCount;
         url = imgUrl;
 
         // 边框阴影设置
@@ -84,6 +105,11 @@ class ImgBlock extends BorderPane {
         ivDwonLoad.setFitWidth(15);
         ivClose.setFitHeight(20);
         ivClose.setFitWidth(20);
+//        String[] tmpUrl = imgUrl.split("\\\\");
+//        Dialog = tmpUrl[0];
+//        for(int i = 1;i<tmpUrl.length-1;i++){
+//            Dialog+="\\\\"+tmpUrl[i];
+//        }
 
 
         //关闭按钮设定
@@ -125,36 +151,111 @@ class ImgBlock extends BorderPane {
 
 
         //底部栏设定
-        ComboBox<String> trans = new ComboBox<>();
         trans.setPadding(new Insets(0,0,0,10));
-        trans.getItems().addAll("To JPG","To PNG","To BMP");
-        trans.setValue("To JPG");
+        trans.getItems().addAll(JPG,PNG,BMP,TIF);
         trans.getStyleClass().addAll("block-combo");
         butBar.getChildren().add(trans);
-
-
+        if(imgUrl.split("\\.")[1].equals("jpg")){
+            trans.setValue(JPG);
+        }
+        else if(imgUrl.split("\\.")[1].equals("png")){
+            trans.setValue(PNG);
+        }
+        else if(imgUrl.split("\\.")[1].equals("bmp")){
+            trans.setValue(BMP);
+        }
 
 
 
         // 事件响应部分
+        trans.setOnAction(e->{
+            ivstate.setImage(WAITING);
+        });
+
+        // 保存
         save.setOnAction(e->{
+            ivstate.setImage(LOADING);
+            saverPool.execute(new SaveImg(imgUrl,imgUrl));
+        });
+
+        // 另存为
+        saveAs.setOnAction(e->{
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("选择保存路径");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                    new FileChooser.ExtensionFilter("PNG", "*.png"),
+                    new FileChooser.ExtensionFilter("TIF", "*.tif"));
+            String path = fileChooser.showSaveDialog(stage).getPath();
+            System.out.println(path);
+            ivstate.setImage(LOADING);
+            saverPool.execute(new SaveImg(imgUrl,path));
+        });
+
+        btClose.setOnAction(e->{
+            MainBox.drop(index);
+        });
+    }
+
+
+    /**
+     *   保存文件的线程
+     */
+    class SaveImg implements Runnable{
+        String imgUrl;
+        String[] newUrl;
+        public SaveImg(String url,String newUrl){
+            imgUrl = url;
+            this.newUrl = newUrl.split("\\.");
+        }
+        @Override
+        public void run() {
             //通过split截取文件路径
-            String[] nf=imgUrl.split("\\.");
-            System.out.println(nf[0]);
+            String[] url=imgUrl.split("\\.");
+            System.out.println(url[0]);
             File f2=new File(imgUrl);
             //使用imgeIO来读取图片
             BufferedImage srcImg = null;
             try {
                 srcImg = ImageIO.read(f2);
-                if(trans.getValue().equals("To JPG")) {
+                if(trans.getValue().equals(JPG)) {
                     //重新创建图片
-                    ImageIO.write(srcImg, "jpg", new File(nf[0] + ".jpg"));
+                    BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
+                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
+                    ImageIO.write(newBufferedImage, "jpg", new File(newUrl[0] + ".jpg"));
                 }
-            } catch (IOException ex) {
+                else if(trans.getValue().equals(PNG)) {
+                    //重新创建图片
+                    BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
+                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
+                    ImageIO.write(srcImg, "jpg", new File(newUrl[0] + ".png"));
+                }
+                else if(trans.getValue().equals(TIF)) {
+                    //重新创建图片
+                    BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
+                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
+                    ImageIO.write(srcImg, "jpg", new File(newUrl[0] + ".tif"));
+                }
+                else if(trans.getValue().equals(BMP)) {
+
+                    //重新创建图片(使用了awt包）
+                    int h = srcImg.getHeight(), w = srcImg.getWidth();
+                    int[] pixel = new int[w * h];
+                    PixelGrabber pixelGrabber = new PixelGrabber(srcImg, 0, 0, w, h, pixel, 0, w);
+                    pixelGrabber.grabPixels();
+                    MemoryImageSource m = new MemoryImageSource(w, h, pixel, 0, w);
+                    java.awt.Image image =  Toolkit.getDefaultToolkit().createImage(m);
+                    BufferedImage buff = new BufferedImage(w, h, BufferedImage.TYPE_USHORT_565_RGB);
+                    buff.createGraphics().drawImage(image, 0, 0 ,null);
+                    ImageIO.write(buff, "bmp", new File(newUrl[0] + ".bmp"));
+                }
+            } catch (IOException | InterruptedException ex) {
                 ex.printStackTrace();
             }
             ivstate.setImage(DONE);
-        });
-
+        }
     }
 }
+
