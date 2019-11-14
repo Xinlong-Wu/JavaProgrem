@@ -8,7 +8,14 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
+
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
 
 
 /**
@@ -22,12 +29,17 @@ class ImgBlock extends BorderPane {
     static Image DONE = new Image("res/icon/done.png");
     static Image DOWNLOAD = new Image("res/icon/download.png");
     static Image CLOSE = new Image("res/icon/close.png");
+    static int imgCount = 0;
 
     private ImageView ivimg = new ImageView();
     private ImageView ivstate = new ImageView(WAITING);
     private ImageView ivDwonLoad = new ImageView(DOWNLOAD);
     private ImageView ivClose = new ImageView(CLOSE);
     private Button btClose = new Button();
+    private StackPane cent = new StackPane();
+    private String url;
+    private Label size;
+    private int index;
     HBox topBar = new HBox();
     HBox butBar = new HBox();
 
@@ -43,10 +55,9 @@ class ImgBlock extends BorderPane {
         this.setTop(topBar);
         this.setBottom(butBar);
         this.getStyleClass().add("block-bg");
-        this.setCenter(ivimg);
-
-
-
+        this.setCenter(cent);
+        this.index = imgCount++;
+        url = imgUrl;
 
         // 边框阴影设置
         DropShadow dropShadow =new DropShadow();
@@ -62,9 +73,11 @@ class ImgBlock extends BorderPane {
         Image tmp = new Image("file:"+imgUrl);
         ivimg.setImage(tmp);
         ivimg.setPreserveRatio(true);
-        ivimg.setFitWidth(270);
-//        ivimg.setFitHeight(290);
-
+        if(tmp.getHeight()>tmp.getWidth()){
+            ivimg.setFitHeight(200);
+        }else{
+            ivimg.setFitWidth(225);
+        }
         ivstate.setFitHeight(15);
         ivstate.setFitWidth(15);
         ivDwonLoad.setFitHeight(15);
@@ -83,6 +96,10 @@ class ImgBlock extends BorderPane {
         // 顶部栏属性设定
         topBar.getStyleClass().setAll("block-topbar");
         topBar.setPadding(new Insets(0,0,0,10));
+
+        //中间图片位置
+        cent.getStyleClass().addAll("block-imgbox");
+        cent.getChildren().addAll(ivimg);
 
         //底部栏属性设定
         butBar.getStyleClass().setAll("block-butbar");
@@ -120,7 +137,24 @@ class ImgBlock extends BorderPane {
 
 
         // 事件响应部分
-
+        save.setOnAction(e->{
+            //通过split截取文件路径
+            String[] nf=imgUrl.split("\\.");
+            System.out.println(nf[0]);
+            File f2=new File(imgUrl);
+            //使用imgeIO来读取图片
+            BufferedImage srcImg = null;
+            try {
+                srcImg = ImageIO.read(f2);
+                if(trans.getValue().equals("To JPG")) {
+                    //重新创建图片
+                    ImageIO.write(srcImg, "jpg", new File(nf[0] + ".jpg"));
+                }
+            } catch (IOException ex) {
+                ex.printStackTrace();
+            }
+            ivstate.setImage(DONE);
+        });
 
     }
 }
