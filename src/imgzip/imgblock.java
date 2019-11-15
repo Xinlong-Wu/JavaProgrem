@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-
+import static imgzip.MainBox.IMGCOUNT;
 
 
 /**
@@ -70,14 +70,14 @@ class ImgBlock extends BorderPane {
      * 图片预览框 构造方法
      *
      */
-    public ImgBlock(int imgCount,String imgUrl){
+    public ImgBlock(String imgUrl){
         //父属性及子属性设定
         this.setPadding(new Insets(10));
         this.setTop(topBar);
         this.setBottom(butBar);
         this.getStyleClass().add("block-bg");
         this.setCenter(cent);
-        this.index = imgCount;
+        this.index = ++IMGCOUNT;
         url = imgUrl;
 
         // 边框阴影设置
@@ -170,12 +170,16 @@ class ImgBlock extends BorderPane {
         // 事件响应部分
         trans.setOnAction(e->{
             ivstate.setImage(WAITING);
+            //销毁实例
+            e.consume();
         });
 
         // 保存
         save.setOnAction(e->{
             ivstate.setImage(LOADING);
             saverPool.execute(new SaveImg(imgUrl,imgUrl));
+            //销毁实例
+            e.consume();
         });
 
         // 另存为
@@ -192,10 +196,14 @@ class ImgBlock extends BorderPane {
             System.out.println(path);
             ivstate.setImage(LOADING);
             saverPool.execute(new SaveImg(imgUrl,path));
+            //销毁实例
+            e.consume();
         });
 
         btClose.setOnAction(e->{
             MainBox.drop(index);
+            //销毁实例
+            e.consume();
         });
     }
 
@@ -255,6 +263,7 @@ class ImgBlock extends BorderPane {
                 ex.printStackTrace();
             }
             ivstate.setImage(DONE);
+
         }
     }
 }

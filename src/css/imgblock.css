@@ -79,10 +79,17 @@
 
 .background-lable{
     -fx-font-size: 50px;
+    -fx-pref-width: 1024px;
+    -fx-max-width: 1024px;
+    -fx-min-width: 1024px;
+    -fx-min-height: 700px;
+    -fx-max-height: 700px;
+    -fx-pref-height: 700px;
     -fx-text-fill: rgba(0, 0, 0, 0.49);
 }
 
 .main-box {
     -fx-padding: 20px;
     -fx-hgap: 30px;
+    -fx-vgap: 30px;
 }

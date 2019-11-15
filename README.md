@@ -23,3 +23,5 @@
 
 ## 参考资料：
 > [JavaFx Effect 之 Dropshadow 介绍使用](https://blog.csdn.net/qq_22571159/article/details/86570727)
+
+>[JavaFX之Drag And Drop拖放操作](https://blog.csdn.net/wingfourever/article/details/8858782)
