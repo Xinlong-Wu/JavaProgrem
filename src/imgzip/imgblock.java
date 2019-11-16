@@ -27,7 +27,7 @@ import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import static imgzip.MainBox.IMGCOUNT;
+
 
 
 /**
@@ -37,6 +37,7 @@ import static imgzip.MainBox.IMGCOUNT;
  * @date 2019/11/12
  */
 class ImgBlock extends BorderPane {
+    //  静态参数加载各种资源图像
     static Image WAITING = new Image("res/icon/waiting.png");
     static Image LOADING = new Image("res/icon/loading.gif");
     static Image DONE = new Image("res/icon/done.png");
@@ -70,14 +71,14 @@ class ImgBlock extends BorderPane {
      * 图片预览框 构造方法
      *
      */
-    public ImgBlock(String imgUrl){
+    public ImgBlock(int imgCount,String imgUrl){
         //父属性及子属性设定
         this.setPadding(new Insets(10));
         this.setTop(topBar);
         this.setBottom(butBar);
         this.getStyleClass().add("block-bg");
         this.setCenter(cent);
-        this.index = ++IMGCOUNT;
+        this.index = imgCount;
         url = imgUrl;
 
         // 边框阴影设置
@@ -263,7 +264,6 @@ class ImgBlock extends BorderPane {
                 ex.printStackTrace();
             }
             ivstate.setImage(DONE);
-
         }
     }
 }

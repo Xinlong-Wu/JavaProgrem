@@ -18,6 +18,9 @@
  [ ] 注册功能：用户名，密码，邮箱，电话，头像
  [ ] jpg/png/bmp/tif 格式的图片互相转化（多线程技术）
  
+ ## 遇到的问题
+ 1. 属性绑定，布局会乱
+ 
  ## 代码规范：
  > 采用[《阿里巴巴Java开发手册》](https://github.com/alibaba/p3c/blob/master/%E9%98%BF%E9%87%8C%E5%B7%B4%E5%B7%B4Java%E5%BC%80%E5%8F%91%E6%89%8B%E5%86%8C%EF%BC%88%E5%8D%8E%E5%B1%B1%E7%89%88%EF%BC%89.pdf)
 

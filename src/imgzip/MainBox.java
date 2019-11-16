@@ -1,9 +1,14 @@
 package imgzip;
 
 import javafx.application.Application;
+import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
+import javafx.scene.control.ScrollBar;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
@@ -12,6 +17,7 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import java.io.File;
+import java.util.HashSet;
 import java.util.List;
 
 
@@ -19,19 +25,45 @@ import java.util.List;
  * @author 乌鑫龙
  */
 public class MainBox extends Application {
-    static int IMGCOUNT=0;
+    /**
+     *  静态参数图像计数器和blockList，借此完成图片block的新建及删除
+     */
+    static int imgCount=0;
     static FlowPane blockList = new FlowPane();
 
-
-    private Label tipLabel = new Label("从本地文件夹拖动图片到这里");
-    private Label tipLabelDark = new Label("从本地文件夹拖动图片到这里");
+    /**
+     *   主界面
+     */
     private StackPane centerPane = new StackPane();
     private BorderPane homePane = new BorderPane();
+    private Label tipLabel = new Label("从本地文件夹拖动图片到这里");
+    private Label tipLabelDark = new Label("从本地文件夹拖动图片到这里");
+    private ScrollPane centerScroll = new ScrollPane();
+
+    /**
+     *   用来筛选重复添加的图片
+     */
+    private HashSet<String> imgList = new HashSet<>();
+
+//    private ScrollBar centerScroll = new ScrollBar();
+
+
+
     @Override
     public void start(Stage primaryStage) throws Exception{
-        //主界面装载所有的的节点
-        centerPane.getChildren().addAll(tipLabel,blockList,tipLabelDark);
+        //设置静态值
+        blockList.getStyleClass().add("main-box");
+
+        // 设置私有值
+        centerScroll.setContent(blockList);
+        centerScroll.getStyleClass().addAll("scroll-pane");
+        centerScroll.setFitToWidth(true);
+        centerScroll.setFitToHeight(true);
+        centerPane.getChildren().addAll(tipLabel,centerScroll,tipLabelDark);
+        centerPane.getStyleClass().add("center-pane");
         homePane.setCenter(centerPane);
+//        centerScroll.setVisible(false)；
+//        homePane.setRight(centerScroll);
 
 
         // 设置主界面的背景提示，用label实现
@@ -44,13 +76,13 @@ public class MainBox extends Application {
 
 
         // 临时加载样例图片
-        ImgBlock test = new ImgBlock("E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
-        ImgBlock tet = new ImgBlock("E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000042.jpg");
-        ImgBlock tt = new ImgBlock("E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000040.bmp");
+        ImgBlock test = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
+        ImgBlock tet = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000042.jpg");
+        ImgBlock tt = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000040.bmp");
 
         //临时添加文件进入blockList
         blockList.getChildren().addAll(test,tet,tt);
-        blockList.getStyleClass().add("main-box");
+
 
         //窗口尺寸
         Scene scene = new Scene(homePane, 1024, 700);
@@ -63,6 +95,8 @@ public class MainBox extends Application {
         primaryStage.setResizable(false);
         primaryStage.show();
 
+
+        //  拖动载入文件方法
         centerPane.setOnDragEntered(e->{
             System.out.println("enter");
             tipLabelDark.setVisible(true);
@@ -71,6 +105,18 @@ public class MainBox extends Application {
             System.out.println("exist");
             tipLabelDark.setVisible(false);
         });
+        centerPane.setOnDragDropped(e->{
+            System.out.println("dropped");
+            Dragboard dragboard = e.getDragboard();
+            List<File> imgs = dragboard.getFiles();
+            imgs.forEach(img->{
+                String path = img.getPath();
+                addToBlockList(path);
+                tipLabelDark.setVisible(false);
+            });
+        });
+
+        //  允许拖放文件（不写这个拖放总不成功，不会写网上查的）
         centerPane.setOnDragOver(e->{
             if (e.getGestureSource() != centerPane
                     && e.getDragboard().hasFiles()) {
@@ -79,30 +125,34 @@ public class MainBox extends Application {
             }
             e.consume();
         });
-        tipLabelDark.setOnDragDropped(e->{
-            System.out.println("dropped");
-            Dragboard dragboard = e.getDragboard();
-            List<File> imgs = dragboard.getFiles();
-//            imgs.get(0).getPath()
-            imgs.forEach(img->{
-                String path = img.getPath();
-                ImgBlock tmp = new ImgBlock(path);
-                blockList.getChildren().add(tmp);
-                tipLabelDark.setVisible(false);
-            });
-        });
+
+        // 监听滚动条事件布局会乱掉
+//        blockList.layoutYProperty().bind(blockList.heightProperty().divide(100).multiply(centerScroll.valueProperty()).multiply(-1));
     }
 
+    /**
+     *  添加block窗格到BlockList(禁止重复插入）
+     * @param path
+     */
+    public void addToBlockList(String path){
+        if(imgList.add(path)){
+            ImgBlock tmp = new ImgBlock(++imgCount,path);
+            blockList.getChildren().add(tmp);
+        }
+    }
 
-
+    /**
+     *  静态方法删除图片
+     * @param index
+     */
     static void drop(int index){
-        if(IMGCOUNT>1){
+        if(imgCount>1){
             blockList.getChildren().remove(index);
-            IMGCOUNT--;
+            imgCount--;
         }
         else {
             blockList.getChildren().clear();
-            IMGCOUNT--;
+            imgCount--;
         }
 
     }
