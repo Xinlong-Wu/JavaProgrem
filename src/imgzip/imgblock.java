@@ -37,7 +37,9 @@ import java.util.concurrent.Executors;
  * @date 2019/11/12
  */
 class ImgBlock extends BorderPane {
-    //  静态参数加载各种资源图像
+    /**
+     *  静态参数加载各种资源图像
+      */
     static Image WAITING = new Image("res/icon/waiting.png");
     static Image LOADING = new Image("res/icon/loading.gif");
     static Image DONE = new Image("res/icon/done.png");
@@ -48,7 +50,9 @@ class ImgBlock extends BorderPane {
     static String BMP = "To BMP";
     static String TIF = "To TIF";
 
-
+    /**
+     *  私有参数用于各个类特定的值、和对象，用来组成
+     */
     private ImageView ivimg = new ImageView();
     private ImageView ivstate = new ImageView(WAITING);
     private ImageView ivDwonLoad = new ImageView(DOWNLOAD);
