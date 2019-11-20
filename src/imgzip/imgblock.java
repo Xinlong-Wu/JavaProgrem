@@ -49,6 +49,7 @@ class ImgBlock extends BorderPane {
     static String PNG = "To PNG";
     static String BMP = "To BMP";
     static String TIF = "To TIF";
+    static ExecutorService saverPool = Executors.newCachedThreadPool();
 
     /**
      *  私有参数用于各个类特定的值、和对象，用来组成
@@ -60,9 +61,8 @@ class ImgBlock extends BorderPane {
     private Button btClose = new Button();
     private StackPane cent = new StackPane();
     private ComboBox<String> trans = new ComboBox<>();
-    private ExecutorService saverPool = Executors.newCachedThreadPool();
     private String url;
-    private String Dialog = "";
+    private String dialog = "";
     private Label size;
     private int index;
     HBox topBar = new HBox();
@@ -111,9 +111,9 @@ class ImgBlock extends BorderPane {
         ivClose.setFitHeight(20);
         ivClose.setFitWidth(20);
 //        String[] tmpUrl = imgUrl.split("\\\\");
-//        Dialog = tmpUrl[0];
+//        dialog = tmpUrl[0];
 //        for(int i = 1;i<tmpUrl.length-1;i++){
-//            Dialog+="\\\\"+tmpUrl[i];
+//            dialog+="\\\\"+tmpUrl[i];
 //        }
 
 
@@ -160,14 +160,17 @@ class ImgBlock extends BorderPane {
         trans.getItems().addAll(JPG,PNG,BMP,TIF);
         trans.getStyleClass().addAll("block-combo");
         butBar.getChildren().add(trans);
-        if(imgUrl.split("\\.")[1].equals("jpg")){
+        if("jpg".equals(imgUrl.split("\\.")[1])){
             trans.setValue(JPG);
         }
-        else if(imgUrl.split("\\.")[1].equals("png")){
+        else if("png".equals(imgUrl.split("\\.")[1])){
             trans.setValue(PNG);
         }
-        else if(imgUrl.split("\\.")[1].equals("bmp")){
+        else if("bmp".equals(imgUrl.split("\\.")[1])){
             trans.setValue(BMP);
+        }
+        else if("tif".equals(imgUrl.split("\\.")[1])){
+            trans.setValue(TIF);
         }
 
 
@@ -182,7 +185,7 @@ class ImgBlock extends BorderPane {
         // 保存
         save.setOnAction(e->{
             ivstate.setImage(LOADING);
-            saverPool.execute(new SaveImg(imgUrl,imgUrl));
+            saveImg(imgUrl,imgUrl);
             //销毁实例
             e.consume();
         });
@@ -200,7 +203,7 @@ class ImgBlock extends BorderPane {
             String path = fileChooser.showSaveDialog(stage).getPath();
             System.out.println(path);
             ivstate.setImage(LOADING);
-            saverPool.execute(new SaveImg(imgUrl,path));
+            saveImg(imgUrl,path);
             //销毁实例
             e.consume();
         });
@@ -210,8 +213,16 @@ class ImgBlock extends BorderPane {
             //销毁实例
             e.consume();
         });
+
     }
 
+    void saveImg(String imgUrl,String path){
+        saverPool.execute(new SaveImg(imgUrl,path));
+    }
+
+    public String getUrl(){
+        return url;
+    }
 
     /**
      *   保存文件的线程

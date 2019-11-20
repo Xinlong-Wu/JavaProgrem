@@ -44,15 +44,21 @@
     -fx-background-color: rgb(102, 102, 153);
 }
 
+.block-menu-basic:focused {
+    -fx-background-color: rgb(102, 102, 153);
+}
+
 .block-box-close{
     -fx-background-color: #ffffff;
     -fx-pref-width: 15px;
     -fx-pref-height: 20px;
     -fx-border-width: none;
+    -fx-background-radius: 100px;
 }
 
 .block-box-close:hover{
     -fx-cursor: hand;
+    -fx-background-color: rgba(255, 119, 210, 0.73);
 }
 
 
@@ -145,6 +151,21 @@
 
 .top-manebar{
     -fx-pref-height: 20px;
-    -fx-background-color: rgb(244, 244, 244);
+    -fx-background-color: rgb(221, 221, 221);
 }
 
+.top-ctrl{
+    -fx-pref-height: 80px;
+    -fx-alignment: center-left;
+    -fx-background-color: rgb(252, 252, 252);
+}
+
+.top-ctrl-bt{
+    -fx-alignment: center;
+    -fx-background-color: rgb(252, 252, 252);
+    -fx-border-width: 0px;
+}
+
+.top-ctrl-bt:hover{
+    -fx-cursor: hand;
+}

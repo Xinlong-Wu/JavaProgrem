@@ -1,6 +1,7 @@
 package imgzip;
 
 import javafx.application.Application;
+import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
@@ -26,22 +27,33 @@ public class MainBox extends Application {
     /**
      *  静态参数图像计数器和blockList，借此完成图片block的新建及删除
      */
+    static Image SAVE = new Image("res/icon/save.png");
+    static Image ADD = new Image("res/icon/add.png");
+    static Image CLEAR = new Image("res/icon/clear.png");
+    static Image SAVED = new Image("res/icon/save-dark.png");
+    static Image ADDD = new Image("res/icon/add-dark.png");
+    static Image CLEARD = new Image("res/icon/clear-dark.png");
     static int imgCount=0;
     static FlowPane blockList = new FlowPane();
 
     /**
-     *   主界面
+     *   用来筛选重复添加的图片
+     */
+    static HashSet<String> imgList = new HashSet<>();
+
+    /**
+     *   主界面 和 顶部栏
      */
     private StackPane centerPane = new StackPane();
     private VBox topPane = new VBox();
     private BorderPane homePane = new BorderPane();
     private Label tipLabelDark = new Label("从本地文件夹拖动图片到这里");
     private ScrollPane centerScroll = new ScrollPane();
+    private ImageView ivSave = new ImageView(SAVE);
+    private ImageView ivAdd = new ImageView(ADD);
+    private ImageView ivClear = new ImageView(CLEAR);
 
-    /**
-     *   用来筛选重复添加的图片
-     */
-    private HashSet<String> imgList = new HashSet<>();
+
 
 //    private ScrollBar centerScroll = new ScrollBar();
 
@@ -65,7 +77,8 @@ public class MainBox extends Application {
         centerPane.getStyleClass().add("center-pane");
         homePane.setCenter(centerPane);
 
-        // 顶部菜单栏
+        // 顶部组件
+        // 菜单栏
         MenuItem about = new MenuItem("关于 imagine");
         MenuItem exit = new MenuItem("退出");
         Menu imagine = new Menu("imagine");
@@ -77,7 +90,22 @@ public class MainBox extends Application {
 
         MenuBar menuBar = new MenuBar();
         menuBar.getMenus().addAll(imagine,file);
-        topPane.getChildren().addAll(menuBar);
+
+        // 控制栏
+        Button btAdd = new Button();
+        btAdd.setGraphic(ivAdd);
+        btAdd.getStyleClass().addAll("top-ctrl-bt");
+        Button btSave = new Button();
+        btSave.setGraphic(ivSave);
+        btSave.getStyleClass().addAll("top-ctrl-bt");
+        Button btClear = new Button();
+        btClear.setGraphic(ivClear);
+        btClear.getStyleClass().addAll("top-ctrl-bt");
+        HBox ctrlBar = new HBox(20);
+        ctrlBar.getChildren().addAll(btAdd,btSave,btClear);
+        ctrlBar.getStyleClass().addAll("top-ctrl");
+        ctrlBar.setPadding(new Insets(0,0,0,20));
+        topPane.getChildren().addAll(menuBar,ctrlBar);
         topPane.getStyleClass().addAll("top-pane");
         homePane.setTop(topPane);
 //        centerScroll.setVisible(false)；
@@ -89,7 +117,7 @@ public class MainBox extends Application {
         tipLabelDark.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.12),null,null)));
         tipLabelDark.setVisible(false);
 
-        // 临时加载样例图片
+////         临时加载样例图片
 //        ImgBlock test = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
 //        ImgBlock tet = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000042.jpg");
 //        ImgBlock tt = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000040.bmp");
@@ -137,7 +165,7 @@ public class MainBox extends Application {
                 List<File> imgs = dragboard.getFiles();
                 for (int i = 0;i < imgs.size();i++ ) {
                     String[] path = imgs.get(i).getPath().split("\\.");
-                    if(path[path.length-1].equals("png")||path[path.length-1].equals("jpg")||path[path.length-1].equals("bmp")||path[path.length-1].equals("tif")){
+                    if("png".equals(path[path.length-1])|| "jpg".equals(path[path.length-1])|| "bmp".equals(path[path.length-1])|| "tif".equals(path[path.length-1])){
                         /* allow for both copying and moving, whatever user chooses */
                         e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                     }else{
@@ -150,8 +178,59 @@ public class MainBox extends Application {
             e.consume();
         });
 
+        btClear.setOnMouseEntered(e->{
+            setImg(ivClear,CLEARD);
+            e.consume();
+        });
+        btClear.setOnMouseExited(e->{
+            setImg(ivClear,CLEAR);
+            e.consume();
+        });
+        btClear.setOnAction(e->{
+            dropAll();
+        });
+
+        btAdd.setOnMouseEntered(e->{
+            setImg(ivAdd,ADDD);
+            e.consume();
+        });
+        btAdd.setOnMouseExited(e->{
+            setImg(ivAdd,ADD);
+            e.consume();
+        });
+        btAdd.setOnAction(e->{
+            Stage stage = new Stage();
+            FileChooser fileChooser = new FileChooser();
+            fileChooser.setTitle("选择保存路径");
+            List list = fileChooser.showOpenMultipleDialog(stage);
+            list.forEach(li->{
+                String path = li.toString();
+                System.out.println(path);
+                addToBlockList(path);
+            });
+            //销毁实例
+            e.consume();
+        });
+
+        btSave.setOnMouseEntered(e->{
+            setImg(ivSave,SAVED);
+            e.consume();
+        });
+        btSave.setOnMouseExited(e->{
+            setImg(ivSave,SAVE);
+            e.consume();
+        });
+
         // 监听滚动条事件布局会乱掉
 //        blockList.layoutYProperty().bind(blockList.heightProperty().divide(100).multiply(centerScroll.valueProperty()).multiply(-1));
+    }
+
+    /**
+     *  修改ImageView中的图片
+     * @param iv，im
+     */
+    void setImg(ImageView iv,Image im){
+        iv.setImage(im);
     }
 
     /**
@@ -170,6 +249,8 @@ public class MainBox extends Application {
      * @param index
      */
     static void drop(int index){
+//        ImgBlock tmp = (ImgBlock)blockList.getChildren().;
+//        imgList.remove(tmp.getUrl());
         if(imgCount>1){
             blockList.getChildren().remove(index);
             imgCount--;
@@ -178,9 +259,16 @@ public class MainBox extends Application {
             blockList.getChildren().clear();
             imgCount--;
         }
-
     }
 
+    /**
+     * 删除全部图片
+     */
+    private void dropAll(){
+        blockList.getChildren().clear();
+        imgList.clear();
+        imgCount=0;
+    }
 
     public static void main(String[] args) {
         launch(args);
