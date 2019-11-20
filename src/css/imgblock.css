@@ -135,3 +135,16 @@
     -fx-hgap: 30px;
     -fx-vgap: 30px;
 }
+
+.top-pane{
+    -fx-min-height: 100px;
+    -fx-max-height: 100px;
+    -fx-pref-height: 100px;
+    -fx-background-color: #ff565b;
+}
+
+.top-manebar{
+    -fx-pref-height: 20px;
+    -fx-background-color: rgb(244, 244, 244);
+}
+

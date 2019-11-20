@@ -4,9 +4,7 @@ import javafx.application.Application;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Label;
-import javafx.scene.control.ScrollBar;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.Dragboard;
@@ -35,9 +33,9 @@ public class MainBox extends Application {
      *   主界面
      */
     private StackPane centerPane = new StackPane();
+    private VBox topPane = new VBox();
     private BorderPane homePane = new BorderPane();
     private Label tipLabelDark = new Label("从本地文件夹拖动图片到这里");
-    private Label tipLabel = new Label("从本地文件夹拖动图片到这里");
     private ScrollPane centerScroll = new ScrollPane();
 
     /**
@@ -54,7 +52,7 @@ public class MainBox extends Application {
         //设置静态值
         blockList.getStyleClass().add("main-box");
         blockList.setBackground(new Background(new BackgroundImage(new Image("res/icon/background.png",1024,700,false,true),
-                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundRepeat.REPEAT, BackgroundRepeat.REPEAT, BackgroundPosition.DEFAULT,
                 BackgroundSize.DEFAULT)));
         // 设置私有值
 
@@ -66,6 +64,22 @@ public class MainBox extends Application {
         centerPane.getChildren().addAll(centerScroll,tipLabelDark);
         centerPane.getStyleClass().add("center-pane");
         homePane.setCenter(centerPane);
+
+        // 顶部菜单栏
+        MenuItem about = new MenuItem("关于 imagine");
+        MenuItem exit = new MenuItem("退出");
+        Menu imagine = new Menu("imagine");
+        imagine.getItems().addAll(about,exit);
+
+        MenuItem open = new MenuItem("打开  (Ctrk+O)");
+        Menu file = new Menu("文件");
+        file.getItems().addAll(open);
+
+        MenuBar menuBar = new MenuBar();
+        menuBar.getMenus().addAll(imagine,file);
+        topPane.getChildren().addAll(menuBar);
+        topPane.getStyleClass().addAll("top-pane");
+        homePane.setTop(topPane);
 //        centerScroll.setVisible(false)；
 //        homePane.setRight(centerScroll);
 
@@ -76,16 +90,15 @@ public class MainBox extends Application {
         tipLabelDark.setVisible(false);
 
         // 临时加载样例图片
-        ImgBlock test = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
-        ImgBlock tet = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000042.jpg");
-        ImgBlock tt = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000040.bmp");
-
-        //临时添加文件进入blockList
-        blockList.getChildren().addAll(test,tet,tt);
+//        ImgBlock test = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
+//        ImgBlock tet = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000042.jpg");
+//        ImgBlock tt = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000040.bmp");
+//        //临时添加文件进入blockList
+//        blockList.getChildren().addAll(test,tet,tt);
 
 
         //窗口尺寸
-        Scene scene = new Scene(homePane, 1024, 700);
+        Scene scene = new Scene(homePane, 1024, 800);
         scene.getStylesheets().add("css/imgblock.css");
 
 
