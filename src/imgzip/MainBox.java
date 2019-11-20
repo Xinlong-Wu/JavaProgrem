@@ -36,8 +36,8 @@ public class MainBox extends Application {
      */
     private StackPane centerPane = new StackPane();
     private BorderPane homePane = new BorderPane();
-    private Label tipLabel = new Label("从本地文件夹拖动图片到这里");
     private Label tipLabelDark = new Label("从本地文件夹拖动图片到这里");
+    private Label tipLabel = new Label("从本地文件夹拖动图片到这里");
     private ScrollPane centerScroll = new ScrollPane();
 
     /**
@@ -53,27 +53,27 @@ public class MainBox extends Application {
     public void start(Stage primaryStage) throws Exception{
         //设置静态值
         blockList.getStyleClass().add("main-box");
-
+        blockList.setBackground(new Background(new BackgroundImage(new Image("res/icon/background.png",1024,700,false,true),
+                BackgroundRepeat.REPEAT, BackgroundRepeat.NO_REPEAT, BackgroundPosition.DEFAULT,
+                BackgroundSize.DEFAULT)));
         // 设置私有值
+
         centerScroll.setContent(blockList);
         centerScroll.getStyleClass().addAll("scroll-pane");
         centerScroll.setFitToWidth(true);
         centerScroll.setFitToHeight(true);
-        centerPane.getChildren().addAll(tipLabel,centerScroll,tipLabelDark);
+
+        centerPane.getChildren().addAll(centerScroll,tipLabelDark);
         centerPane.getStyleClass().add("center-pane");
         homePane.setCenter(centerPane);
 //        centerScroll.setVisible(false)；
 //        homePane.setRight(centerScroll);
 
-
         // 设置主界面的背景提示，用label实现
-        tipLabel.getStyleClass().addAll("background-lable");
         tipLabelDark.getStyleClass().addAll("background-lable");
-        tipLabel.setAlignment(Pos.BASELINE_CENTER);
         tipLabelDark.setAlignment(Pos.BASELINE_CENTER);
         tipLabelDark.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.12),null,null)));
         tipLabelDark.setVisible(false);
-
 
         // 临时加载样例图片
         ImgBlock test = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
@@ -120,8 +120,19 @@ public class MainBox extends Application {
         centerPane.setOnDragOver(e->{
             if (e.getGestureSource() != centerPane
                     && e.getDragboard().hasFiles()) {
-                /* allow for both copying and moving, whatever user chooses */
-                e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                Dragboard dragboard = e.getDragboard();
+                List<File> imgs = dragboard.getFiles();
+                for (int i = 0;i < imgs.size();i++ ) {
+                    String[] path = imgs.get(i).getPath().split("\\.");
+                    if(path[path.length-1].equals("png")||path[path.length-1].equals("jpg")||path[path.length-1].equals("bmp")||path[path.length-1].equals("tif")){
+                        /* allow for both copying and moving, whatever user chooses */
+                        e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
+                    }else{
+                        e.acceptTransferModes(TransferMode.NONE);
+                        break;
+                    }
+                }
+
             }
             e.consume();
         });
