@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.paint.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.9999000000025" prefWidth="638.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="imgzip.LoginController">
+  <children>
+    <BorderPane id="whole" layoutX="13.0" layoutY="14.0" prefHeight="373.0" prefWidth="611.0">
+      <bottom>
+        <VBox prefHeight="100.0" prefWidth="573.0">
+          <children>
+            <Separator prefWidth="200.0" />
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="5.0">
+              <children>
+                <Label text="Need help with sign in?" wrapText="false">
+                  <font>
+                    <Font name="System Bold" size="15.0" fx:id="x1" />
+                  </font>
+                  <HBox.margin>
+                    <Insets left="35.0" fx:id="x2" />
+                  </HBox.margin>
+                </Label>
+                <Button id="CantSign" fx:id="cantSign" alignment="TOP_LEFT" mnemonicParsing="false" prefWidth="373.0" text="I CAN'T SIGN IN" textAlignment="LEFT" wrapText="true" />
+              </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="0.0">
+              <children>
+                <Label font="$x1" text="Don't have the accout？" HBox.margin="$x2" />
+                <Button id="CreateAccount" fx:id="createAccount" alignment="CENTER_LEFT" mnemonicParsing="false" prefWidth="373.0" text="CREATE AN ACCOUNT">
+                  <HBox.margin>
+                    <Insets fx:id="x3" />
+                  </HBox.margin>
+                </Button>
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+      </bottom>
+      <center>
+        <VBox prefHeight="214.0" prefWidth="573.0">
+          <children>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
+              <children>
+                <Label text="Account name" HBox.margin="$x2" />
+                <TextField id="Account" fx:id="account" onKeyReleased="#check" prefHeight="27.0" prefWidth="435.0" />
+              </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.margin="$x3">
+              <children>
+                <Label text="Password">
+                  <HBox.margin>
+                    <Insets left="71.0" />
+                  </HBox.margin>
+                </Label>
+                <PasswordField fx:id="password" onKeyReleased="#check" prefWidth="435.0" />
+              </children>
+            </HBox>
+            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" VBox.margin="$x3">
+              <children>
+                <CheckBox fx:id="remember" mnemonicParsing="false" text="Remember my password">
+                  <HBox.margin>
+                    <Insets left="149.0" />
+                  </HBox.margin>
+                </CheckBox>
+              </children>
+            </HBox>
+            <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.margin="$x3">
+              <children>
+                <Button id="Login" fx:id="login" alignment="CENTER_LEFT" disable="true" mnemonicParsing="false" onAction="#login" prefWidth="210.0" text="LOGIN">
+                  <HBox.margin>
+                    <Insets left="151.0" />
+                  </HBox.margin>
+                </Button>
+                <Button id="Cancel" fx:id="cancel" alignment="CENTER_LEFT" mnemonicParsing="false" prefWidth="210.0" text="CANCEL" HBox.margin="$x3" />
+              </children>
+            </HBox>
+          </children>
+        </VBox>
+      </center>
+      <top>
+        <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="573.0" BorderPane.alignment="CENTER">
+          <children>
+            <Label text="Welcome to XXX" textAlignment="LEFT">
+              <font>
+                <Font size="40.0" />
+              </font>
+            </Label>
+          </children>
+        </HBox>
+      </top>
+    </BorderPane>
+  </children>
+</AnchorPane>
