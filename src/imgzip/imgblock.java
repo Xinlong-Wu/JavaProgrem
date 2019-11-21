@@ -209,7 +209,7 @@ class ImgBlock extends BorderPane {
         });
 
         btClose.setOnAction(e->{
-            MainBox.drop(index);
+            MainBox.drop(this);
             //销毁实例
             e.consume();
         });
@@ -220,9 +220,22 @@ class ImgBlock extends BorderPane {
         saverPool.execute(new SaveImg(imgUrl,path));
     }
 
+    /**
+     *  图片url访问器
+     * @return
+     */
     public String getUrl(){
-        return url;
+        return this.url;
     }
+
+    /**
+     * 图像序号访问器
+     * @return
+     */
+    public int getIndex(){
+        return this.index;
+    }
+
 
     /**
      *   保存文件的线程

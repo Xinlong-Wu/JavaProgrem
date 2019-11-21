@@ -1,9 +1,11 @@
 package imgzip;
 
 import javafx.application.Application;
+import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
+import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -18,6 +20,7 @@ import javafx.stage.Stage;
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
+import java.util.Observable;
 
 
 /**
@@ -117,12 +120,12 @@ public class MainBox extends Application {
         tipLabelDark.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.12),null,null)));
         tipLabelDark.setVisible(false);
 
-////         临时加载样例图片
-//        ImgBlock test = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
-//        ImgBlock tet = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000042.jpg");
-//        ImgBlock tt = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000040.bmp");
-//        //临时添加文件进入blockList
-//        blockList.getChildren().addAll(test,tet,tt);
+//         临时加载样例图片
+        ImgBlock test = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
+        ImgBlock tet = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000042.jpg");
+        ImgBlock tt = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000040.bmp");
+        //临时添加文件进入blockList
+        blockList.getChildren().addAll(test,tet,tt);
 
 
         //窗口尺寸
@@ -246,16 +249,17 @@ public class MainBox extends Application {
 
     /**
      *  静态方法删除图片
-     * @param index
+     * @param block
      */
-    static void drop(int index){
-//        ImgBlock tmp = (ImgBlock)blockList.getChildren().;
-//        imgList.remove(tmp.getUrl());
+    static void drop(ImgBlock block){
+        String url = block.getUrl();
         if(imgCount>1){
-            blockList.getChildren().remove(index);
+            imgList.remove(url);
+            blockList.getChildren().remove(block);
             imgCount--;
         }
         else {
+            imgList.clear();
             blockList.getChildren().clear();
             imgCount--;
         }
