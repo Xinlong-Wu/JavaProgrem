@@ -76,7 +76,7 @@
                     <Insets left="151.0" />
                   </HBox.margin>
                 </Button>
-                <Button id="Cancel" fx:id="cancel" alignment="CENTER_LEFT" mnemonicParsing="false" prefWidth="210.0" text="CANCEL" HBox.margin="$x3" />
+                <Button id="Cancel" fx:id="cancel" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#cancel" prefWidth="210.0" text="CANCEL" HBox.margin="$x3" />
               </children>
             </HBox>
           </children>
