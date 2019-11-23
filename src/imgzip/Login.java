@@ -18,13 +18,12 @@ import java.awt.event.FocusListener;
 
 /**
  @Author:   肖尧
- @Date: 2019.11.20
+ @Date: 2019.11.22
  */
 public class Login extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-
 
         try {
 
