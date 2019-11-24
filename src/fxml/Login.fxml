@@ -31,7 +31,7 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="0.0">
               <children>
                 <Label font="$x1" text="Don't have the accout？" HBox.margin="$x2" />
-                <Button id="CreateAccount" fx:id="createAccount" alignment="CENTER_LEFT" mnemonicParsing="false" prefWidth="373.0" text="CREATE AN ACCOUNT">
+                <Button id="CreateAccount" fx:id="createAccount" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#createAccount" prefWidth="373.0" text="CREATE AN ACCOUNT">
                   <HBox.margin>
                     <Insets fx:id="x3" />
                   </HBox.margin>

@@ -9,8 +9,8 @@ import java.sql.SQLException;
 
 
 /**
- Author:肖尧
- Date:2019.11.22
+ @Author:肖尧
+ @Date:2019.11.24
  */
 public class WrongPasswordController {
 
@@ -30,7 +30,8 @@ public class WrongPasswordController {
      */
 
     public void createAccount(){
-
+        new CreateAccount();
+        back();
     }
 
 
@@ -51,7 +52,6 @@ public class WrongPasswordController {
 
         Stage stage = (Stage)back.getScene().getWindow();
         stage.close();
-
     }
 
 

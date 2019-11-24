@@ -24,7 +24,7 @@ import java.sql.Statement;
 
 /**
     @Author:肖尧
-    @Date:2019.11.23
+    @Date:2019.11.24
  */
 public class LoginController {
 
@@ -172,5 +172,16 @@ public class LoginController {
             e.printStackTrace();
         }
     }
+
+
+    /**
+     点击注册页面的方法，用户点击以后直接进入注册页面。
+     */
+    public void createAccount(){
+        new CreateAccount();
+    }
+
+
+
 }
 

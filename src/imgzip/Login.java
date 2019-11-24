@@ -23,7 +23,7 @@ import java.io.FileWriter;
 
 /**
  @Author:   肖尧
- @Date: 2019.11.23
+ @Date: 2019.11.24
  */
 public class Login extends Application {
 
@@ -41,7 +41,7 @@ public class Login extends Application {
 
 
             /**
-             在页面开启之前检查上一次是否记住了密码，
+             在页面开启之前检查上一次登录时是否记住了密码，
              如果上一次登录点击了记住密码，则在本次打开时会将账号和密码写入
              */
             try {
