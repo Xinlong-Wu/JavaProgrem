@@ -1,11 +1,8 @@
-package imgzip;
+package imgzip.mainwindow;
 
-import javafx.application.Application;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
-import javafx.geometry.Orientation;
 import javafx.geometry.Pos;
-import javafx.scene.Node;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
 import javafx.scene.image.Image;
@@ -14,19 +11,20 @@ import javafx.scene.input.Dragboard;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.IIOException;
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
-import java.util.Observable;
 
 
 /**
  * @author 乌鑫龙
  */
-public class MainBox extends Application {
+public class MainBox extends Scene {
     /**
      *  静态参数图像计数器和blockList，借此完成图片block的新建及删除
      */
@@ -38,7 +36,7 @@ public class MainBox extends Application {
     static Image CLEARD = new Image("res/icon/clear-dark.png");
     static int imgCount=0;
     static FlowPane blockList = new FlowPane();
-
+    static BorderPane homePane = new BorderPane();
     /**
      *   用来筛选重复添加的图片
      */
@@ -49,21 +47,25 @@ public class MainBox extends Application {
      */
     private StackPane centerPane = new StackPane();
     private VBox topPane = new VBox();
-    private BorderPane homePane = new BorderPane();
     private Label tipLabelDark = new Label("从本地文件夹拖动图片到这里");
     private ScrollPane centerScroll = new ScrollPane();
     private ImageView ivSave = new ImageView(SAVE);
     private ImageView ivAdd = new ImageView(ADD);
     private ImageView ivClear = new ImageView(CLEAR);
 
+    /**
+     * 将主界面整合成一个Scene类，方便调用
+     *
+     *  root   静态homePane，因为只用一次所以就设为静态了
+     *  width  1024
+     *  height 800
+     *
+     */
+    public MainBox() {
+        //窗口尺寸
+        super(homePane, 1024, 800);
+        this.getStylesheets().add("css/imgblock.css");
 
-
-//    private ScrollBar centerScroll = new ScrollBar();
-
-
-
-    @Override
-    public void start(Stage primaryStage) throws Exception{
         //设置静态值
         blockList.getStyleClass().add("main-box");
         blockList.setBackground(new Background(new BackgroundImage(new Image("res/icon/background.png",1024,700,false,true),
@@ -111,34 +113,12 @@ public class MainBox extends Application {
         topPane.getChildren().addAll(menuBar,ctrlBar);
         topPane.getStyleClass().addAll("top-pane");
         homePane.setTop(topPane);
-//        centerScroll.setVisible(false)；
-//        homePane.setRight(centerScroll);
 
         // 设置主界面的背景提示，用label实现
         tipLabelDark.getStyleClass().addAll("background-lable");
         tipLabelDark.setAlignment(Pos.BASELINE_CENTER);
         tipLabelDark.setBackground(new Background(new BackgroundFill(Color.rgb(0, 0, 0, 0.12),null,null)));
         tipLabelDark.setVisible(false);
-
-//         临时加载样例图片
-        ImgBlock test = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000035.png");
-        ImgBlock tet = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000042.jpg");
-        ImgBlock tt = new ImgBlock(++imgCount,"E:\\360MoveData\\Users\\fenglinger\\Desktop\\照片\\test\\000040.bmp");
-        //临时添加文件进入blockList
-        blockList.getChildren().addAll(test,tet,tt);
-
-
-        //窗口尺寸
-        Scene scene = new Scene(homePane, 1024, 800);
-        scene.getStylesheets().add("css/imgblock.css");
-
-
-
-        primaryStage.setTitle("图像压缩处理");
-        primaryStage.setScene(scene);
-        primaryStage.setResizable(false);
-        primaryStage.show();
-
 
         //  拖动载入文件方法
         centerPane.setOnDragEntered(e->{
@@ -181,6 +161,7 @@ public class MainBox extends Application {
             e.consume();
         });
 
+        // 清空blockList
         btClear.setOnMouseEntered(e->{
             setImg(ivClear,CLEARD);
             e.consume();
@@ -193,6 +174,7 @@ public class MainBox extends Application {
             dropAll();
         });
 
+        // 从文件管理器打开图像
         btAdd.setOnMouseEntered(e->{
             setImg(ivAdd,ADDD);
             e.consume();
@@ -204,16 +186,28 @@ public class MainBox extends Application {
         btAdd.setOnAction(e->{
             Stage stage = new Stage();
             FileChooser fileChooser = new FileChooser();
-            fileChooser.setTitle("选择保存路径");
-            List list = fileChooser.showOpenMultipleDialog(stage);
-            list.forEach(li->{
-                String path = li.toString();
-                System.out.println(path);
-                addToBlockList(path);
-            });
+            fileChooser.setTitle("选择图片");
+            fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("全部图片（.bmp/.png/.jpg/.tif", "*.bmp","*.jpg","*.png","*.tif"),
+                    new FileChooser.ExtensionFilter("BMP", "*.bmp"),
+                    new FileChooser.ExtensionFilter("JPG", "*.jpg"),
+                    new FileChooser.ExtensionFilter("PNG", "*.png"),
+                    new FileChooser.ExtensionFilter("TIF", "*.tif"));
+            try{
+                List list = fileChooser.showOpenMultipleDialog(stage);
+                list.forEach(li->{
+                    String path = li.toString();
+                    System.out.println(path);
+                    addToBlockList(path);
+                });
+            }
+            catch (Exception ex){
+                System.out.println("MainBos->btAdd->action->list: "+ex);
+            }
             //销毁实例
             e.consume();
         });
+
 
         btSave.setOnMouseEntered(e->{
             setImg(ivSave,SAVED);
@@ -223,9 +217,28 @@ public class MainBox extends Application {
             setImg(ivSave,SAVE);
             e.consume();
         });
+        btSave.setOnAction(e->{
+            Stage stage = new Stage();
+            DirectoryChooser directoryChooser = new DirectoryChooser();
+            directoryChooser.setTitle("选择文件目录");
+            int coun = 0;
+            try{
+                String path = directoryChooser.showDialog(stage).getPath();
+                System.out.println(path);
+                ObservableList i = blockList.getChildren();
+                for(int j = 0;j<i.size();j++){
+                    ((ImgBlock)i.get(j)).setState(ImgBlock.LOADING);
+                    ((ImgBlock)i.get(j)).saveImg(path+"\\"+j);
+                }
+            }
+            catch (IIOException ex){
+                System.out.println("MainBos->btAdd->action->file: "+ex.getMessage());
+            }
+            catch (NullPointerException ex){
+                System.out.println("MainBos->btAdd->action->list: "+ex);
+            }
+        });
 
-        // 监听滚动条事件布局会乱掉
-//        blockList.layoutYProperty().bind(blockList.heightProperty().divide(100).multiply(centerScroll.valueProperty()).multiply(-1));
     }
 
     /**
@@ -272,9 +285,5 @@ public class MainBox extends Application {
         blockList.getChildren().clear();
         imgList.clear();
         imgCount=0;
-    }
-
-    public static void main(String[] args) {
-        launch(args);
     }
 }

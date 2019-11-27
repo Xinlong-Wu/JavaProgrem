@@ -1,4 +1,4 @@
-package imgzip;
+package imgzip.mainwindow;
 
 
 import javafx.geometry.Insets;
@@ -11,12 +11,12 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
-import javafx.scene.layout.Pane;
 import javafx.scene.layout.StackPane;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
+import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
@@ -26,7 +26,6 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
-
 
 
 
@@ -83,7 +82,7 @@ class ImgBlock extends BorderPane {
         this.getStyleClass().add("block-bg");
         this.setCenter(cent);
         this.index = imgCount;
-        url = imgUrl;
+        this.url = imgUrl;
 
         // 边框阴影设置
         DropShadow dropShadow =new DropShadow();
@@ -115,7 +114,6 @@ class ImgBlock extends BorderPane {
 //        for(int i = 1;i<tmpUrl.length-1;i++){
 //            dialog+="\\\\"+tmpUrl[i];
 //        }
-
 
         //关闭按钮设定
         btClose.setGraphic(ivClose);
@@ -162,6 +160,7 @@ class ImgBlock extends BorderPane {
         butBar.getChildren().add(trans);
         if("jpg".equals(imgUrl.split("\\.")[1])){
             trans.setValue(JPG);
+//            trans.getItems().remove(JPG);
         }
         else if("png".equals(imgUrl.split("\\.")[1])){
             trans.setValue(PNG);
@@ -185,9 +184,16 @@ class ImgBlock extends BorderPane {
         // 保存
         save.setOnAction(e->{
             ivstate.setImage(LOADING);
-            saveImg(imgUrl,imgUrl);
-            //销毁实例
-            e.consume();
+            try {
+                saveImg(imgUrl);
+            }
+            catch (IIOException ex){
+                System.out.println("Imgblock->save->action: "+ex.getMessage());
+            }
+            finally {
+                //销毁实例
+                e.consume();
+            }
         });
 
         // 另存为
@@ -196,16 +202,27 @@ class ImgBlock extends BorderPane {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("选择保存路径");
             fileChooser.getExtensionFilters().addAll(
+                    new FileChooser.ExtensionFilter("全部图片（.bmp/.png/.jpg/.tif", "*.bmp","*.jpg","*.png","*.tif"),
                     new FileChooser.ExtensionFilter("BMP", "*.bmp"),
                     new FileChooser.ExtensionFilter("JPG", "*.jpg"),
                     new FileChooser.ExtensionFilter("PNG", "*.png"),
                     new FileChooser.ExtensionFilter("TIF", "*.tif"));
-            String path = fileChooser.showSaveDialog(stage).getPath();
-            System.out.println(path);
-            ivstate.setImage(LOADING);
-            saveImg(imgUrl,path);
-            //销毁实例
-            e.consume();
+            try{
+                String path = fileChooser.showSaveDialog(stage).getPath();
+                System.out.println(path);
+                ivstate.setImage(LOADING);
+                saveImg(imgUrl,path);
+            }
+            catch (IIOException ex){
+                System.out.println("Imgblock->save->action: "+ex.getMessage());
+            }
+            catch (NullPointerException ex){
+                System.out.println("imgBlock->saveAs->action->fileChooser: "+ex);
+            }
+            finally {
+                //销毁实例
+                e.consume();
+            }
         });
 
         btClose.setOnAction(e->{
@@ -216,7 +233,24 @@ class ImgBlock extends BorderPane {
 
     }
 
-    void saveImg(String imgUrl,String path){
+    void setState(Image state){
+        ivstate.setImage(state);
+    }
+
+    /**
+     * 保存图片的储存路径方法
+     * @param path
+     */
+    void saveImg(String path) throws IIOException{
+            saverPool.execute(new SaveImg(this.url,path));
+    }
+
+    /**
+     * 保存图片的图片路径和储存路径方法
+     * @param imgUrl
+     * @param path
+     */
+    void saveImg(String imgUrl,String path) throws IIOException{
         saverPool.execute(new SaveImg(imgUrl,path));
     }
 
@@ -243,7 +277,11 @@ class ImgBlock extends BorderPane {
     class SaveImg implements Runnable{
         String imgUrl;
         String[] newUrl;
-        public SaveImg(String url,String newUrl){
+
+        public SaveImg(String url,String newUrl)throws IIOException{
+            if(! new File(url).exists()){
+                throw new IIOException("Imgae "+ url + " not exists");
+            }
             imgUrl = url;
             this.newUrl = newUrl.split("\\.");
         }
@@ -266,13 +304,13 @@ class ImgBlock extends BorderPane {
                 else if(trans.getValue().equals(PNG)) {
                     //重新创建图片
                     BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
-                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
+//                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
                     ImageIO.write(srcImg, "jpg", new File(newUrl[0] + ".png"));
                 }
                 else if(trans.getValue().equals(TIF)) {
                     //重新创建图片
                     BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
-                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
+//                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
                     ImageIO.write(srcImg, "jpg", new File(newUrl[0] + ".tif"));
                 }
                 else if(trans.getValue().equals(BMP)) {
