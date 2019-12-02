@@ -148,7 +148,8 @@ public class MainBox extends Scene {
                 List<File> imgs = dragboard.getFiles();
                 for (int i = 0;i < imgs.size();i++ ) {
                     String[] path = imgs.get(i).getPath().split("\\.");
-                    if("png".equals(path[path.length-1])|| "jpg".equals(path[path.length-1])|| "bmp".equals(path[path.length-1])|| "tif".equals(path[path.length-1])){
+                    String type = path[path.length-1].toLowerCase();
+                    if("png".equals(type)|| "jpg".equals(type)|| "bmp".equals(type)|| "tif".equals(type)){
                         /* allow for both copying and moving, whatever user chooses */
                         e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                     }else{

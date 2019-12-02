@@ -2,6 +2,7 @@ package imgzip.mainwindow;
 
 
 import javafx.geometry.Insets;
+import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -12,12 +13,14 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.StackPane;
+import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
 import javax.imageio.ImageIO;
+import javax.imageio.stream.FileImageInputStream;
 import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.awt.image.MemoryImageSource;
@@ -65,7 +68,9 @@ class ImgBlock extends BorderPane {
     private Label size;
     private int index;
     HBox topBar = new HBox();
-    HBox butBar = new HBox();
+    VBox botBar = new VBox();
+    HBox transBar = new HBox();
+    Slider sliderBar = new Slider();
 
 
 //    Menu
@@ -78,7 +83,7 @@ class ImgBlock extends BorderPane {
         //父属性及子属性设定
         this.setPadding(new Insets(10));
         this.setTop(topBar);
-        this.setBottom(butBar);
+        this.setBottom(botBar);
         this.getStyleClass().add("block-bg");
         this.setCenter(cent);
         this.index = imgCount;
@@ -99,7 +104,7 @@ class ImgBlock extends BorderPane {
         ivimg.setImage(tmp);
         ivimg.setPreserveRatio(true);
         if(tmp.getHeight()>tmp.getWidth()){
-            ivimg.setFitHeight(200);
+            ivimg.setFitHeight(205);
         }else{
             ivimg.setFitWidth(225);
         }
@@ -109,11 +114,17 @@ class ImgBlock extends BorderPane {
         ivDwonLoad.setFitWidth(15);
         ivClose.setFitHeight(20);
         ivClose.setFitWidth(20);
-//        String[] tmpUrl = imgUrl.split("\\\\");
-//        dialog = tmpUrl[0];
-//        for(int i = 1;i<tmpUrl.length-1;i++){
-//            dialog+="\\\\"+tmpUrl[i];
-//        }
+
+        Label size = new Label(this.getFileSize(imgUrl));
+        size.getStyleClass().addAll("size-Label");
+        Label split = new Label("/");
+        Label dialog = new Label(size.getText());
+        dialog.getStyleClass().addAll("size-Label");
+        HBox sizeBox = new HBox();
+        sizeBox.getChildren().addAll(dialog,split,size);
+//        sizeBox.setAlignment(Pos.BOTTOM_RIGHT);
+        sizeBox.getStyleClass().addAll("sizeBox");
+
 
         //关闭按钮设定
         btClose.setGraphic(ivClose);
@@ -131,8 +142,9 @@ class ImgBlock extends BorderPane {
         cent.getChildren().addAll(ivimg);
 
         //底部栏属性设定
-        butBar.getStyleClass().setAll("block-butbar");
-        butBar.setPadding(new Insets(0,0,0,10));
+        botBar.getChildren().addAll(sliderBar,transBar);
+        botBar.getStyleClass().setAll("block-botbar");
+//        botBar.setPadding(new Insets(0,0,0,10));
 
         //保存菜单设定
         MenuButton downLoad = new MenuButton();
@@ -154,21 +166,26 @@ class ImgBlock extends BorderPane {
 
 
         //底部栏设定
+
+
+        sliderBar.getStyleClass().addAll("slidebar");
+
         trans.setPadding(new Insets(0,0,0,10));
         trans.getItems().addAll(JPG,PNG,BMP,TIF);
         trans.getStyleClass().addAll("block-combo");
-        butBar.getChildren().add(trans);
-        if("jpg".equals(imgUrl.split("\\.")[1])){
+        transBar.getChildren().addAll(trans, sizeBox);
+        transBar.getStyleClass().addAll("transbar");
+        String type = imgUrl.split("\\.")[1].toLowerCase();
+        if("jpg".equals(type)){
             trans.setValue(JPG);
-//            trans.getItems().remove(JPG);
         }
-        else if("png".equals(imgUrl.split("\\.")[1])){
+        else if("png".equals(type)){
             trans.setValue(PNG);
         }
-        else if("bmp".equals(imgUrl.split("\\.")[1])){
+        else if("bmp".equals(type)){
             trans.setValue(BMP);
         }
-        else if("tif".equals(imgUrl.split("\\.")[1])){
+        else if("tif".equals(type)){
             trans.setValue(TIF);
         }
 
@@ -270,6 +287,26 @@ class ImgBlock extends BorderPane {
         return this.index;
     }
 
+    /**
+     * 获取文件大小
+     * @param url
+     */
+    String getFileSize(String url){
+        String str = "";
+        try {
+            FileImageInputStream fiis = new FileImageInputStream(new File(url));
+            Float fsize = (float) fiis.length() / 1024;
+            if(fsize<100){
+                str = String.format("%.2f",fsize) + "KB";
+            }
+            else {
+                str = String.format("%.2f",fsize/1024) + "MB";
+            }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return str;
+    }
 
     /**
      *   保存文件的线程
