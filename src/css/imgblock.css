@@ -188,9 +188,19 @@
     -fx-max-width: 125px;
 }
 
-.slidebar{
+.slidebox{
     -fx-pref-height: 40px;
-    /*-fx-background-color: #d251ff;*/
+    -fx-alignment: center;
+    -fx-background-color: #d251ff;
+}
+
+.slidebar{
+    -fx-pref-width: 180px;
+    -fx-padding: 0px;
+}
+
+.slidebar:hover{
+    -fx-cursor: hand;
 }
 
 .transbar{

@@ -1,6 +1,8 @@
 package imgzip.mainwindow;
 
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.control.*;
@@ -27,6 +29,7 @@ import java.awt.image.MemoryImageSource;
 import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.IOException;
+import java.sql.Time;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -50,8 +53,8 @@ class ImgBlock extends BorderPane {
     static String JPG = "To JPG";
     static String PNG = "To PNG";
     static String BMP = "To BMP";
-    static String TIF = "To TIF";
     static ExecutorService saverPool = Executors.newCachedThreadPool();
+    static ExecutorService zipPool = Executors.newCachedThreadPool();
 
     /**
      *  私有参数用于各个类特定的值、和对象，用来组成
@@ -70,7 +73,8 @@ class ImgBlock extends BorderPane {
     HBox topBar = new HBox();
     VBox botBar = new VBox();
     HBox transBar = new HBox();
-    Slider sliderBar = new Slider();
+    HBox sliderBox = new HBox();
+    Slider sliderBar = new Slider(0,100,100);
 
 
 //    Menu
@@ -115,6 +119,12 @@ class ImgBlock extends BorderPane {
         ivClose.setFitHeight(20);
         ivClose.setFitWidth(20);
 
+        Label lbZip = new Label("压缩：");
+        Label lbZipPre = new Label("100%");
+        lbZipPre.setPrefWidth(40);
+        sliderBox.getChildren().addAll(lbZip,sliderBar,lbZipPre);
+        sliderBox.getStyleClass().addAll("slidebox");
+
         Label size = new Label(this.getFileSize(imgUrl));
         size.getStyleClass().addAll("size-Label");
         Label split = new Label("/");
@@ -142,7 +152,7 @@ class ImgBlock extends BorderPane {
         cent.getChildren().addAll(ivimg);
 
         //底部栏属性设定
-        botBar.getChildren().addAll(sliderBar,transBar);
+        botBar.getChildren().addAll(sliderBox,transBar);
         botBar.getStyleClass().setAll("block-botbar");
 //        botBar.setPadding(new Insets(0,0,0,10));
 
@@ -171,7 +181,7 @@ class ImgBlock extends BorderPane {
         sliderBar.getStyleClass().addAll("slidebar");
 
         trans.setPadding(new Insets(0,0,0,10));
-        trans.getItems().addAll(JPG,PNG,BMP,TIF);
+        trans.getItems().addAll(JPG,PNG,BMP);
         trans.getStyleClass().addAll("block-combo");
         transBar.getChildren().addAll(trans, sizeBox);
         transBar.getStyleClass().addAll("transbar");
@@ -184,9 +194,6 @@ class ImgBlock extends BorderPane {
         }
         else if("bmp".equals(type)){
             trans.setValue(BMP);
-        }
-        else if("tif".equals(type)){
-            trans.setValue(TIF);
         }
 
 
@@ -219,16 +226,15 @@ class ImgBlock extends BorderPane {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("选择保存路径");
             fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("全部图片（.bmp/.png/.jpg/.tif", "*.bmp","*.jpg","*.png","*.tif"),
+                    new FileChooser.ExtensionFilter("全部图片（.bmp/.png/.jpg)", "*.bmp","*.jpg","*.png"),
                     new FileChooser.ExtensionFilter("BMP", "*.bmp"),
                     new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                    new FileChooser.ExtensionFilter("PNG", "*.png"),
-                    new FileChooser.ExtensionFilter("TIF", "*.tif"));
+                    new FileChooser.ExtensionFilter("PNG", "*.png"));
             try{
                 String path = fileChooser.showSaveDialog(stage).getPath();
                 System.out.println(path);
                 ivstate.setImage(LOADING);
-                saveImg(imgUrl,path);
+                saveImg(path);
             }
             catch (IIOException ex){
                 System.out.println("Imgblock->save->action: "+ex.getMessage());
@@ -248,27 +254,63 @@ class ImgBlock extends BorderPane {
             e.consume();
         });
 
+
+        /**
+         *  图片压缩监听
+         */
+        sliderBar.valueProperty().addListener(new ChangeListener<Number>() {
+            @Override
+            public void changed(ObservableValue<? extends Number> ov,
+                                Number old_val, Number new_val) {
+                lbZipPre.setText(String.format("%.0f",sliderBar.getValue())+"%");
+                System.out.println(sliderBar.getValue());
+            }
+        });
+
+        sliderBar.setOnMouseReleased(event ->{
+            this.setState(LOADING);
+            zipImg(sliderBar.getValue());
+            event.consume();
+        });
+
     }
 
     void setState(Image state){
         ivstate.setImage(state);
     }
 
+    public ImageView getIvstate() {
+        return ivstate;
+    }
+
+    public ComboBox<String> getTrans() {
+        return trans;
+    }
+
+
     /**
      * 保存图片的储存路径方法
      * @param path
      */
     void saveImg(String path) throws IIOException{
-            saverPool.execute(new SaveImg(this.url,path));
+            saverPool.execute(new SaveImg(this,path));
     }
 
+//    /**
+//     * 保存图片的图片路径和储存路径方法
+//     * @param imgUrl
+//     * @param path
+//     */
+//    void saveImg(String imgUrl,String path) throws IIOException{
+//        saverPool.execute(new SaveImg(this,imgUrl,path));
+//    }
+
     /**
-     * 保存图片的图片路径和储存路径方法
-     * @param imgUrl
-     * @param path
+     * 压缩图片方法方法
+     * @param rate
      */
-    void saveImg(String imgUrl,String path) throws IIOException{
-        saverPool.execute(new SaveImg(imgUrl,path));
+    void zipImg(double rate){
+        zipPool.execute(new ZipImg(this,rate));
     }
 
     /**
@@ -308,66 +350,6 @@ class ImgBlock extends BorderPane {
         return str;
     }
 
-    /**
-     *   保存文件的线程
-     */
-    class SaveImg implements Runnable{
-        String imgUrl;
-        String[] newUrl;
 
-        public SaveImg(String url,String newUrl)throws IIOException{
-            if(! new File(url).exists()){
-                throw new IIOException("Imgae "+ url + " not exists");
-            }
-            imgUrl = url;
-            this.newUrl = newUrl.split("\\.");
-        }
-        @Override
-        public void run() {
-            //通过split截取文件路径
-            String[] url=imgUrl.split("\\.");
-            System.out.println(url[0]);
-            File f2=new File(imgUrl);
-            //使用imgeIO来读取图片
-            BufferedImage srcImg = null;
-            try {
-                srcImg = ImageIO.read(f2);
-                if(trans.getValue().equals(JPG)) {
-                    //重新创建图片
-                    BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
-                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
-                    ImageIO.write(newBufferedImage, "jpg", new File(newUrl[0] + ".jpg"));
-                }
-                else if(trans.getValue().equals(PNG)) {
-                    //重新创建图片
-                    BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
-//                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
-                    ImageIO.write(srcImg, "jpg", new File(newUrl[0] + ".png"));
-                }
-                else if(trans.getValue().equals(TIF)) {
-                    //重新创建图片
-                    BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
-//                    newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
-                    ImageIO.write(srcImg, "jpg", new File(newUrl[0] + ".tif"));
-                }
-                else if(trans.getValue().equals(BMP)) {
-
-                    //重新创建图片(使用了awt包）
-                    int h = srcImg.getHeight(), w = srcImg.getWidth();
-                    int[] pixel = new int[w * h];
-                    PixelGrabber pixelGrabber = new PixelGrabber(srcImg, 0, 0, w, h, pixel, 0, w);
-                    pixelGrabber.grabPixels();
-                    MemoryImageSource m = new MemoryImageSource(w, h, pixel, 0, w);
-                    java.awt.Image image =  Toolkit.getDefaultToolkit().createImage(m);
-                    BufferedImage buff = new BufferedImage(w, h, BufferedImage.TYPE_USHORT_565_RGB);
-                    buff.createGraphics().drawImage(image, 0, 0 ,null);
-                    ImageIO.write(buff, "bmp", new File(newUrl[0] + ".bmp"));
-                }
-            } catch (IOException | InterruptedException ex) {
-                ex.printStackTrace();
-            }
-            ivstate.setImage(DONE);
-        }
-    }
 }
 
