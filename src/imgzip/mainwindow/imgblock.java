@@ -296,15 +296,6 @@ class ImgBlock extends BorderPane {
             saverPool.execute(new SaveImg(this,path));
     }
 
-//    /**
-//     * 保存图片的图片路径和储存路径方法
-//     * @param imgUrl
-//     * @param path
-//     */
-//    void saveImg(String imgUrl,String path) throws IIOException{
-//        saverPool.execute(new SaveImg(this,imgUrl,path));
-//    }
-
     /**
      * 压缩图片方法方法
      * @param rate

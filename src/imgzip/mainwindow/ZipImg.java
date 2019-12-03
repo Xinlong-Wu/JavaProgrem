@@ -6,6 +6,7 @@ package imgzip.mainwindow;
  */
 class ZipImg implements Runnable{
     ImgBlock imgBlock;
+    String sorce;
     double rate;
     public ZipImg(ImgBlock imgBlock, double rate){
         this.imgBlock = imgBlock;
@@ -22,4 +23,6 @@ class ZipImg implements Runnable{
         System.out.println("done");
         imgBlock.getIvstate().setImage(ImgBlock.DONE);
     }
+
+
 }

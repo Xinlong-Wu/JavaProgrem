@@ -68,7 +68,6 @@ class SaveImg implements Runnable{
                 ImageIO.write(newBufferedImage, "png", new File(newUrl[0] + ".png"));
             }
             else if(trans.getValue().equals(ImgBlock.BMP)) {
-
                 //重新创建图片(使用了awt包）
                 int h = srcImg.getHeight(), w = srcImg.getWidth();
                 int[] pixel = new int[w * h];
