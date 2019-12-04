@@ -48,6 +48,7 @@ public class DataBaseController {
             ex.printStackTrace();
 
         }
+
     }
 
     
@@ -68,7 +69,28 @@ public class DataBaseController {
             ex.printStackTrace();
 
         }
+
         return rs;
     }
+
+
+    public void queryUpdate(String sql){
+        try {
+
+            Class.forName(driver);
+
+            ct = DriverManager.getConnection(url,user,password);
+
+            ps = ct.prepareStatement(sql);
+
+            ps.executeUpdate();
+
+        }catch (Exception ex){
+            ex.printStackTrace();
+
+        }
+
+    }
+
 
 }

@@ -19,7 +19,7 @@ public class WrongPassword {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/WrongPassword.fxml"));
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Password is wrong!");
-            primaryStage.setScene(new Scene(root, 638.0, 385));
+            primaryStage.setScene(new Scene(root, 638.0, 400));
             primaryStage.show();
 
         }catch (Exception e){

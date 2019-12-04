@@ -97,7 +97,6 @@ public class LoginController {
 
         DataBaseController loginInstruction = new DataBaseController();
         ResultSet rs = null;
-
         try{
 
             String currentInstruction = "SELECT pwd FROM login WHERE userName=" + "'" + account.getText().trim()+ "'";
@@ -114,10 +113,14 @@ public class LoginController {
 
                 }else{
                     new WrongPassword();
+                    Stage stage = (Stage)createAccount.getScene().getWindow();
+                    stage.close();
                 }
 
             }else {
                 new WrongPassword();
+                Stage stage = (Stage)createAccount.getScene().getWindow();
+                stage.close();
 
             }
 
@@ -127,10 +130,6 @@ public class LoginController {
         }finally {
             loginInstruction.close();
         }
-
-
-
-
     }
 
 
@@ -142,6 +141,8 @@ public class LoginController {
         Stage stage = (Stage)cancel.getScene().getWindow();
         stage.close();
     }
+
+
 
     /**
      设置记住账号密码按钮的方法。
@@ -156,7 +157,6 @@ public class LoginController {
         }else {
             judgeIfclick = "false";
         }
-
 
         try {
             FileWriter fw = new FileWriter("src/txtFile/RememberAccount&Password.txt");
@@ -179,6 +179,8 @@ public class LoginController {
      */
     public void createAccount(){
         new CreateAccount();
+        Stage stage = (Stage)createAccount.getScene().getWindow();
+        stage.close();
     }
 
 
