@@ -1,0 +1,42 @@
+@font-face {
+    font-family: 'Size Font';
+    src: url('/res/font/SourceCodeVariable-Roman.ttf');
+}
+
+.lbinfocT{
+    -fx-font-size: 15px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #0078D7;
+}
+
+.tittle{
+    -fx-alignment: center-left;
+    -fx-pref-width: 360px;
+    /*-fx-background-color: #000;*/
+
+}
+
+.ppane{
+    -fx-alignment: center;
+}
+
+.btBox{
+    -fx-min-height: 115px;
+}
+
+.button{
+    -fx-min-width: 300px;
+    -fx-min-height: 50px;
+    -fx-border-color: #0078D7;
+    -fx-background-radius:0px;
+    -fx-background-color: #fff;
+    -fx-font-size: 14px;
+}
+
+.button:hover{
+    -fx-cursor: hand;
+}
+
+.root{
+    -fx-background-color: #fff;
+}

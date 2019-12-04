@@ -1,5 +1,5 @@
 # [JavaProgram] 图像转化压缩及文件临时存储
->作者：乌鑫龙
+>作者：乌鑫龙 吴泳仪 肖尧
 ---
 ## 目前想法：
   1. 图片的几种主流格式互相转化 
@@ -34,5 +34,30 @@
 
 
 ## 接口参数
-
  
+ - (Scene) MainBox:
+    - \- _SAVE_:Image 按钮图标    
+    - \- _ADD_:Image 按钮图标   
+    - \- _CLEAR_:Image 按钮图标   
+    - \- _SAVED_:Image 按钮图标-深色   
+    - \- _ADDD_:Image 按钮图标-深色   
+    - \- _CLEARD_:Image 按钮图标-深色   
+    - \- _imgCount_: int 用来记录imgblock的个数，方便删除
+    - \- _blockList_: FlowPane 用来储存imglock   
+    - \- _homePane_: BorderPane 主pane，因为要传给super所以必须为静态类   
+    - \- imgList: HashSet 用来防止图片重复插入   
+    - \- centerPane: ScollarPane 实现滚动显示   
+    - \- tipLabelDark: ImageView 实现拖动提示   
+    - \- ivSave: ImageView 按钮图标  
+    - \- ivAdd: ImageView 按钮图标  
+    - \- ivClear: ImageView 按钮图标 
+   - MainBox()  **构造方法，调用生成主界面窗口Scene**    
+   - \- setImg(ImageView iv, Image im):void **更改类中imgview的显示图片**   
+   - \- addToBlockList(String path): void **添加一个block窗格类到BlockList**    
+   - _drop_(ImgBlock block): void **静态方法删除图片(block窗格类)**    
+   - \- _dropAll_(): void **删除主窗口所有的block窗格**    
+   
+
+## 目前功能
+1. 运用多线程，jpg/png/bmp/tif图片互相转化
+2. 拖动加载图片f-
