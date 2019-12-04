@@ -8,16 +8,23 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.CheckBox;
 import javafx.stage.Stage;
 
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.BufferedReader;
+import java.io.BufferedWriter;
+import java.io.FileReader;
+import java.io.FileWriter;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
+
 import java.sql.SQLException;
 import java.sql.Statement;
 
 
 /**
     @Author:肖尧
-    @Date:2019.11.22
+    @Date:2019.11.24
  */
 public class LoginController {
 
@@ -56,7 +63,7 @@ public class LoginController {
         String stringPassword = password.getText();
         String ifEmpty = "";
 
-        if ( (stringAccount.equals(ifEmpty) || stringPassword.equals(ifEmpty)) && login.isDisable() == false){
+        if ( (stringAccount.equals(ifEmpty) || stringPassword.equals(ifEmpty))){
             login.setDisable(true);
 
         }else if ((!stringAccount.equals(ifEmpty) && !stringPassword.equals(ifEmpty))){
@@ -81,15 +88,15 @@ public class LoginController {
 
     /**
     用户点击此按钮时，
-    ①：如果账号不存在或账号存在但是密码错误，则进入密码错误页面。
-    ②：如果账号存在且密码正确，则进入主页面（尚未完成）
+     ①：如果账号不存在或账号存在但是密码错误，则进入密码错误页面。
+     ②：如果账号存在且密码正确，则进入主页面（尚未完成）。
+     ③：如果勾选了记住账号和密码，则在下一次打开页面时会记住上一次的密码。
      */
 
     public void login(){
 
         DataBaseController loginInstruction = new DataBaseController();
         ResultSet rs = null;
-
         try{
 
             String currentInstruction = "SELECT pwd FROM login WHERE userName=" + "'" + account.getText().trim()+ "'";
@@ -99,16 +106,21 @@ public class LoginController {
             if (rs.next()) {
                 String rightPassword = rs.getString(1);
                 if (rightPassword.equals(password.getText())){
+
+                    remember();
                     //登入主页面，待定
-                    System.out.println("登录成功");
+                    System.out.println("登录1");
 
                 }else{
                     new WrongPassword();
-
+                    Stage stage = (Stage)createAccount.getScene().getWindow();
+                    stage.close();
                 }
 
             }else {
                 new WrongPassword();
+                Stage stage = (Stage)createAccount.getScene().getWindow();
+                stage.close();
 
             }
 
@@ -118,13 +130,11 @@ public class LoginController {
         }finally {
             loginInstruction.close();
         }
-
     }
 
 
     /**
-    设置back事件，
-    当用户点击该按钮的时候，跳转至登录界面
+    设置cancel按钮，可以直接点击这里完成窗口的关闭。
  */
     public void cancel(){
 
@@ -132,4 +142,48 @@ public class LoginController {
         stage.close();
     }
 
+
+
+    /**
+     设置记住账号密码按钮的方法。
+     */
+
+    public void remember(){
+        boolean ifclick = remember.isSelected();
+        String judgeIfclick = "";
+
+        if(ifclick){
+            judgeIfclick = "true";
+        }else {
+            judgeIfclick = "false";
+        }
+
+        try {
+            FileWriter fw = new FileWriter("src/txtFile/RememberAccount&Password.txt");
+            BufferedWriter fis = new BufferedWriter(fw);
+
+            fis.write(account.getText() +"|"+ password.getText() + "|" + judgeIfclick );
+            fis.newLine();
+
+            fis.close();
+            fw.close();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+
+    /**
+     点击注册页面的方法，用户点击以后直接进入注册页面。
+     */
+    public void createAccount(){
+        new CreateAccount();
+        Stage stage = (Stage)createAccount.getScene().getWindow();
+        stage.close();
+    }
+
+
+
 }
+

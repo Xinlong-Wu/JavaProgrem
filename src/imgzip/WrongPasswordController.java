@@ -3,14 +3,15 @@ import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
+import sun.rmi.runtime.Log;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
 /**
- Author:肖尧
- Date:2019.11.22
+ @Author:肖尧
+ @Date:2019.11.24
  */
 public class WrongPasswordController {
 
@@ -30,7 +31,9 @@ public class WrongPasswordController {
      */
 
     public void createAccount(){
-
+        new CreateAccount();
+        Stage stage = (Stage)back.getScene().getWindow();
+        stage.close();
     }
 
 
@@ -51,7 +54,7 @@ public class WrongPasswordController {
 
         Stage stage = (Stage)back.getScene().getWindow();
         stage.close();
-
+        new Loginbeginner();
     }
 
 
