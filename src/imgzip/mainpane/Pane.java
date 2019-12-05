@@ -1,4 +1,4 @@
-package mainpane;
+package imgzip.mainpane;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
