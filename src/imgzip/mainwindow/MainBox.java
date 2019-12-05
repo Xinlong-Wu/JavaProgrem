@@ -268,8 +268,8 @@ public class MainBox extends Scene {
             AlertWindow alertWindow = new AlertWindow("登陆失败","你尚未登录");
             alertWindow.anotherButton(vBox -> {
                 AlertButton alertButton = new AlertButton("asdasda");
-
                 vBox.getChildren().add(alertButton);
+                alertWindow.getBtBoxChildren().add(vBox);
             });
             try {
                 alertWindow.start(new Stage());

@@ -57,6 +57,26 @@
    - _drop_(ImgBlock block): void **静态方法删除图片(block窗格类)**    
    - \- _dropAll_(): void **删除主窗口所有的block窗格**    
    
+## API
+   1. 警告弹窗AlertWindow类，添加按钮的实例如下    
+   ```java
+    class Demo{
+        Demo(){
+            AlertWindow alertWindow = new AlertWindow("登陆失败","你尚未登录");  // 此处写警告弹窗的标题和内容
+            // 用于新加按钮，可以新加多个，最后添加在VBox中
+            alertWindow.anotherButton(vBox -> {
+                  AlertButton alertButton = new AlertButton("asdasda");        //写新加按钮的名字
+                  vBox.getChildren().add(alertButton);
+                  alertWindow.getBtBoxChildren().add(vBox); // 最后一定要将VBox添加进alertWindow的btbox中
+            });
+            try {
+              alertWindow.start(new Stage());
+            } catch (Exception e) {
+              e.printStackTrace();
+            }
+        }
+    }
+   ``` 
 
 ## 目前功能
 1. 运用多线程，jpg/png/bmp/tif图片互相转化
