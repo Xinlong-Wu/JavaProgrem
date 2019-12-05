@@ -1,6 +1,8 @@
 package imgzip.mainwindow;
 
 import imgzip.Main;
+import imgzip.alertwindow.AlertButton;
+import imgzip.alertwindow.AlertWindow;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -263,13 +265,21 @@ public class MainBox extends Scene {
         open.setOnAction(new OpenFiles());
 
         about.setOnAction(event -> {
-            AlertWindow alertWindow = new AlertWindow();
+            AlertWindow alertWindow = new AlertWindow("登陆失败","你尚未登录");
+            alertWindow.anotherButton(vBox -> {
+                AlertButton alertButton = new AlertButton("asdasda");
+
+                vBox.getChildren().add(alertButton);
+            });
             try {
                 alertWindow.start(new Stage());
             } catch (Exception e) {
                 e.printStackTrace();
             }
+
         });
+
+
 
         exit.setOnAction(event -> Main.close());
     }
