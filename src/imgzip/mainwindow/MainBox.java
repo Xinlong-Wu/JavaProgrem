@@ -35,14 +35,17 @@ public class MainBox extends Scene {
     static Image SAVE = new Image("res/icon/save.png");
     static Image ADD = new Image("res/icon/add.png");
     static Image CLEAR = new Image("res/icon/clear.png");
+    static Image UPLOAD = new Image("res/icon/upload&font.png");
     static Image SAVED = new Image("res/icon/save-dark.png");
     static Image ADDD = new Image("res/icon/add-dark.png");
     static Image CLEARD = new Image("res/icon/clear-dark.png");
+    static Image UPLOADD = new Image("res/icon/upload&font-dark.png");
     private static int imgCount=0;
     private static FlowPane blockList = new FlowPane();
     private static BorderPane homePane = new BorderPane();
     private static Button btClear = new Button();
     private static Button btSave = new Button();
+    private static Button btUpload = new Button();
 
     /**
      *   用来筛选重复添加的图片
@@ -57,6 +60,7 @@ public class MainBox extends Scene {
     private ImageView ivSave = new ImageView(SAVE);
     private ImageView ivAdd = new ImageView(ADD);
     private ImageView ivClear = new ImageView(CLEAR);
+    private ImageView ivUpload = new ImageView(UPLOAD);
 
 
     /**
@@ -107,6 +111,9 @@ public class MainBox extends Scene {
         btAdd.setGraphic(ivAdd);
         btAdd.getStyleClass().addAll("top-ctrl-bt");
 
+        btUpload.setGraphic(ivUpload);
+        btUpload.getStyleClass().addAll("top-ctrl-bt");
+
         btSave.setGraphic(ivSave);
         btSave.getStyleClass().addAll("top-ctrl-bt");
 
@@ -114,8 +121,9 @@ public class MainBox extends Scene {
         btClear.getStyleClass().addAll("top-ctrl-bt");
         btClear.setDisable(true);
         btSave.setDisable(true);
+        btUpload.setDisable(true);
         HBox ctrlBar = new HBox(20);
-        ctrlBar.getChildren().addAll(btAdd,btSave,btClear);
+        ctrlBar.getChildren().addAll(btAdd,btSave,btClear,btUpload);
         ctrlBar.getStyleClass().addAll("top-ctrl");
         ctrlBar.setPadding(new Insets(0,0,0,20));
         VBox topPane = new VBox();
@@ -183,6 +191,20 @@ public class MainBox extends Scene {
         });
         btClear.setOnAction(e->{
             dropAll();
+            checkBlockList();
+        });
+
+        // 上传图片
+        btUpload.setOnMouseEntered(e->{
+            setImg(ivUpload,UPLOADD);
+            e.consume();
+        });
+        btUpload.setOnMouseExited(e->{
+            setImg(ivUpload,UPLOAD);
+            e.consume();
+        });
+        btUpload.setOnAction(e->{
+
             checkBlockList();
         });
 
@@ -307,10 +329,12 @@ public class MainBox extends Scene {
         if(imgCount==0){
             btClear.setDisable(true);
             btSave.setDisable(true);
+            btUpload.setDisable(true);
         }
         else{
             btClear.setDisable(false);
             btSave.setDisable(false);
+            btUpload.setDisable(false);
         }
     }
 

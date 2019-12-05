@@ -48,6 +48,7 @@
 
 .block-menu-basic:hover {
     -fx-background-color: rgb(102, 102, 153);
+    -fx-cursor: hand;
 }
 
 .block-menu-basic:focused {
@@ -79,6 +80,11 @@
     -fx-pref-width: 10px;
     -fx-pref-height: 15px;
 }
+
+.block-menu-bt:hover {
+    -fx-cursor: hand;
+}
+
 
 .block-combo {
     -fx-alignment: center-right;
