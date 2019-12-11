@@ -173,7 +173,6 @@ public class LoginController {
         }
     }
 
-
     /**
      点击注册页面的方法，用户点击以后直接进入注册页面。
      */
@@ -182,8 +181,14 @@ public class LoginController {
         Stage stage = (Stage)createAccount.getScene().getWindow();
         stage.close();
     }
-
-
+    /**
+     点击忘记密码页面的方法，用户点击以后直接进入找回密码页面。
+     */
+    public void findPassword(){
+        new FindPassword();
+        Stage stage = (Stage)cantSign.getScene().getWindow();
+        stage.close();
+    }
 
 }
 

@@ -18,7 +18,7 @@
           <children>
             <ImageView fitHeight="141.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../res/icon/Happyface.jpg" />
+                <Image url="@../res/icon/Happyface.png" />
               </image>
             </ImageView>
           </children>
@@ -39,7 +39,7 @@
           <children>
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="588.0001220703125" spacing="5.0">
               <children>
-                <HBox id="AccountBox" alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="397.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:2px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;&#10;&#10;&#10;&#10;&#10;">
+                <HBox id="AccountBox" alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="397.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;&#10;&#10;&#10;&#10;&#10;">
                   <children>
                     <TextField fx:id="userName" onKeyReleased="#checkAccountExistence" prefHeight="36.0" prefWidth="260.0" promptText="UserName ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;&#10;" styleClass="null">
                       <HBox.margin>
@@ -60,7 +60,11 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="601.0" spacing="19.0">
               <children>
-                <PasswordField fx:id="passWord" prefHeight="45.0" prefWidth="397.0" promptText="Password" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:2px;&#10;-fx-border-insets:2;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;&#10;&#10;&#10;" HBox.margin="$x1" />
+                <PasswordField fx:id="passWord" prefHeight="45.0" prefWidth="397.0" promptText="Password" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:2;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;&#10;&#10;&#10;">
+                  <HBox.margin>
+                    <Insets left="103.5" fx:id="x1" />
+                  </HBox.margin>
+                </PasswordField>
               </children>
               <VBox.margin>
                 <Insets top="10.0" fx:id="x2" />
@@ -68,9 +72,9 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="601.0" spacing="47.0" VBox.margin="$x2">
               <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="397.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:2px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;">
+                <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="397.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;">
                   <children>
-                    <TextField fx:id="email" onKeyReleased="#checkEmailExistence" prefHeight="40.0" prefWidth="260.0" promptText="Email ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;">
+                    <TextField fx:id="email" onKeyPressed="#checkEmailExistence" prefHeight="40.0" prefWidth="260.0" promptText="Email ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;">
                       <HBox.margin>
                         <Insets />
                       </HBox.margin>
@@ -85,7 +89,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="601.0" spacing="10.0" VBox.margin="$x2">
               <children>
-                <TextField fx:id="telephone" prefHeight="40.0" prefWidth="397.0" promptText="Telephone" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:2px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;">
+                <TextField fx:id="telephone" prefHeight="40.0" prefWidth="397.0" promptText="Telephone" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;">
                   <HBox.margin>
                     <Insets left="103.5" fx:id="x1" />
                   </HBox.margin>

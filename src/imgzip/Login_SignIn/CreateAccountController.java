@@ -144,7 +144,6 @@ public class CreateAccountController {
              * ④如果账号邮箱都不存在，但是未同意服务条款，无法点击。
              * ⑤如果账号邮箱都不存在，且同意了服务条款，才可被点击。
              */
-
             if ("".equals(email.getText())){
                 createAccount.setDisable(true);
 
