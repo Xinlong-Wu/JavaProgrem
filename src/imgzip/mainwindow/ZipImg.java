@@ -11,6 +11,7 @@ class ZipImg implements Runnable{
     public ZipImg(ImgBlock imgBlock, double rate){
         this.imgBlock = imgBlock;
         this.rate = rate;
+        this.sorce = imgBlock.getUrl();
     }
     @Override
     public void run() {

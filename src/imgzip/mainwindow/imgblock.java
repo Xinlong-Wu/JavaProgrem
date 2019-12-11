@@ -1,6 +1,8 @@
 package imgzip.mainwindow;
 
 
+import imgzip.alertwindow.AlertButton;
+import imgzip.alertwindow.AlertWindow;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -56,6 +58,7 @@ class ImgBlock extends BorderPane {
     static String BMP = "To BMP";
     static ExecutorService saverPool = Executors.newCachedThreadPool();
     static ExecutorService zipPool = Executors.newCachedThreadPool();
+    static ExecutorService uploadPool = Executors.newCachedThreadPool();
 
     /**
      *  私有参数用于各个类特定的值、和对象，用来组成
@@ -262,6 +265,7 @@ class ImgBlock extends BorderPane {
         btUpload.setOnAction(e->{
             //检查登录！！！！
             ivstate.setImage(LOADING);
+            uploadImg();
             //销毁实例
             e.consume();
         });
@@ -316,11 +320,22 @@ class ImgBlock extends BorderPane {
     }
 
     /**
-     * 压缩图片方法方法
+     * 压缩图片方法
      * @param rate
      */
     void zipImg(double rate){
         zipPool.execute(new ZipImg(this,rate));
+    }
+
+    /**
+     * 图片上传方法
+     */
+    void uploadImg(){
+        try {
+            uploadPool.execute(new UploadImg(this));
+        } catch (IIOException e) {
+            AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
+        }
     }
 
     /**

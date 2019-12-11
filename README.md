@@ -69,11 +69,7 @@
                   vBox.getChildren().add(alertButton);
                   alertWindow.getBtBoxChildren().add(vBox); // 最后一定要将VBox添加进alertWindow的btbox中
             });
-            try {
-              alertWindow.start(new Stage());
-            } catch (Exception e) {
-              e.printStackTrace();
-            }
+            alertWindow.start(new Stage());
         }
     }
    ``` 

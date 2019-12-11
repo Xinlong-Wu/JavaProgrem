@@ -241,7 +241,7 @@ public class MainBox extends Scene {
                 ObservableList i = blockList.getChildren();
                 for(int j = 0;j<i.size();j++){
                     ((ImgBlock)i.get(j)).setState(ImgBlock.LOADING);
-                    ((ImgBlock)i.get(j)).saveImg(path+"\\"+j);
+                    ((ImgBlock)i.get(j)).saveImg(path+"\\"+"ImgZip_"+String.format("%04d",j));
                 }
             }
             catch (IIOException ex){
@@ -265,12 +265,12 @@ public class MainBox extends Scene {
         open.setOnAction(new OpenFiles());
 
         about.setOnAction(event -> {
-            AlertWindow alertWindow = new AlertWindow("登陆失败","你尚未登录");
-            alertWindow.anotherButton(vBox -> {
-                AlertButton alertButton = new AlertButton("asdasda");
-                vBox.getChildren().add(alertButton);
-                alertWindow.getBtBoxChildren().add(vBox);
-            });
+            AlertWindow alertWindow = new AlertWindow();
+//            alertWindow.anotherButton(vBox -> {
+//                AlertButton alertButton = new AlertButton("asdasda");
+//                vBox.getChildren().add(alertButton);
+//                alertWindow.getBtBoxChildren().add(vBox);
+//            });
             try {
                 alertWindow.start(new Stage());
             } catch (Exception e) {
