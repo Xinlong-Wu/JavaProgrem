@@ -1,0 +1,22 @@
+package imgzip.mainpane;
+
+import javafx.application.Application;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.stage.Stage;
+
+public class Course {
+    public Course(){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Course.fxml"));
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("Course");
+            primaryStage.setScene(new Scene(root, 939, 685));
+            primaryStage.show();
+
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+}
