@@ -39,4 +39,6 @@
 
 .root{
     -fx-background-color: #fff;
+    -fx-pref-width: 400px;
+    -fx-padding: 10px;
 }

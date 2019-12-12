@@ -1,6 +1,8 @@
 package imgzip.mainwindow;
 
 
+import imgzip.alertwindow.AlertButton;
+import imgzip.alertwindow.AlertWindow;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -49,12 +51,14 @@ class ImgBlock extends BorderPane {
     static Image LOADING = new Image("res/icon/loading.gif");
     static Image DONE = new Image("res/icon/done.png");
     static Image DOWNLOAD = new Image("res/icon/download.png");
+    static Image UPLOAD = new Image("res/icon/upload.png");
     static Image CLOSE = new Image("res/icon/close.png");
     static String JPG = "To JPG";
     static String PNG = "To PNG";
     static String BMP = "To BMP";
     static ExecutorService saverPool = Executors.newCachedThreadPool();
     static ExecutorService zipPool = Executors.newCachedThreadPool();
+    static ExecutorService uploadPool = Executors.newCachedThreadPool();
 
     /**
      *  私有参数用于各个类特定的值、和对象，用来组成
@@ -63,6 +67,7 @@ class ImgBlock extends BorderPane {
     private ImageView ivstate = new ImageView(WAITING);
     private ImageView ivDwonLoad = new ImageView(DOWNLOAD);
     private ImageView ivClose = new ImageView(CLOSE);
+    private ImageView ivUpload = new ImageView(UPLOAD);
     private Button btClose = new Button();
     private StackPane cent = new StackPane();
     private ComboBox<String> trans = new ComboBox<>();
@@ -118,6 +123,8 @@ class ImgBlock extends BorderPane {
         ivDwonLoad.setFitWidth(15);
         ivClose.setFitHeight(20);
         ivClose.setFitWidth(20);
+        ivUpload.setFitHeight(15);
+        ivUpload.setFitWidth(15);
 
         Label lbZip = new Label("压缩：");
         Label lbZipPre = new Label("100%");
@@ -168,10 +175,16 @@ class ImgBlock extends BorderPane {
         downLoad.setGraphic(ivDwonLoad);
         downLoad.getStyleClass().addAll("block-menu-bt");
 
+        //上传按钮
+        Button btUpload = new Button();
+        btUpload.setPadding(new Insets(0,0,0,10));
+        btUpload.setGraphic(ivUpload);
+        btUpload.getStyleClass().addAll("block-menu-bt");
 
         // 状态及关闭图标设定
         topBar.getChildren().add(ivstate);
         topBar.getChildren().add(downLoad);
+        topBar.getChildren().add(btUpload);
         topBar.getChildren().add(btBox);
 
 
@@ -248,6 +261,16 @@ class ImgBlock extends BorderPane {
             }
         });
 
+        // 上传
+        btUpload.setOnAction(e->{
+            //检查登录！！！！
+            ivstate.setImage(LOADING);
+            uploadImg();
+            //销毁实例
+            e.consume();
+        });
+
+        //关闭按钮
         btClose.setOnAction(e->{
             MainBox.drop(this);
             //销毁实例
@@ -297,11 +320,22 @@ class ImgBlock extends BorderPane {
     }
 
     /**
-     * 压缩图片方法方法
+     * 压缩图片方法
      * @param rate
      */
     void zipImg(double rate){
         zipPool.execute(new ZipImg(this,rate));
+    }
+
+    /**
+     * 图片上传方法
+     */
+    void uploadImg(){
+        try {
+            uploadPool.execute(new UploadImg(this));
+        } catch (IIOException e) {
+            AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
+        }
     }
 
     /**
