@@ -1,5 +1,6 @@
 package imgzip.Login_SignIn;
 
+import imgzip.mainpane.Personal;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -115,7 +116,11 @@ public class LoginController {
                     if ((passwordWrong.isVisible())){
                         passwordWrong.setVisible(false);
                     }
-                    System.out.println("登录1");
+                    GlobalStringManager.setAccount(account.getText());
+
+                    Stage stage = (Stage)account.getScene().getWindow();
+                    new Personal();
+                    stage.close();
 
                 }else{
                     passwordWrong.setVisible(true);
