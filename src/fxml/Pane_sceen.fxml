@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
@@ -23,21 +24,33 @@
          <font>
             <Font size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="signin" layoutX="740.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Sign in">
          <font>
             <Font size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="course" layoutX="635.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
          <font>
             <Font size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="price" layoutX="533.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
          <font>
             <Font size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Pane fx:id="changepane" layoutX="31.0" layoutY="122.0" prefHeight="532.0" prefWidth="889.0">
          <children>
