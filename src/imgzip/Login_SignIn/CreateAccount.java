@@ -172,7 +172,13 @@ public class CreateAccount {
 
                          }else {
 
+                            if (!already2.isVisible()){
+                                already2.setVisible(true);
+                            }
 
+                            if (!createAccount.isDisable()){
+                                createAccount.setDisable(true);
+                            }
 
 
 
