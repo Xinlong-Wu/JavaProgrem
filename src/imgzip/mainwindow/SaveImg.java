@@ -26,7 +26,7 @@ class SaveImg implements Runnable{
         if(! new File(imgUrl).exists()){
             throw new IIOException("Imgae "+ imgUrl + " not exists");
         }
-        this.newUrl = newUrl.split("\\\\");
+        this.newUrl = newUrl.split("\\.");
         this.imgBlock=imgBlock;
         this.trans = imgBlock.getTrans();
     }
@@ -56,6 +56,7 @@ class SaveImg implements Runnable{
                 BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
                 newBufferedImage.createGraphics().drawImage(srcImg, 0, 0, java.awt.Color.WHITE, null);
                 ImageIO.write(newBufferedImage, "jpg", new File(newUrl[0] + ".jpg"));
+                System.out.println(newUrl[0] + ".jpg");
             } else if (trans.getValue().equals(ImgBlock.PNG)) {
                 //重新创建图片
                 BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);
