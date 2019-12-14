@@ -25,13 +25,13 @@
                     <Insets left="35.0" fx:id="x2" />
                   </HBox.margin>
                 </Label>
-                <Button id="CantSign" fx:id="cantSign" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#findPassword" prefWidth="373.0" text="I CAN'T SIGN IN" textAlignment="LEFT" wrapText="true" />
+                <Button id="CantSign" fx:id="cantSign" alignment="TOP_LEFT" mnemonicParsing="false" onAction="#findPassword" prefWidth="373.0" style="" text="I CAN'T SIGN IN" textAlignment="LEFT" wrapText="true" />
               </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="0.0">
               <children>
                 <Label font="$x1" text="Don't have the accout？" HBox.margin="$x2" />
-                <Button id="CreateAccount" fx:id="createAccount" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#createAccount" prefWidth="373.0" text="CREATE AN ACCOUNT">
+                <Button id="CreateAccount" fx:id="createAccount" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#createAccount" prefWidth="373.0" style="" text="CREATE AN ACCOUNT">
                   <HBox.margin>
                     <Insets fx:id="x3" />
                   </HBox.margin>
@@ -46,7 +46,11 @@
           <children>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
               <children>
-                <Label text="Account name" HBox.margin="$x2" />
+                <Label text="User name">
+                  <HBox.margin>
+                    <Insets left="63.0" />
+                  </HBox.margin>
+                </Label>
                 <TextField id="Account" fx:id="account" onKeyReleased="#check" prefHeight="27.0" prefWidth="445.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;" />
               </children>
             </HBox>
@@ -80,12 +84,12 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.margin="$x3">
               <children>
-                <Button id="Login" fx:id="login" alignment="CENTER_LEFT" disable="true" mnemonicParsing="false" onAction="#login" prefWidth="210.0" text="LOGIN">
+                <Button id="Login" fx:id="login" alignment="CENTER_LEFT" disable="true" mnemonicParsing="false" onAction="#login" prefWidth="210.0" style="" text="LOGIN">
                   <HBox.margin>
                     <Insets left="151.0" />
                   </HBox.margin>
                 </Button>
-                <Button id="Cancel" fx:id="cancel" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#cancel" prefWidth="210.0" text="CANCEL" HBox.margin="$x3" />
+                <Button id="Cancel" fx:id="cancel" alignment="CENTER_LEFT" mnemonicParsing="false" onAction="#cancel" prefWidth="210.0" style="" text="CANCEL" HBox.margin="$x3" />
               </children>
             </HBox>
           </children>
@@ -96,7 +100,7 @@
           <children>
             <Label text="Welcome to XXX" textAlignment="LEFT">
               <font>
-                <Font size="40.0" />
+                <Font size="36.0" />
               </font>
             </Label>
           </children>

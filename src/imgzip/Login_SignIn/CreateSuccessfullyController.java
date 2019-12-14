@@ -21,7 +21,7 @@ public class CreateSuccessfullyController{
      */
     public void backToLogin() {
         Stage stage = (Stage) signUp.getScene().getWindow();
-        new LoginBeginner();
+        new Loginbeginner();
         stage.close();
 
     }

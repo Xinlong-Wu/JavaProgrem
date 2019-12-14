@@ -28,9 +28,9 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="67.0" prefWidth="601.0">
           <children>
-            <Label text="Create an Account">
+            <Label text="CREATE AN ACCOUNT">
               <font>
-                <Font size="45.0" />
+                <Font name="Arial Black" size="33.0" />
               </font>
             </Label>
           </children>
@@ -46,9 +46,9 @@
                         <Insets />
                       </HBox.margin>
                     </TextField>
-                    <Label id="Al" fx:id="already" alignment="CENTER" prefHeight="31.0" prefWidth="124.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="Already taken!!" textAlignment="LEFT" textFill="RED">
+                    <Label id="Al" fx:id="already" alignment="CENTER" prefHeight="31.0" prefWidth="124.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="Already taken!" textAlignment="LEFT" textFill="RED">
                       <font>
-                        <Font name="System Bold" size="15.0" fx:id="x4" />
+                        <Font name="Arial Black" size="15.0" fx:id="x3" />
                       </font>
                     </Label>
                   </children>
@@ -57,6 +57,9 @@
                   </HBox.margin>
                 </HBox>
               </children>
+              <VBox.margin>
+                <Insets top="5.0" />
+              </VBox.margin>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="601.0" spacing="19.0">
               <children>
@@ -79,7 +82,7 @@
                         <Insets />
                       </HBox.margin>
                     </TextField>
-                    <Label id="Al2" fx:id="already2" alignment="CENTER" font="$x4" prefHeight="31.0" prefWidth="124.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="Already taken!!" textAlignment="LEFT" textFill="RED" />
+                    <Label id="Al2" fx:id="already2" alignment="CENTER" font="$x3" prefHeight="31.0" prefWidth="136.00009999999747" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="Already taken!" textAlignment="LEFT" textFill="RED" />
                   </children>
                   <HBox.margin>
                     <Insets left="103.5" fx:id="x1" />
@@ -98,17 +101,14 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="601.0">
               <children>
-                <CheckBox fx:id="agree" alignment="CENTER_LEFT" contentDisplay="RIGHT" font="$x4" mnemonicParsing="false" onAction="#checkIfSelectedPrivacy" prefWidth="249.0" text="I have read and agree to the" textAlignment="LEFT" underline="false" wrapText="false">
+                <CheckBox fx:id="agree" alignment="CENTER_LEFT" contentDisplay="RIGHT" font="$x3" mnemonicParsing="false" onAction="#checkIfSelectedPrivacy" prefWidth="269.0" text="I have read and agree to the" textAlignment="LEFT" underline="false" wrapText="false">
                   <HBox.margin>
                     <Insets left="103.5" fx:id="x1" />
                   </HBox.margin>
                 </CheckBox>
-                <Hyperlink onAction="#openService" text="terms of services">
-                  <font>
-                    <Font name="Arial Black" size="15.0" fx:id="x3" />
-                  </font>
+                <Hyperlink font="$x3" onAction="#openService" text="terms of services">
                   <HBox.margin>
-                    <Insets left="4.0" />
+                    <Insets left="10.0" />
                   </HBox.margin>
                 </Hyperlink>
               </children>
@@ -118,7 +118,7 @@
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="601.0">
               <children>
-                <Button fx:id="createAccount" font="$x3" mnemonicParsing="false" onAction="#createAccount" prefHeight="36.0" prefWidth="391.0" text="CREATE ACCOUNT">
+                <Button fx:id="createAccount" font="$x3" mnemonicParsing="false" onAction="#createAccount" prefHeight="36.0" prefWidth="391.0" style="-fx-background-color: linear-gradient(to bottom,#BEBEBE,#363636);&#10;&#9;-fx-text-alignment: center;&#10;&#9;-fx-text-fill: #fff;&#10;&#9;-fx-border-radius: 8px;&#10;&#9;-fx-background-radius: 8px;&#10;-fx-cursor:HAND;&#10;" text="CREATE ACCOUNT">
                   <HBox.margin>
                     <Insets left="103.5" fx:id="x1" />
                   </HBox.margin>
@@ -130,16 +130,16 @@
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="601.0">
               <children>
-                <Hyperlink fx:id="privacy" font="$x4" onAction="#openPrivacy" text="Privacy Policy" />
+                <Hyperlink fx:id="privacy" onAction="#openPrivacy" text="Privacy Policy">
+                  <font>
+                    <Font name="System Bold" size="15.0" fx:id="x4" />
+                  </font>
+                </Hyperlink>
               </children>
             </HBox>
             <HBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="601.0" spacing="5.0">
               <children>
-                <Label text="Already had an Account?">
-                  <font>
-                    <Font size="15.0" />
-                  </font>
-                </Label>
+                <Label font="$x3" text="Already had an Account?" />
                 <Hyperlink fx:id="signIn" font="$x3" onAction="#backToLogin" text="Sign In" />
               </children>
             </HBox>
