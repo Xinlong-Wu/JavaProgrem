@@ -1,5 +1,7 @@
 package imgzip.Login_SignIn;
 
+import imgzip.alertwindow.AlertButton;
+import imgzip.alertwindow.AlertWindow;
 import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -86,23 +88,15 @@ public class FindPasswordController {
                 stage.close();
 
             }else {
-
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.setTitle("Error!");
-                alert.setHeaderText("We are sorry to inform you that:");
-                alert.setContentText("This email is WRONG!");
-
-                alert.showAndWait();
-
+                AlertWindow alertWindow = new AlertWindow("验证失败","YOUR EMAIL IS WRONG");  // 此处写警告弹窗的标题和内容
+                // 用于新加按钮，可以新加多个，最后添加在VBox中
+                alertWindow.start(new Stage());
             }
 
         }else {
-            Alert alert = new Alert(Alert.AlertType.ERROR);
-            alert.setTitle("Error!");
-            alert.setHeaderText("We are sorry to inform you that:");
-            alert.setContentText("This Account doesn't exist!");
-
-            alert.showAndWait();
+            AlertWindow alertWindow = new AlertWindow("验证失败","We are sorry to inform you that:\nThis Account doesn't exist!");  // 此处写警告弹窗的标题和内容
+            // 用于新加按钮，可以新加多个，最后添加在VBox中
+            alertWindow.start(new Stage());
         }
 
 
@@ -118,7 +112,7 @@ public class FindPasswordController {
 
     public void backToSignIn(){
         Stage stage = (Stage) verify.getScene().getWindow();
-        new LoginBeginner();
+        new Loginbeginner();
         stage.close();
     }
 }
