@@ -1,5 +1,6 @@
 package imgzip.mainpane;
 
+import imgzip.FunctionPane;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -27,12 +28,13 @@ public class PricepaneController implements Initializable {
     private Button price;
     @FXML
     private Button signout;
+    @Override
     public void initialize(URL lacation, ResourceBundle resources){
         /**
          本页面连接到functionpage
          */
         functionpage.setOnAction(e -> {
-            new Functionpage();
+            new FunctionPane();
             Stage stage = (Stage)functionpage.getScene().getWindow();
             stage.close();
         });

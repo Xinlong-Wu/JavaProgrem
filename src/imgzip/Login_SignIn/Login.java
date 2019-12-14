@@ -46,18 +46,17 @@ public class Login extends Application {
 
             try {
                 File file = new File("src/txtFile/RememberAccount&Password.txt");
-                if(!file.exists()){
-                    file.createNewFile();
-                }
+//                if(!file.exists()){
+//                    file.createNewFile();
+//                }
 
-                File file1 = new File("src/txtFile/RememberAccount&Password.txt");
-                FileReader fr = new FileReader(file1);
+                FileReader fr = new FileReader(file);
                 BufferedReader br = new BufferedReader(fr);
 
                 String line = "";
                 line = br.readLine();
 
-                if(file1.length() != 0){
+                if(file.length() != 0){
 
                     String[] judge = line.split("\\|");
                     String truejudge = "true";
