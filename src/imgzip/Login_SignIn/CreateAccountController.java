@@ -59,7 +59,7 @@ public class CreateAccountController {
      */
     public void backToLogin() {
         Stage stage = (Stage) signIn.getScene().getWindow();
-        new LoginBeginner();
+        new Loginbeginner();
         stage.close();
 
     }
@@ -226,7 +226,7 @@ public class CreateAccountController {
      * 检查是否点击了同意privacy协议，如果不同意，则无法点击 createaccount 按钮。
      */
     public void checkIfSelectedPrivacy(){
-        if(!judgeAccountExists && !judgeEmialexist && createAccount.isDisable()){
+        if(!judgeAccountExists && !judgeEmialexist && createAccount.isDisable() && !already2.isVisible() && !already.isVisible()){
             createAccount.setDisable(false);
 
         }
