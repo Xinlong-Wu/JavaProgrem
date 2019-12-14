@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.CourseController">
+<AnchorPane fx:id="pane" prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.CourseController">
    <children>
       <ImageView fx:id="imagebg" fitHeight="763.0" fitWidth="951.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -23,21 +24,33 @@
          <font>
             <Font size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="functionpage" layoutX="690.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="145.0" style="-fx-background-color: Transparent;" text="Function page">
          <font>
             <Font size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="course" layoutX="590.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
          <font>
             <Font size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <Button fx:id="price" layoutX="490.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
          <font>
             <Font size="17.0" />
          </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
       </Button>
       <AnchorPane layoutX="35.0" layoutY="110.0" opacity="0.6" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: WHITE;">
          <children>
@@ -45,6 +58,9 @@
                <font>
                   <Font size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Label layoutX="29.0" layoutY="32.0" text="1.开始使用">
                <font>
@@ -54,11 +70,17 @@
             <Button fx:id="login" layoutX="55.0" layoutY="108.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="登录账号" underline="true">
                <font>
                   <Font size="15.0" />
-               </font></Button>
+               </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
             <Button fx:id="forget" layoutX="55.0" layoutY="148.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="忘记密码" underline="true">
                <font>
                   <Font size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
             <Label layoutX="29.0" layoutY="200.0" text="2.功能操作">
                <font>
@@ -69,14 +91,23 @@
                <font>
                   <Font size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
-            <Button fx:id="compress" layoutX="55.0" layoutY="283.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="图片压缩" underline="true">
+            <Button fx:id="compress" layoutX="55.0" layoutY="283.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="上传图片" underline="true">
                <font>
                   <Font size="15.0" />
                </font>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor>
             </Button>
          </children></AnchorPane>
       <ButtonBar layoutX="315.0" layoutY="150.0" prefHeight="40.0" prefWidth="200.0" />
-      <BorderPane fx:id="page" layoutX="300.0" layoutY="110.0" opacity="0.6" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: WHITE;" />
+      <BorderPane fx:id="page" layoutX="300.0" layoutY="110.0" opacity="0.6" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: WHITE;">
+         <center>
+            <ImageView fx:id="gif" fitHeight="400.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true" BorderPane.alignment="CENTER" />
+         </center></BorderPane>
    </children>
 </AnchorPane>
