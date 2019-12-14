@@ -8,6 +8,10 @@ import javafx.stage.Stage;
 
 import java.util.Objects;
 
+/**
+ @Author:  吴泳仪
+ @Date: 2019.12.10
+ */
 public class Course {
     public Course(){
         try {

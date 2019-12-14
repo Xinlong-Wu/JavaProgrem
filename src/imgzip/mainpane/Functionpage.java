@@ -5,6 +5,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ @Author:  吴泳仪
+ @Date: 2019.12.14
+ */
 public class Functionpage {
     public Functionpage() {
         try {

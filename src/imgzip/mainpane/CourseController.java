@@ -17,11 +17,11 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
+/**
+ @Author:  吴泳仪
+ @Date: 2019.12.10
+ */
 public class CourseController implements Initializable {
-    @FXML
-    private Label homepage;
-    @FXML
-    private Line line;
     @FXML
     private Button course;
     @FXML
@@ -46,26 +46,45 @@ public class CourseController implements Initializable {
 
 
     public void initialize(URL lacation, ResourceBundle resources){
+        /**
+        本页面连接到homepage
+         */
         signout.setOnAction(e -> {
             new Pane_sceenbeginner();
             Stage stage = (Stage)signout.getScene().getWindow();
             stage.close();
         });
+
+        /**
+         course页面自我更新到初始状态
+         */
         course.setOnAction(e -> {
             new Course();
             Stage stage = (Stage)course.getScene().getWindow();
             stage.close();
         });
+
+        /**
+         本页面连接到price
+         */
         price.setOnAction(e->{
             new Pricepane();
             Stage stage = (Stage)price.getScene().getWindow();
             stage.close();
         });
+
+        /**
+         本页面连接到functionpage
+         */
         functionpage.setOnAction(e -> {
             new Functionpage();
             Stage stage = (Stage)functionpage.getScene().getWindow();
             stage.close();
         });
+
+        /**
+         把登录教程的gif放到page版面上
+         */
         login.setOnAction(e -> {
 //            page.getChildren().clear();
 //            Image image = new Image("pkq.gif");
@@ -73,6 +92,10 @@ public class CourseController implements Initializable {
 //            imageView.setImage(image);
 //            page.setCenter(imageView);
         });
+
+        /**
+         把注册教程的gif放到page版面上
+         */
         register.setOnAction(e -> {
 //            page.getChildren().clear();
 //            Image image = new Image("C:\\Users\\24472\\Desktop\\image\\pkq.gif");
@@ -80,6 +103,10 @@ public class CourseController implements Initializable {
 //            imageView.setImage(image);
 //            page.setCenter(imageView);
         });
+
+        /**
+         把忘记密码教程的gif放到page版面上
+         */
         forget.setOnAction(e->{
 //            page.getChildren().clear();
 //            Image image = new Image("C:\\Users\\24472\\Desktop\\image\\pkq.gif");
@@ -87,6 +114,10 @@ public class CourseController implements Initializable {
 //            imageView.setImage(image);
 //            page.setCenter(imageView);
         });
+
+        /**
+         把图片格式转换教程的gif放到page版面上
+         */
         change.setOnAction( e-> {
 //            page.getChildren().clear();
 //            Image image = new Image("C:\\Users\\24472\\Desktop\\image\\pkq.gif");
@@ -94,6 +125,10 @@ public class CourseController implements Initializable {
 //            imageView.setImage(image);
 //            page.setCenter(imageView);
         });
+
+        /**
+         把图片压缩教程的gif放到page版面上
+         */
         compress.setOnAction( e-> {
 //            page.getChildren().clear();
 //            Image image = new Image("C:\\Users\\24472\\Desktop\\image\\pkq.gif");

@@ -8,6 +8,10 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
 
+/**
+ @Author:  吴泳仪
+ @Date: 2019.12.9
+ */
 public class Pricepane{
     public Pricepane(){
         try {

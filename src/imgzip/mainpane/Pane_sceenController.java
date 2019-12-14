@@ -19,6 +19,10 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
 
+/**
+ @Author: 吴泳仪
+ @Date: 2019.12.9
+ */
 public class Pane_sceenController implements Initializable {
 	@FXML
 	private Label homepage;
