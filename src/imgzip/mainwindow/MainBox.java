@@ -208,8 +208,12 @@ public class MainBox extends Scene {
         });
         btUpload.setOnAction(e->{
             String uuid = UUID.randomUUID().toString().replaceAll("-","");
-
-
+            //获取图片列表
+            List imgBlockList = blockList.getChildren();
+            for (int i = 0;i < imgCount;i++){
+                ImgBlock tmp = (ImgBlock)imgBlockList.get(i);
+                tmp.uploadImg(uuid);
+            }
             checkBlockList();
         });
 

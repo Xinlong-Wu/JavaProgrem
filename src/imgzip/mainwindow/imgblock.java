@@ -264,7 +264,6 @@ class ImgBlock extends BorderPane {
         // 上传
         btUpload.setOnAction(e->{
             //检查登录！！！！
-            ivstate.setImage(LOADING);
             uploadImg();
             //销毁实例
             e.consume();
@@ -331,8 +330,17 @@ class ImgBlock extends BorderPane {
      * 图片上传方法
      */
     void uploadImg(){
+        ivstate.setImage(LOADING);
         try {
             uploadPool.execute(new UploadImg(this));
+        } catch (IIOException e) {
+            AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
+        }
+    }
+    void uploadImg(String uuid){
+        ivstate.setImage(LOADING);
+        try {
+            uploadPool.execute(new UploadImg(this,uuid));
         } catch (IIOException e) {
             AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
         }
