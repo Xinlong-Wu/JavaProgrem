@@ -1,6 +1,6 @@
 package imgzip.mainwindow;
 
-import imgzip.Main;
+import imgzip.FunctionPane;
 import imgzip.alertwindow.AlertButton;
 import imgzip.alertwindow.AlertWindow;
 import javafx.collections.ObservableList;
@@ -288,7 +288,7 @@ public class MainBox extends Scene {
 
 
 
-        exit.setOnAction(event -> Main.close());
+        exit.setOnAction(event -> FunctionPane.close());
     }
 
     /**
