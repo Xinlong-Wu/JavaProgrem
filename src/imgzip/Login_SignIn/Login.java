@@ -44,22 +44,19 @@ public class Login extends Application {
              */
             passwordWrong.setVisible(false);
 
-
-
             try {
                 File file = new File("src/txtFile/RememberAccount&Password.txt");
-                if(!file.exists()){
-                    file.createNewFile();
-                }
+//                if(!file.exists()){
+//                    file.createNewFile();
+//                }
 
-                File file1 = new File("src/txtFile/RememberAccount&Password.txt");
-                FileReader fr = new FileReader(file1);
+                FileReader fr = new FileReader(file);
                 BufferedReader br = new BufferedReader(fr);
 
                 String line = "";
                 line = br.readLine();
 
-                if(file1.length() != 0){
+                if(file.length() != 0){
 
                     String[] judge = line.split("\\|");
                     String truejudge = "true";
@@ -113,7 +110,8 @@ class Loginbeginner{
             PasswordField password = (PasswordField)root.lookup("#password");
             CheckBox remember = (CheckBox)root.lookup("#remember");
             Button logIn = (Button)root.lookup("#Login");
-
+            Label passwordWrong = (Label)root.lookup("#passwordWrong");
+            passwordWrong.setVisible(false);
 
             /**
              在页面开启之前检查上一次登录时是否记住了密码，
@@ -121,34 +119,41 @@ class Loginbeginner{
              */
             try {
 
-                FileReader fr = new FileReader("src/txtFile/RememberAccount&Password.txt");
+                File file = new File("src/txtFile/RememberAccount&Password.txt");
+                if(!file.exists()){
+                    file.createNewFile();
+                }
+
+                File file1 = new File("src/txtFile/RememberAccount&Password.txt");
+                FileReader fr = new FileReader(file1);
                 BufferedReader br = new BufferedReader(fr);
 
                 String line = "";
                 line = br.readLine();
 
+                if(file1.length() != 0){
 
-                String[] judge = line.split("\\|");
-                String truejudge = "true";
-                int accountIndex = 0;
-                int passwordIndex = 1;
-                int judgeIndex = 2;
+                    String[] judge = line.split("\\|");
+                    String truejudge = "true";
+                    int accountIndex = 0;
+                    int passwordIndex = 1;
+                    int judgeIndex = 2;
 
-                if(judge[judgeIndex].equals(truejudge) ){
-                    account.setText(judge[accountIndex]);
-                    password.appendText(judge[passwordIndex]);
+                    if(judge[judgeIndex].equals(truejudge) ){
+                        account.setText(judge[accountIndex]);
+                        password.appendText(judge[passwordIndex]);
 
-                    remember.setSelected(true);
-                    logIn.setDisable(false);
+                        remember.setSelected(true);
+                        logIn.setDisable(false);
+                    }
 
+                    br.close();
+                    fr.close();
                 }
 
-                br.close();
-                fr.close();
 
             }catch (Exception e){
                 e.printStackTrace();
-
             }
 
             primaryStage.setTitle("XXX login");

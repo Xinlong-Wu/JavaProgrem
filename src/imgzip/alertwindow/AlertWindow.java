@@ -46,7 +46,7 @@ public class AlertWindow extends Application {
         tittle.getStyleClass().addAll("tittle");
 
         Label lbinfo = new Label("Created by wxl \n https://gitee.com/fenglingerr/JavaProgrem");
-
+        lbinfo.getStyleClass().addAll("disc");
 
         ImageView tar = new ImageView(new Image("res/icon/target.png"));
         tar.setFitHeight(20);

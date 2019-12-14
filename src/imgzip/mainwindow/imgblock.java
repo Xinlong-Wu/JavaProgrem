@@ -75,6 +75,7 @@ class ImgBlock extends BorderPane {
     private String dialog = "";
     private Label size;
     private int index;
+    private Boolean isUpload = false;
     HBox topBar = new HBox();
     VBox botBar = new VBox();
     HBox transBar = new HBox();
@@ -309,6 +310,13 @@ class ImgBlock extends BorderPane {
         return trans;
     }
 
+    public Boolean getUpload() {
+        return isUpload;
+    }
+
+    public void setUpload(Boolean upload) {
+        isUpload = upload;
+    }
 
     /**
      * 保存图片的储存路径方法
@@ -331,6 +339,10 @@ class ImgBlock extends BorderPane {
      */
     void uploadImg(){
         ivstate.setImage(LOADING);
+        if(!isUpload){
+            ivstate.setImage(DONE);
+            return;
+        }
         try {
             uploadPool.execute(new UploadImg(this));
         } catch (IIOException e) {
@@ -339,10 +351,15 @@ class ImgBlock extends BorderPane {
     }
     void uploadImg(String uuid){
         ivstate.setImage(LOADING);
+        if(!isUpload){
+            ivstate.setImage(DONE);
+            return;
+        }
         try {
-            uploadPool.execute(new UploadImg(this,uuid));
+            (new UploadImg(this,uuid)).run();
         } catch (IIOException e) {
             AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
+            ivstate.setImage(WAITING);
         }
     }
 
@@ -367,7 +384,7 @@ class ImgBlock extends BorderPane {
      * @param url
      */
     String getFileSize(String url){
-        String str = "";
+        String str = "null";
         try {
             FileImageInputStream fiis = new FileImageInputStream(new File(url));
             Float fsize = (float) fiis.length() / 1024;

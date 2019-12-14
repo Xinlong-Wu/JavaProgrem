@@ -55,12 +55,16 @@ public class UploadImg implements Runnable {
         String[] Urls = imgUrl.split("\\\\");
         this.storeName = Urls[Urls.length-1];
         this.imgBlock=imgBlock;
+
         this.uuid = uuid;
     }
 
     @Override
     public void  run() {
-        lock.lock();
+        upLoad();
+    }
+
+    synchronized void upLoad(){
         /**与服务器建立连接的通信句柄*/
         Socket s = null;
 
@@ -81,6 +85,12 @@ public class UploadImg implements Runnable {
         /**检查要发送的文件是否存在*/
         if(!sendfile.exists()){
             System.out.println("客户端：要发送的文件不存在");
+
+            /**
+             * 失败，停止该线程
+             */
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
         }
 
 
@@ -89,6 +99,11 @@ public class UploadImg implements Runnable {
             s = new Socket("127.0.0.1", 1234);
         }catch (IOException e) {
             System.out.println("未连接到服务器");
+            /**
+             * 失败，停止该线程
+             */
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
         }
 
         /**用文件对象初始化fis对象
@@ -98,6 +113,12 @@ public class UploadImg implements Runnable {
             fis = new FileInputStream(sendfile);
         } catch (FileNotFoundException e1) {
             e1.printStackTrace();
+
+            /**
+             * 失败，停止该线程
+             */
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
         }
 
         /**
@@ -112,12 +133,21 @@ public class UploadImg implements Runnable {
             fileId = Integer.valueOf(rs.getString("maxx")) + 1;
         } catch (SQLException e) {
             e.printStackTrace();
+
+            /**
+             * 失败，停止该线程
+             */
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
         }
         String fileName = "";
         if(fileId>=0){
             fileName = String.format("%04d",fileId) +"_imgZIP." +storeName;
         }
         else {
+            /**
+             * 失败，停止该线程
+             */
             imgBlock.getIvstate().setImage(ImgBlock.WAITING);
             return;
         }
@@ -131,20 +161,30 @@ public class UploadImg implements Runnable {
             PrintStream ps = new PrintStream(s.getOutputStream());
             ps.println("512/#" + fileName + "/#" + fis.available());
             ps.flush();
+            System.out.println(fileName);
         } catch (IOException e) {
             System.out.println("服务器连接中断");
+            /**
+             * 失败，停止该线程
+             */
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
         }
 
 
         /**
          * 此处睡眠2s，等待服务器把相关的工作准备好
          * 也是为了保证网络的延迟
-         * 读者可自行选择添加此代码
          * */
         try {
             Thread.sleep(2000);
         } catch (InterruptedException e1) {
             e1.printStackTrace();
+            /**
+             * 失败，停止该线程
+             */
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
         }
 
 
@@ -162,7 +202,7 @@ public class UploadImg implements Runnable {
 
             /**使用while循环读取文件，直到文件读取结束*/
             while((size = fis.read(buffer)) != -1){
-                System.out.println("客户端发送数据包，大小为" + size);
+                System.out.println(fileName+": 客户端发送数据包，大小为" + size);
                 /**向输出流中写入刚刚读到的数据包*/
                 os.write(buffer, 0, size);
                 /**刷新一下*/
@@ -170,8 +210,18 @@ public class UploadImg implements Runnable {
             }
         } catch (FileNotFoundException e) {
             System.out.println("客户端读取文件出错");
+            /**
+             * 失败，停止该线程
+             */
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
         } catch (IOException e) {
             System.out.println("客户端输出文件出错");
+            /**
+             * 失败，停止该线程
+             */
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
         }finally{
 
             /**
@@ -185,8 +235,12 @@ public class UploadImg implements Runnable {
             } catch (IOException e) {
                 System.out.println("客户端文件关闭出错");
             }//catch (IOException e)
-            lock.unlock();
         }//finally
+        imgBlock.setUpload(true);
         imgBlock.getIvstate().setImage(ImgBlock.DONE);
+    }
+
+    void fild(){
+        imgBlock.getIvstate().setImage(ImgBlock.WAITING);
     }
 }//public class UploadImg

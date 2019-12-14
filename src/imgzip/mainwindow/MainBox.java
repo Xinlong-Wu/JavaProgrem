@@ -213,6 +213,11 @@ public class MainBox extends Scene {
             for (int i = 0;i < imgCount;i++){
                 ImgBlock tmp = (ImgBlock)imgBlockList.get(i);
                 tmp.uploadImg(uuid);
+                try {
+                    Thread.sleep(2000);
+                } catch (InterruptedException e1) {
+                    e1.printStackTrace();
+                }
             }
             checkBlockList();
         });

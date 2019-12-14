@@ -53,8 +53,9 @@ public class WrongPasswordController {
     public void back(){
 
         Stage stage = (Stage)back.getScene().getWindow();
-        stage.close();
         new Loginbeginner();
+        stage.close();
+
     }
 
 
