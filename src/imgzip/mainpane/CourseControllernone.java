@@ -1,6 +1,7 @@
 package imgzip.mainpane;
 
 import com.sun.org.apache.xalan.internal.xsltc.dom.CurrentNodeListFilter;
+import imgzip.Login_SignIn.LoginBeginner;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -67,7 +68,9 @@ public class CourseControllernone implements Initializable {
          本页面连接到登录页面
          */
         loginnone.setOnAction(e -> {
-
+            Stage stage = (Stage)loginnone.getScene().getWindow();
+            new LoginBeginner();
+            stage.close();
         });
 
         /**

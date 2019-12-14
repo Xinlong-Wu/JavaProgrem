@@ -1,5 +1,6 @@
 package imgzip.mainpane;
 
+import imgzip.Login_SignIn.LoginBeginner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -24,19 +25,36 @@ public class PricepaneControllernone implements Initializable {
     @FXML
     private Button homepagenone;
     public void initialize(URL lacation, ResourceBundle resources){
+        /**
+         本页面连接到course未登录页面
+         */
         coursenone.setOnAction(e -> {
             new Course(1);
             Stage stage = (Stage)coursenone.getScene().getWindow();
             stage.close();
         });
+
+        /**
+         本页面连接到price未登录页面
+         */
         pricenone.setOnAction(e -> {
             new Pricepane(1);
             Stage stage = (Stage)pricenone.getScene().getWindow();
             stage.close();
         });
-        loginnone.setOnAction(e -> {
 
+        /**
+         本页面连接到登录页面
+         */
+        loginnone.setOnAction(e -> {
+            Stage stage = (Stage)loginnone.getScene().getWindow();
+            new LoginBeginner();
+            stage.close();
         });
+
+        /**
+         本页面连接到homepage
+         */
         homepagenone.setOnAction(e -> {
             new Pane_sceenbeginner();
             Stage stage = (Stage)homepagenone.getScene().getWindow();

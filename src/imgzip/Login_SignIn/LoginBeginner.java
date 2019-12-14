@@ -12,6 +12,22 @@ import javafx.stage.Stage;
 import java.io.BufferedReader;
 import java.io.FileReader;
 
+
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.TextField;
+import javafx.stage.Stage;
+import javafx.scene.control.CheckBox;
+import java.util.regex.*;
+
+import javafx.scene.control.Label;
+
+import java.sql.ResultSet;
+
 public class LoginBeginner {
     public LoginBeginner(){
         try {
