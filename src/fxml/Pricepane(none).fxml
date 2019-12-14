@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.PricepaneController">
+<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.PricepaneControllernone">
    <children>
       <ImageView fitHeight="763.0" fitWidth="951.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -19,22 +19,12 @@
          </font>
       </Label>
       <Line fx:id="line" endX="100.0" layoutX="134.0" layoutY="100.0" startX="-100.0" />
-      <Button fx:id="signout" layoutX="841.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Sign out">
+      <Button fx:id="coursenone" layoutX="650.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="functionpage" layoutX="690.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="145.0" style="-fx-background-color: Transparent;" text="Function page">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Button>
-      <Button fx:id="course" layoutX="590.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Button>
-      <Button fx:id="price" layoutX="490.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
+      <Button fx:id="pricenone" layoutX="550.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
          <font>
             <Font size="17.0" />
          </font>
@@ -258,5 +248,15 @@
                </image>
             </ImageView>
          </children></AnchorPane>
+      <Button fx:id="loginnone" layoutX="760.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="login">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="homepagenone" layoutX="425.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Homepage">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

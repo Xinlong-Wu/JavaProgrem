@@ -17,19 +17,15 @@ import java.awt.*;
 import java.net.URL;
 import java.util.ResourceBundle;
 
-public class CourseController implements Initializable {
+public class CourseControllernone implements Initializable {
     @FXML
-    private Label homepage;
+    private Button coursenone;
     @FXML
-    private Line line;
+    private Button pricenone;
     @FXML
-    private Button course;
+    private Button loginnone;
     @FXML
-    private Button price;
-    @FXML
-    private Button signout;
-    @FXML
-    private Button functionpage;
+    private Button homepagenone;
     @FXML
     private Button login;
     @FXML
@@ -44,26 +40,23 @@ public class CourseController implements Initializable {
     private BorderPane page;
 
 
-
     public void initialize(URL lacation, ResourceBundle resources){
-        signout.setOnAction(e -> {
+        coursenone.setOnAction(e -> {
+            new Course(1);
+            Stage stage = (Stage)coursenone.getScene().getWindow();
+            stage.close();
+        });
+        pricenone.setOnAction(e -> {
+            new Pricepane(1);
+            Stage stage = (Stage)pricenone.getScene().getWindow();
+            stage.close();
+        });
+        loginnone.setOnAction(e -> {
+
+        });
+        homepagenone.setOnAction(e -> {
             new Pane_sceenbeginner();
-            Stage stage = (Stage)signout.getScene().getWindow();
-            stage.close();
-        });
-        course.setOnAction(e -> {
-            new Course();
-            Stage stage = (Stage)course.getScene().getWindow();
-            stage.close();
-        });
-        price.setOnAction(e->{
-            new Pricepane();
-            Stage stage = (Stage)price.getScene().getWindow();
-            stage.close();
-        });
-        functionpage.setOnAction(e -> {
-            new Functionpage();
-            Stage stage = (Stage)functionpage.getScene().getWindow();
+            Stage stage = (Stage)homepagenone.getScene().getWindow();
             stage.close();
         });
         login.setOnAction(e -> {

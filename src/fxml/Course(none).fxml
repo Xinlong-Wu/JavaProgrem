@@ -6,7 +6,7 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.CourseController">
+<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.CourseControllernone">
    <children>
       <ImageView fx:id="imagebg" fitHeight="763.0" fitWidth="951.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
          <image>
@@ -19,26 +19,22 @@
          </font>
       </Label>
       <Line fx:id="line" endX="100.0" layoutX="134.0" layoutY="100.0" startX="-100.0" />
-      <Button fx:id="signout" layoutX="841.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Sign out">
+      <Button fx:id="coursenone" layoutX="650.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="functionpage" layoutX="690.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="145.0" style="-fx-background-color: Transparent;" text="Function page">
+      <Button fx:id="pricenone" layoutX="550.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="course" layoutX="590.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
+      <Button fx:id="loginnone" layoutX="760.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Login">
          <font>
             <Font size="17.0" />
          </font>
       </Button>
-      <Button fx:id="price" layoutX="490.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
-         <font>
-            <Font size="17.0" />
-         </font>
-      </Button>
+      <BorderPane fx:id="page" layoutX="300.0" layoutY="110.0" opacity="0.6" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: WHITE;" />
       <AnchorPane layoutX="35.0" layoutY="110.0" opacity="0.6" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: WHITE;">
          <children>
             <Button fx:id="register" layoutX="55.0" layoutY="70.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="注册账号" underline="true">
@@ -76,7 +72,10 @@
                </font>
             </Button>
          </children></AnchorPane>
-      <ButtonBar layoutX="315.0" layoutY="150.0" prefHeight="40.0" prefWidth="200.0" />
-      <BorderPane fx:id="page" layoutX="300.0" layoutY="110.0" opacity="0.6" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: WHITE;" />
+      <Button fx:id="homepagenone" layoutX="425.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Homepage">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
    </children>
 </AnchorPane>

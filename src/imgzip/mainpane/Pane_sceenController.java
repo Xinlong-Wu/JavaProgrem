@@ -43,12 +43,12 @@ public class Pane_sceenController implements Initializable {
 
 		});
 		course.setOnAction(e -> {
-			new Course();
+			new Course(1);
 			Stage stage = (Stage)course.getScene().getWindow();
 			stage.close();
 		});
 		price.setOnAction(e -> {
-			new Pricepane();
+			new Pricepane(1);
 			Stage stage = (Stage)price.getScene().getWindow();
 			stage.close();
 		});

@@ -10,7 +10,7 @@
    <children>
       <ImageView fx:id="image" fitHeight="763.0" fitWidth="961.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../../../../Desktop/image/timg.jpg" />
+            <Image url="@../res/icon/timg.jpg" />
          </image>
       </ImageView>
       <Label fx:id="homepage" alignment="CENTER" layoutX="22.0" layoutY="21.0" prefHeight="72.0" prefWidth="224.0" text="Homepage">
@@ -43,12 +43,12 @@
          <children>
             <ImageView fitHeight="257.0" fitWidth="242.0" layoutX="89.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Desktop/image/7e6ad6dddaa13fc993277a4c7ce99a1.png" />
+                  <Image url="@../res/icon/image1.png" />
                </image>
             </ImageView>
             <ImageView fitHeight="273.0" fitWidth="225.0" layoutX="535.0" layoutY="113.0" pickOnBounds="true" preserveRatio="true">
                <image>
-                  <Image url="@../../../../Desktop/image/0847e6196b245774e36590cd1100cb7.png" />
+                  <Image url="@../res/icon/image2.png" />
                </image>
             </ImageView>
          </children></Pane>

@@ -21,5 +21,16 @@ public class Pricepane{
             e.printStackTrace();
         }
     }
+    public Pricepane(int a){
+        try {
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/Pricepane(none).fxml"));
+            Stage primaryStage = new Stage();
+            primaryStage.setTitle("Price");
+            primaryStage.setScene(new Scene(root, 939, 685));
+            primaryStage.show();
 
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
 }
