@@ -79,7 +79,6 @@ public class Login extends Application {
 
             }catch (Exception e){
                 e.printStackTrace();
-
             }
 
             primaryStage.setTitle("XXX login");

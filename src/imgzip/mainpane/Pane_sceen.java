@@ -22,9 +22,9 @@ public class Pane_sceen extends Application {
         }catch (Exception e){
             e.printStackTrace();
 
-            }
-
         }
+
+    }
 
     public static void main(String[] args) {
         launch(args);
@@ -32,6 +32,7 @@ public class Pane_sceen extends Application {
 
 }
 class Pane_sceenbeginner {
+
     public Pane_sceenbeginner(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Pane_sceen.fxml"));
