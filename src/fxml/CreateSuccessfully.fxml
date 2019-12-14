@@ -15,26 +15,26 @@
       <children>
         <ImageView fitHeight="150.0" fitWidth="200.0" pickOnBounds="true" preserveRatio="true">
           <image>
-            <Image url="@../res/icon/Happyface.jpg" />
+            <Image url="@../res/icon/Happyface.png" />
           </image>
+          <VBox.margin>
+            <Insets top="5.0" fx:id="x3" />
+          </VBox.margin>
         </ImageView>
-        <Label text="Congratulate,">
+        <Label text="Congratulate" VBox.margin="$x3">
           <font>
-            <Font size="50.0" />
+            <Font size="30.0" fx:id="x4" />
           </font>
         </Label>
-        <Label text="The Account is created SUCCESSFULLY!">
-          <font>
-            <Font name="System Bold" size="30.0" />
-          </font>
+        <Label font="$x4" text="The Account is created SUCCESSFULLY!">
+          <VBox.margin>
+            <Insets top="15.0" />
+          </VBox.margin>
+        </Label>
+        <Label font="$x4" text="Now, You can:">
           <VBox.margin>
             <Insets top="20.0" fx:id="x1" />
           </VBox.margin>
-        </Label>
-        <Label text="Now, You can:" VBox.margin="$x1">
-          <font>
-            <Font size="30.0" />
-          </font>
         </Label>
         <HBox alignment="CENTER" prefHeight="100.0" prefWidth="200.0" spacing="60.0">
           <children>

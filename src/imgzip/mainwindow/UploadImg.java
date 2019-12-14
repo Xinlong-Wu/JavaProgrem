@@ -1,6 +1,7 @@
 package imgzip.mainwindow;
 
 
+import imgzip.Login_SignIn.DataBaseController;
 import javafx.scene.control.ComboBox;
 
 import javax.imageio.IIOException;
@@ -11,6 +12,8 @@ import java.io.File;
         import java.io.OutputStream;
         import java.io.PrintStream;
         import java.net.Socket;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -40,7 +43,7 @@ public class UploadImg implements Runnable {
     String imgUrl;
     String storeName;
     ImgBlock imgBlock;
-    static int count = 0;
+    String uuid = "NULL";
     Lock lock = new ReentrantLock();
     public UploadImg(ImgBlock imgBlock)throws IIOException {
         imgUrl = imgBlock.getUrl();
@@ -50,6 +53,16 @@ public class UploadImg implements Runnable {
         String[] Urls = imgUrl.split("\\\\");
         this.storeName = Urls[Urls.length-1];
         this.imgBlock=imgBlock;
+    }
+    public UploadImg(ImgBlock imgBlock,String uuid)throws IIOException {
+        imgUrl = imgBlock.getUrl();
+        if(! new File(imgUrl).exists()){
+            throw new IIOException("Imgae "+ imgUrl + " not exists");
+        }
+        String[] Urls = imgUrl.split("\\\\");
+        this.storeName = Urls[Urls.length-1];
+        this.imgBlock=imgBlock;
+        this.uuid = uuid;
     }
 
     @Override
@@ -94,15 +107,35 @@ public class UploadImg implements Runnable {
             e1.printStackTrace();
         }
 
+        /**
+         * 向数据库提交数据
+         */
+        DataBaseController dbc = new DataBaseController();
+        String sql = "SELECT max(imgId) FROM imgcount";
+        ResultSet rs = dbc.queryExcecute(sql);
+        int fileId = -1;
+        try {
+            fileId = Integer.valueOf(rs.getString(1)) + 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        String fileName = "";
+        if(fileId>=0){
+            fileName = String.format("%04d",fileId) +"_" +storeName;
+        }
+        else {
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+            return;
+        }
+        sql = "INSERT INTO `imgcount` (`imgUrl`, `groupUuid`) VALUES ('"+fileName+"','"+uuid+"')";
+
 
         /**首先先向服务器发送关于文件的信息，以便于服务器进行接收的相关准备工作
-         * 具体的准备工作，请查看服务器代码。
-         *
-         * 发送的内容包括：发送文件协议码（此处为111）/#文件名（带后缀名）/#文件大小
+         * 发送的内容包括：发送文件协议码（此处为512）/#文件名（带后缀名）/#文件大小
          * */
         try {
             PrintStream ps = new PrintStream(s.getOutputStream());
-            ps.println("512/#" +String.format("%04d",count++) +"_" +storeName + "/#" + fis.available());
+            ps.println("512/#" + fileName + "/#" + fis.available());
             ps.flush();
         } catch (IOException e) {
             System.out.println("服务器连接中断");
@@ -160,5 +193,6 @@ public class UploadImg implements Runnable {
             }//catch (IOException e)
             lock.unlock();
         }//finally
+        imgBlock.getIvstate().setImage(ImgBlock.DONE);
     }
 }//public class UploadImg

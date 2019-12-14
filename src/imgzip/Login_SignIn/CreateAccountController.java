@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 /**
  @Author:   肖尧
- @Date: 2019.12.4
+ @Date: 2019.12.12
  */
 public class CreateAccountController {
 
@@ -59,7 +59,7 @@ public class CreateAccountController {
      */
     public void backToLogin() {
         Stage stage = (Stage) signIn.getScene().getWindow();
-        new Loginbeginner();
+        new LoginBeginner();
         stage.close();
 
     }
@@ -144,7 +144,6 @@ public class CreateAccountController {
              * ④如果账号邮箱都不存在，但是未同意服务条款，无法点击。
              * ⑤如果账号邮箱都不存在，且同意了服务条款，才可被点击。
              */
-
             if ("".equals(email.getText())){
                 createAccount.setDisable(true);
 
@@ -221,7 +220,6 @@ public class CreateAccountController {
             createAccountInstruction.close();
 
         }
-
     }
 
     /**
@@ -238,7 +236,6 @@ public class CreateAccountController {
 
         if(!agree.isSelected() || userNmae || emial ){
             createAccount.setDisable(true);
-
         }
     }
 
