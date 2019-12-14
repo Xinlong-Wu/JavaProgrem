@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.PricepaneController">
+   <children>
+      <ImageView fitHeight="763.0" fitWidth="951.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../res/icon/timg.jpg" />
+         </image>
+      </ImageView>
+      <Label fx:id="logo" alignment="CENTER" layoutX="22.0" layoutY="21.0" prefHeight="72.0" prefWidth="224.0" text="Price">
+         <font>
+            <Font name="Verdana Italic" size="34.0" />
+         </font>
+      </Label>
+      <Line fx:id="line" endX="100.0" layoutX="134.0" layoutY="100.0" startX="-100.0" />
+      <Button fx:id="signout" layoutX="841.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Sign out">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="functionpage" layoutX="690.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="145.0" style="-fx-background-color: Transparent;" text="Function page">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="course" layoutX="590.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="price" layoutX="490.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <AnchorPane layoutX="100.0" layoutY="170.0" opacity="0.6" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+         <children>
+            <Label fx:id="label1" layoutX="70.0" layoutY="25.0" text="免费版">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="label2" layoutX="80.0" layoutY="65.0" text="0">
+               <font>
+                  <Font size="43.0" />
+               </font>
+            </Label>
+            <Label fx:id="label3" layoutX="115.0" layoutY="95.0" text="元" />
+            <Line endX="100.0" layoutX="105.0" layoutY="160.0" startX="-100.0" />
+            <Label fx:id="label4" layoutX="80.0" layoutY="127.0" text="永久免费">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Label>
+            <Label fx:id="label5" layoutX="10.0" layoutY="185.0" text="个人图片数量">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label6" layoutX="170.0" layoutY="185.0" text="5张">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label7" layoutX="10.0" layoutY="224.0" text="可导入多种图片格式">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="label8" fitHeight="18.0" fitWidth="26.0" layoutX="170.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icon/check.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="label9" layoutX="10.0" layoutY="260.0" text="图片导出">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label10" layoutX="135.0" layoutY="260.0" text="部分格式">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label11" layoutX="10.0" layoutY="300.0" text="自定义主题风格">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label12" layoutX="170.0" layoutY="300.0" text="1个">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="365.0" layoutY="170.0" opacity="0.6" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+         <children>
+            <Label fx:id="label13" layoutX="70.0" layoutY="25.0" text="会员版">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="label14" layoutX="60.0" layoutY="65.0" text="12">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <Label fx:id="label15" layoutX="115.0" layoutY="90.0" text="元/月" />
+            <Button fx:id="button1" layoutX="35.0" layoutY="115.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="66.0" text="购买">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="button2" layoutX="117.0" layoutY="115.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="66.0" text="体验">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Line endX="100.0" layoutX="105.0" layoutY="160.0" startX="-100.0" />
+            <Label fx:id="label16" layoutX="10.0" layoutY="185.0" text="个人图片数量">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label17" layoutX="165.0" layoutY="185.0" text="不限">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label18" layoutX="10.0" layoutY="224.0" text="可导入多种图片格式">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="label19" fitHeight="18.0" fitWidth="26.0" layoutX="170.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icon/check.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="label20" layoutX="10.0" layoutY="260.0" text="图片导出">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label21" layoutX="135.0" layoutY="260.0" text="全部格式">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label22" layoutX="10.0" layoutY="300.0" text="自定义主题风格">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label23" layoutX="170.0" layoutY="300.0" text="不限">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label24" layoutX="10.0" layoutY="339.0" text="会员免费标识">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label25" layoutX="140.0" layoutY="339.0" text="免费使用">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label26" layoutX="10.0" layoutY="372.0" text="粘贴截图功能">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="label27" fitHeight="18.0" fitWidth="26.0" layoutX="170.0" layoutY="373.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icon/check.jpg" />
+               </image>
+            </ImageView>
+         </children>
+      </AnchorPane>
+      <AnchorPane layoutX="630.0" layoutY="170.0" opacity="0.6" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+         <children>
+            <Label fx:id="label28" layoutX="50.0" layoutY="25.0" text="尊贵会员版">
+               <font>
+                  <Font size="22.0" />
+               </font>
+            </Label>
+            <Label fx:id="label29" layoutX="50.0" layoutY="65.0" text="120">
+               <font>
+                  <Font size="38.0" />
+               </font>
+            </Label>
+            <Label fx:id="label30" layoutX="125.0" layoutY="90.0" text="元/年" />
+            <Button fx:id="button3" layoutX="35.0" layoutY="115.0" mnemonicParsing="false" prefHeight="28.0" prefWidth="66.0" text="购买">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Button fx:id="button4" layoutX="117.0" layoutY="115.0" mnemonicParsing="false" prefHeight="23.0" prefWidth="66.0" text="体验">
+               <font>
+                  <Font size="13.0" />
+               </font>
+            </Button>
+            <Line endX="100.0" layoutX="105.0" layoutY="161.0" startX="-100.0" />
+            <Label fx:id="label31" layoutX="10.0" layoutY="185.0" text="个人版所有特权">
+               <font>
+                  <Font size="15.0" />
+               </font>
+            </Label>
+            <Label fx:id="label33" layoutX="10.0" layoutY="224.0" text="在线客服">
+               <font>
+                  <Font size="16.0" />
+               </font>
+            </Label>
+            <ImageView fx:id="label34" fitHeight="18.0" fitWidth="26.0" layoutX="170.0" layoutY="225.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icon/check.jpg" />
+               </image>
+            </ImageView>
+            <Label fx:id="label35" layoutX="10.0" layoutY="260.0" text="团队协作">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="label37" layoutX="10.0" layoutY="300.0" text="图片操作记录">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <Label fx:id="label39" layoutX="10.0" layoutY="339.0" text="文件自动备份">
+               <font>
+                  <Font size="15.0" />
+               </font></Label>
+            <ImageView fx:id="label32" fitHeight="18.0" fitWidth="26.0" layoutX="170.0" layoutY="188.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icon/check.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="label36" fitHeight="18.0" fitWidth="26.0" layoutX="170.0" layoutY="260.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icon/check.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="label38" fitHeight="18.0" fitWidth="26.0" layoutX="170.0" layoutY="300.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icon/check.jpg" />
+               </image>
+            </ImageView>
+            <ImageView fx:id="label40" fitHeight="18.0" fitWidth="26.0" layoutX="170.0" layoutY="339.0" pickOnBounds="true" preserveRatio="true">
+               <image>
+                  <Image url="@../res/icon/check.jpg" />
+               </image>
+            </ImageView>
+         </children></AnchorPane>
+   </children>
+</AnchorPane>

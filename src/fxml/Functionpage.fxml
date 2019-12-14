@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.shape.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.FunctionpageController">
+   <children>
+      <ImageView fitHeight="763.0" fitWidth="961.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../res/icon/timg.jpg" />
+         </image>
+      </ImageView>
+      <Label alignment="CENTER" layoutX="22.0" layoutY="21.0" prefHeight="72.0" prefWidth="224.0" text="Functionpage">
+         <font>
+            <Font size="33.0" />
+         </font>
+      </Label>
+      <Line endX="110.0" layoutX="134.0" layoutY="100.0" startX="-110.0" />
+      <Button fx:id="signout" layoutX="841.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Sign out">
+         <font>
+            <Font size="17.0" />
+         </font></Button>
+      <Button fx:id="course" layoutX="745.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <Button fx:id="price" layoutX="660.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
+         <font>
+            <Font size="17.0" />
+         </font>
+      </Button>
+      <AnchorPane fx:id="change" layoutX="100.0" layoutY="140.0" prefHeight="500.0" prefWidth="750.0" />
+   </children>
+</AnchorPane>
