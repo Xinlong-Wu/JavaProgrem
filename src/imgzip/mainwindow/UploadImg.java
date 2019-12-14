@@ -50,7 +50,7 @@ public class UploadImg implements Runnable {
         if(! new File(imgUrl).exists()){
             throw new IIOException("Imgae "+ imgUrl + " not exists");
         }
-        String[] Urls = imgUrl.split("\\\\");
+        String[] Urls = imgUrl.split("\\.");
         this.storeName = Urls[Urls.length-1];
         this.imgBlock=imgBlock;
     }
@@ -111,24 +111,25 @@ public class UploadImg implements Runnable {
          * 向数据库提交数据
          */
         DataBaseController dbc = new DataBaseController();
-        String sql = "SELECT max(imgId) FROM imgcount";
+        String sql = "SELECT max(imgId) AS maxx FROM imgcount";
         ResultSet rs = dbc.queryExcecute(sql);
         int fileId = -1;
         try {
-            fileId = Integer.valueOf(rs.getString(1)) + 1;
+            rs.next();
+            fileId = Integer.valueOf(rs.getString("maxx")) + 1;
         } catch (SQLException e) {
             e.printStackTrace();
         }
         String fileName = "";
         if(fileId>=0){
-            fileName = String.format("%04d",fileId) +"_" +storeName;
+            fileName = String.format("%04d",fileId) +"_imgZIP." +storeName;
         }
         else {
             imgBlock.getIvstate().setImage(ImgBlock.WAITING);
             return;
         }
         sql = "INSERT INTO `imgcount` (`imgUrl`, `groupUuid`) VALUES ('"+fileName+"','"+uuid+"')";
-
+        dbc.queryUpdate(sql);
 
         /**首先先向服务器发送关于文件的信息，以便于服务器进行接收的相关准备工作
          * 发送的内容包括：发送文件协议码（此处为512）/#文件名（带后缀名）/#文件大小

@@ -25,6 +25,7 @@ import javax.imageio.IIOException;
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
+import java.util.UUID;
 
 
 /**
@@ -206,6 +207,8 @@ public class MainBox extends Scene {
             e.consume();
         });
         btUpload.setOnAction(e->{
+            String uuid = UUID.randomUUID().toString().replaceAll("-","");
+
 
             checkBlockList();
         });
