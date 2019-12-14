@@ -14,7 +14,11 @@
     -fx-font-size: 20px;
     -fx-pref-width: 360px;
     /*-fx-background-color: #000;*/
-
+}
+.tittle{
+    -fx-alignment: center-left;
+    -fx-font-size: 15px;
+    /*-fx-background-color: #000;*/
 }
 
 .ppane{

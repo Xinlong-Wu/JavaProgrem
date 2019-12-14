@@ -1,4 +1,4 @@
-package imgzip.mainwindow;
+package imgzip;
 
 import imgzip.FunctionPane;
 import javafx.application.Application;

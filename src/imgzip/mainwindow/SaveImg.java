@@ -79,4 +79,5 @@ class SaveImg implements Runnable{
         }
         imgBlock.getIvstate().setImage(ImgBlock.DONE);
     }
+
 }
