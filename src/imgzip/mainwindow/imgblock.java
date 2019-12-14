@@ -339,26 +339,30 @@ class ImgBlock extends BorderPane {
      */
     void uploadImg(){
         ivstate.setImage(LOADING);
-        if(!isUpload){
+        UploadImg uploadImg;
+        if(isUpload){
             ivstate.setImage(DONE);
             return;
         }
         try {
-            uploadPool.execute(new UploadImg(this));
+            uploadImg = new UploadImg(this);
+            uploadPool.execute(uploadImg);
         } catch (IIOException e) {
-            AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
+            ivstate.setImage(WAITING);
+            return;
         }
+
+        MainBox.upLoading(uploadImg.getUuid());
     }
     void uploadImg(String uuid){
         ivstate.setImage(LOADING);
-        if(!isUpload){
+        if(isUpload){
             ivstate.setImage(DONE);
             return;
         }
         try {
-            (new UploadImg(this,uuid)).run();
+            uploadPool.execute(new UploadImg(this,uuid));
         } catch (IIOException e) {
-            AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
             ivstate.setImage(WAITING);
         }
     }

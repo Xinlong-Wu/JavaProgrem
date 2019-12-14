@@ -78,6 +78,9 @@ public class ServerReceive {
                 System.out.println("服务器与客户端断开连接");
             }
             System.out.println("服务器收到请求"+comm);
+            if(comm==null){
+                continue;
+            }
             /**开始解析客户端发送过来的请求命令*/
             String[] index = comm.split("/#");
 

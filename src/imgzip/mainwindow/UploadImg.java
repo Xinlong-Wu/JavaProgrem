@@ -2,7 +2,9 @@ package imgzip.mainwindow;
 
 
 import imgzip.Login_SignIn.DataBaseController;
+import imgzip.alertwindow.AlertWindow;
 import javafx.scene.control.ComboBox;
+import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
 import java.io.File;
@@ -33,6 +35,8 @@ import java.util.concurrent.locks.ReentrantLock;
  * */
 
 public class UploadImg implements Runnable {
+    static int count=1;
+    static Object Lock = new Object();
     String imgUrl;
     String storeName;
     ImgBlock imgBlock;
@@ -46,13 +50,15 @@ public class UploadImg implements Runnable {
         String[] Urls = imgUrl.split("\\.");
         this.storeName = Urls[Urls.length-1];
         this.imgBlock=imgBlock;
+
+        this.uuid = getImgId();
     }
     public UploadImg(ImgBlock imgBlock,String uuid)throws IIOException {
         imgUrl = imgBlock.getUrl();
         if(! new File(imgUrl).exists()){
             throw new IIOException("Imgae "+ imgUrl + " not exists");
         }
-        String[] Urls = imgUrl.split("\\\\");
+        String[] Urls = imgUrl.split("\\.");
         this.storeName = Urls[Urls.length-1];
         this.imgBlock=imgBlock;
 
@@ -61,10 +67,19 @@ public class UploadImg implements Runnable {
 
     @Override
     public void  run() {
-        upLoad();
+        try {
+            synchronized (Lock) {
+                upLoad();
+                imgBlock.setUpload(true);
+            }
+        } catch (Exception e) {
+//            AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
+//            alertWindow.start(new Stage());
+            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+        }
     }
 
-    synchronized void upLoad(){
+    void upLoad() throws Exception {
         /**与服务器建立连接的通信句柄*/
         Socket s = null;
 
@@ -85,73 +100,36 @@ public class UploadImg implements Runnable {
         /**检查要发送的文件是否存在*/
         if(!sendfile.exists()){
             System.out.println("客户端：要发送的文件不存在");
-
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
+            throw new Exception("客户端：要发送的文件不存在");
         }
 
 
         /**与服务器建立连接*/
         try {
             s = new Socket("127.0.0.1", 1234);
+//            s.setSoTimeout(5000);
         }catch (IOException e) {
             System.out.println("未连接到服务器");
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
+            throw new Exception("未连接到服务器");
         }
 
         /**用文件对象初始化fis对象
          * 以便于可以提取出文件的大小
          * */
-        try {
-            fis = new FileInputStream(sendfile);
-        } catch (FileNotFoundException e1) {
-            e1.printStackTrace();
-
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
-        }
+        fis = new FileInputStream(sendfile);
 
         /**
          * 向数据库提交数据
          */
-        DataBaseController dbc = new DataBaseController();
-        String sql = "SELECT max(imgId) AS maxx FROM imgcount";
-        ResultSet rs = dbc.queryExcecute(sql);
-        int fileId = -1;
-        try {
-            rs.next();
-            fileId = Integer.valueOf(rs.getString("maxx")) + 1;
-        } catch (SQLException e) {
-            e.printStackTrace();
-
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
-        }
         String fileName = "";
-        if(fileId>=0){
-            fileName = String.format("%04d",fileId) +"_imgZIP." +storeName;
+        if(!"-1".equals(String.valueOf(uuid))){
+            fileName = uuid +"_imgZIP." +storeName;
         }
         else {
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
+            throw new Exception("数据库连接出错");
         }
-        sql = "INSERT INTO `imgcount` (`imgUrl`, `groupUuid`) VALUES ('"+fileName+"','"+uuid+"')";
+        DataBaseController dbc = new DataBaseController();
+        String sql = "INSERT INTO `imgcount` (`imgUrl`, `groupUuid`) VALUES ('"+fileName+"','"+uuid+"')";
         dbc.queryUpdate(sql);
 
         /**首先先向服务器发送关于文件的信息，以便于服务器进行接收的相关准备工作
@@ -164,11 +142,7 @@ public class UploadImg implements Runnable {
             System.out.println(fileName);
         } catch (IOException e) {
             System.out.println("服务器连接中断");
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
+            throw new Exception("服务器连接中断");
         }
 
 
@@ -176,16 +150,8 @@ public class UploadImg implements Runnable {
          * 此处睡眠2s，等待服务器把相关的工作准备好
          * 也是为了保证网络的延迟
          * */
-        try {
-            Thread.sleep(2000);
-        } catch (InterruptedException e1) {
-            e1.printStackTrace();
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
-        }
+
+        Thread.sleep(2000);
 
 
 
@@ -202,7 +168,7 @@ public class UploadImg implements Runnable {
 
             /**使用while循环读取文件，直到文件读取结束*/
             while((size = fis.read(buffer)) != -1){
-                System.out.println(fileName+": 客户端发送数据包，大小为" + size);
+                System.out.println(count+": 客户端发送数据包，大小为" + size);
                 /**向输出流中写入刚刚读到的数据包*/
                 os.write(buffer, 0, size);
                 /**刷新一下*/
@@ -210,18 +176,10 @@ public class UploadImg implements Runnable {
             }
         } catch (FileNotFoundException e) {
             System.out.println("客户端读取文件出错");
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
+            throw new Exception("客户端输出文件出错");
         } catch (IOException e) {
             System.out.println("客户端输出文件出错");
-            /**
-             * 失败，停止该线程
-             */
-            imgBlock.getIvstate().setImage(ImgBlock.WAITING);
-            return;
+            throw new Exception("客户端输出文件出错");
         }finally{
 
             /**
@@ -236,11 +194,26 @@ public class UploadImg implements Runnable {
                 System.out.println("客户端文件关闭出错");
             }//catch (IOException e)
         }//finally
-        imgBlock.setUpload(true);
+        count++;
         imgBlock.getIvstate().setImage(ImgBlock.DONE);
     }
 
-    void fild(){
-        imgBlock.getIvstate().setImage(ImgBlock.WAITING);
+    public String getImgId(){
+        DataBaseController dbc = new DataBaseController();
+        String sql = "SELECT max(imgId) AS maxx FROM imgcount";
+        ResultSet rs = dbc.queryExcecute(sql);
+        int imgId = -1;
+        try {
+            rs.next();
+            imgId = Integer.valueOf(rs.getString("maxx")) + 1;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }finally {
+            return String.format("%04d",imgId);
+        }
+    }
+
+    public String getUuid() {
+        return uuid;
     }
 }//public class UploadImg

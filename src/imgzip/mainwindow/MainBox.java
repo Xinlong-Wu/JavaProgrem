@@ -9,12 +9,15 @@ import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.*;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.control.Menu;
+import javafx.scene.control.MenuBar;
+import javafx.scene.control.MenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.Dragboard;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.TransferMode;
+import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
 import javafx.stage.DirectoryChooser;
@@ -22,6 +25,8 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
+import java.awt.datatransfer.StringSelection;
+import java.awt.datatransfer.Transferable;
 import java.io.File;
 import java.util.HashSet;
 import java.util.List;
@@ -207,19 +212,15 @@ public class MainBox extends Scene {
             e.consume();
         });
         btUpload.setOnAction(e->{
+            // 用UUID作为提取码
             String uuid = UUID.randomUUID().toString().replaceAll("-","");
             //获取图片列表
             List imgBlockList = blockList.getChildren();
             for (int i = 0;i < imgCount;i++){
                 ImgBlock tmp = (ImgBlock)imgBlockList.get(i);
                 tmp.uploadImg(uuid);
-                try {
-                    Thread.sleep(2000);
-                } catch (InterruptedException e1) {
-                    e1.printStackTrace();
-                }
             }
-            checkBlockList();
+            upLoading(uuid);
         });
 
         // 从文件管理器打开图像
@@ -278,17 +279,7 @@ public class MainBox extends Scene {
 
         about.setOnAction(event -> {
             AlertWindow alertWindow = new AlertWindow();
-//            alertWindow.anotherButton(vBox -> {
-//                AlertButton alertButton = new AlertButton("asdasda");
-//                vBox.getChildren().add(alertButton);
-//                alertWindow.getBtBoxChildren().add(vBox);
-//            });
-            try {
-                alertWindow.start(new Stage());
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-
+            alertWindow.start(new Stage());
         });
 
 
@@ -358,6 +349,33 @@ public class MainBox extends Scene {
             btSave.setDisable(false);
             btUpload.setDisable(false);
         }
+    }
+
+    public static void upLoading(String uuid){
+        AlertWindow alertWindow = new AlertWindow("正在上传","您的图片提取码:\n"+uuid);
+        // 此处写警告弹窗的标题和内容
+        // 用于新加按钮，可以新加多个，最后添加在VBox中
+        alertWindow.anotherButton(vBox -> {
+            AlertButton alertButton = new AlertButton("拷贝");        //写新加按钮的名字
+            vBox.getChildren().add(alertButton);
+            alertWindow.getBtBoxChildren().add(vBox); // 最后一定要将VBox添加进alertWindow的btbox中
+            alertButton.setOnAction(ee->{
+                setclipboardtext(uuid);
+                alertButton.setText("已复制到剪贴板上");
+            });
+        });
+        alertWindow.start(new Stage());
+    }
+
+    /**
+     * 将图片ID添加到剪贴板
+     * @param note
+     */
+    public static void setclipboardtext(String note) {
+        Clipboard clip = Clipboard.getSystemClipboard();
+        ClipboardContent clipboardContent = new ClipboardContent();
+        clipboardContent.putString(note);
+        clip.setContent(clipboardContent);
     }
 
     /**
