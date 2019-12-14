@@ -1,8 +1,12 @@
 package imgzip.mainpane;
 
 import com.sun.org.apache.xalan.internal.xsltc.dom.CurrentNodeListFilter;
+import imgzip.FunctionPane;
+import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.fxml.FXML;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.MenuButton;
 import javafx.scene.image.ImageView;
@@ -77,7 +81,7 @@ public class CourseController implements Initializable {
          本页面连接到functionpage
          */
         functionpage.setOnAction(e -> {
-            new Functionpage();
+            new FunctionPane();
             Stage stage = (Stage)functionpage.getScene().getWindow();
             stage.close();
         });
@@ -86,11 +90,14 @@ public class CourseController implements Initializable {
          把登录教程的gif放到page版面上
          */
         login.setOnAction(e -> {
-//            page.getChildren().clear();
-//            Image image = new Image("pkq.gif");
-//            ImageView imageView = new ImageView();
-//            imageView.setImage(image);
-//            page.setCenter(imageView);
+            page.getChildren().clear();
+            Image image = new Image("file:res/icon/pkq.gif");
+            ImageView imageView = new ImageView();
+            imageView.setImage(image);
+            page.setCenter(imageView);
+            new Course();
+            Stage stage = (Stage)course.getScene().getWindow();
+            stage.close();
         });
 
         /**

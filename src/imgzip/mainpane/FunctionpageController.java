@@ -20,16 +20,27 @@ public class FunctionpageController implements Initializable {
     private AnchorPane change;
 
     public void initialize(URL lacation, ResourceBundle resources){
+        /**
+         本页面连接到course
+         */
         course.setOnAction(e -> {
             new Course();
             Stage stage = (Stage)course.getScene().getWindow();
             stage.close();
         });
+
+        /**
+         本页面连接到price
+         */
         price.setOnAction(e -> {
             new Pricepane();
             Stage stage = (Stage)price.getScene().getWindow();
             stage.close();
         });
+
+        /**
+         本页面连接到homepage
+         */
         signout.setOnAction(e -> {
             new Pane_sceenbeginner();
             Stage stage = (Stage)signout.getScene().getWindow();

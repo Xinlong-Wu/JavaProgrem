@@ -11,8 +11,8 @@ import javafx.stage.Stage;
  */
 public class FunctionPane{
     static private Stage primaryStage;
-    public void FunctionPane() {
-        primaryStage = primaryStage;
+    public FunctionPane() {
+        primaryStage = new Stage();
         MainBox scene = new MainBox();
         primaryStage.setTitle("图像压缩处理");
         primaryStage.setScene(scene);
