@@ -41,7 +41,7 @@
               <children>
                 <HBox id="AccountBox" alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="397.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;&#10;&#10;&#10;&#10;&#10;">
                   <children>
-                    <TextField fx:id="userName" onKeyReleased="#checkAccountExistence" prefHeight="36.0" prefWidth="260.0" promptText="UserName ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;&#10;" styleClass="null">
+                    <TextField fx:id="userName" prefHeight="36.0" prefWidth="260.0" promptText="UserName ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;" styleClass="null">
                       <HBox.margin>
                         <Insets />
                       </HBox.margin>
@@ -74,7 +74,7 @@
               <children>
                 <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="397.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;">
                   <children>
-                    <TextField fx:id="email" onKeyPressed="#checkEmailExistence" prefHeight="40.0" prefWidth="260.0" promptText="Email ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;">
+                    <TextField fx:id="email" prefHeight="40.0" prefWidth="260.0" promptText="Email ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;">
                       <HBox.margin>
                         <Insets />
                       </HBox.margin>

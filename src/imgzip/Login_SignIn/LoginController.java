@@ -2,10 +2,7 @@ package imgzip.Login_SignIn;
 
 import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.Alert;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.scene.control.CheckBox;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -50,6 +47,8 @@ public class LoginController {
     @FXML
     private Button createAccount;
 
+    @FXML
+    private Label passwordWrong;
 
 
     /**
@@ -68,6 +67,10 @@ public class LoginController {
 
         }else if ((!stringAccount.equals(ifEmpty) && !stringPassword.equals(ifEmpty))){
             login.setDisable(false);
+        }
+
+        if(passwordWrong.isVisible()){
+            passwordWrong.setVisible(false);
         }
     }
 
@@ -109,19 +112,17 @@ public class LoginController {
 
                     remember();
                     //登入主页面，待定
+                    if ((passwordWrong.isVisible())){
+                        passwordWrong.setVisible(false);
+                    }
                     System.out.println("登录1");
 
                 }else{
-                    new WrongPassword();
-                    Stage stage = (Stage)createAccount.getScene().getWindow();
-                    stage.close();
+                    passwordWrong.setVisible(true);
                 }
 
             }else {
-                new WrongPassword();
-                Stage stage = (Stage)createAccount.getScene().getWindow();
-                stage.close();
-
+                passwordWrong.setVisible(true);
             }
 
         }catch (SQLException e){

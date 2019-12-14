@@ -19,7 +19,7 @@ import java.sql.SQLException;
 
 /**
  @Author:   肖尧
- @Date: 2019.12.4
+ @Date: 2019.12.12
  */
 public class CreateAccountController {
 
@@ -59,7 +59,7 @@ public class CreateAccountController {
      */
     public void backToLogin() {
         Stage stage = (Stage) signIn.getScene().getWindow();
-        new Loginbeginner();
+        new LoginBeginner();
         stage.close();
 
     }
@@ -220,7 +220,6 @@ public class CreateAccountController {
             createAccountInstruction.close();
 
         }
-
     }
 
     /**
@@ -237,7 +236,6 @@ public class CreateAccountController {
 
         if(!agree.isSelected() || userNmae || emial ){
             createAccount.setDisable(true);
-
         }
     }
 

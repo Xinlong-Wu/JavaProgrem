@@ -118,7 +118,7 @@ public class FindPasswordController {
 
     public void backToSignIn(){
         Stage stage = (Stage) verify.getScene().getWindow();
-        new Loginbeginner();
+        new LoginBeginner();
         stage.close();
     }
 }

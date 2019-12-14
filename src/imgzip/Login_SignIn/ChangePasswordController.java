@@ -24,7 +24,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-
+/**
+ @Author:   肖尧
+ @Date: 2019.12.12
+ */
 public class ChangePasswordController {
 
     @FXML
@@ -36,8 +39,15 @@ public class ChangePasswordController {
     @FXML
     Label checkThePassword = new Label();
 
-    public void upDatePassword(){
+    @FXML
+    Button changeThePassword = new Button();
 
+
+    /**
+     * 点击按钮后，更改密码，并检查是否更改成功。
+     */
+
+    public void upDatePassword(){
 
         String a = GlobalStringManager.getAccount();
         DataBaseController changeInstruction = new DataBaseController();
@@ -57,6 +67,8 @@ public class ChangePasswordController {
                 new ChangePasswordSuccessfully();
                 stage.close();
             }else {
+
+
                 System.out.println("123");
             }
 
@@ -70,14 +82,49 @@ public class ChangePasswordController {
         }
     }
 
+    /**
+     * 检查第一次输入的密码和第二次输入的密码是否相同，以及两个密码框是否为空。
+     * 如果相同或者为空，则无法点击按钮，并会有提示。
+     */
+
     public void checkPasswordTheSame(){
 
+        if("".equals(password.getText()) || "".equals(checkPassword.getText())){
+
+            if(!changeThePassword.isDisable()){
+                changeThePassword.setDisable(true);
+            }
+
+            if(checkThePassword.isVisible()){
+                checkThePassword.setVisible(false);
+            }
 
 
+        }else{
 
+            if(password.getText().equals(checkPassword.getText())){
+                if(changeThePassword.isDisable()){
+                    changeThePassword.setDisable(false);
+                }
 
+                if(checkThePassword.isVisible()){
+                    checkThePassword.setVisible(false);
+                }
 
+            }
 
+            if(!password.getText().equals(checkPassword.getText())){
+
+                if(!changeThePassword.isDisable()){
+                    changeThePassword.setDisable(true);
+                }
+
+                if(!checkThePassword.isVisible()){
+                    checkThePassword.setVisible(true);
+                }
+            }
+
+        }
 
     }
 

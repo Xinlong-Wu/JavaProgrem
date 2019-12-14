@@ -8,7 +8,7 @@
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.9999000000025" prefWidth="638.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="imgzip.Login_SignIn.LoginController">
+<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.9999000000025" prefWidth="648.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="imgzip.Login_SignIn.LoginController">
   <children>
     <BorderPane id="whole" layoutX="13.0" layoutY="14.0" prefHeight="373.0" prefWidth="611.0">
       <bottom>
@@ -47,17 +47,26 @@
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0">
               <children>
                 <Label text="Account name" HBox.margin="$x2" />
-                <TextField id="Account" fx:id="account" onKeyReleased="#check" prefHeight="27.0" prefWidth="435.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;" />
+                <TextField id="Account" fx:id="account" onKeyReleased="#check" prefHeight="27.0" prefWidth="445.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;" />
               </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" spacing="10.0" VBox.margin="$x3">
+            <HBox alignment="CENTER_LEFT" prefHeight="70.0" prefWidth="200.0" spacing="10.0" VBox.margin="$x3">
               <children>
                 <Label text="Password">
                   <HBox.margin>
                     <Insets left="71.0" />
                   </HBox.margin>
                 </Label>
-                <PasswordField fx:id="password" onKeyReleased="#check" prefHeight="27.0" prefWidth="435.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;" />
+                <HBox alignment="CENTER_LEFT" prefHeight="28.0" prefWidth="445.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;">
+                  <children>
+                    <PasswordField fx:id="password" onKeyReleased="#check" prefHeight="20.0" prefWidth="239.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;" />
+                    <Label fx:id="passwordWrong" alignment="CENTER" prefHeight="20.0" prefWidth="218.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="The password or account is invalid" textAlignment="LEFT" textFill="RED">
+                      <font>
+                        <Font name="System Bold" size="12.0" />
+                      </font>
+                    </Label>
+                  </children>
+                </HBox>
               </children>
             </HBox>
             <HBox alignment="CENTER_LEFT" prefHeight="100.0" prefWidth="200.0" VBox.margin="$x3">

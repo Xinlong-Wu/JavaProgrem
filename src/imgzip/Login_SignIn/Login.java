@@ -13,7 +13,9 @@ import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
+import javafx.scene.control.Label;
 
+import java.awt.*;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.io.BufferedReader;
@@ -31,19 +33,22 @@ public class Login extends Application {
     public void start(Stage primaryStage) throws Exception{
 
         try {
-
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
 
             TextField account = (TextField)root.lookup("#Account");
             PasswordField password = (PasswordField)root.lookup("#password");
             CheckBox remember = (CheckBox)root.lookup("#remember");
             Button logIn = (Button)root.lookup("#Login");
-
+            Label passwordWrong = (Label)root.lookup("#passwordWrong");
 
             /**
              在页面开启之前检查上一次登录时是否记住了密码，
              如果上一次登录点击了记住密码，则在本次打开时会将账号和密码写入
              */
+            passwordWrong.setVisible(false);
+
+
+
             try {
 
                 FileReader fr = new FileReader("src/txtFile/RememberAccount&Password.txt");
@@ -150,7 +155,5 @@ class Loginbeginner{
             e.printStackTrace();
 
         }
-
     }
-
 }
