@@ -43,6 +43,7 @@ public class UploadImg implements Runnable {
     String imgUrl;
     String storeName;
     ImgBlock imgBlock;
+    String uuid = "NULL";
     Lock lock = new ReentrantLock();
     public UploadImg(ImgBlock imgBlock)throws IIOException {
         imgUrl = imgBlock.getUrl();
@@ -52,6 +53,16 @@ public class UploadImg implements Runnable {
         String[] Urls = imgUrl.split("\\\\");
         this.storeName = Urls[Urls.length-1];
         this.imgBlock=imgBlock;
+    }
+    public UploadImg(ImgBlock imgBlock,String uuid)throws IIOException {
+        imgUrl = imgBlock.getUrl();
+        if(! new File(imgUrl).exists()){
+            throw new IIOException("Imgae "+ imgUrl + " not exists");
+        }
+        String[] Urls = imgUrl.split("\\\\");
+        this.storeName = Urls[Urls.length-1];
+        this.imgBlock=imgBlock;
+        this.uuid = uuid;
     }
 
     @Override
@@ -116,10 +127,11 @@ public class UploadImg implements Runnable {
             imgBlock.getIvstate().setImage(ImgBlock.WAITING);
             return;
         }
-        sql = "INSERT INTO `imgcount` (`imgUrl`) VALUES ('"+fileName+"')";
+        sql = "INSERT INTO `imgcount` (`imgUrl`, `groupUuid`) VALUES ('"+fileName+"','"+uuid+"')";
+
 
         /**首先先向服务器发送关于文件的信息，以便于服务器进行接收的相关准备工作
-         * 发送的内容包括：发送文件协议码（此处为111）/#文件名（带后缀名）/#文件大小
+         * 发送的内容包括：发送文件协议码（此处为512）/#文件名（带后缀名）/#文件大小
          * */
         try {
             PrintStream ps = new PrintStream(s.getOutputStream());
