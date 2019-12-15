@@ -1,9 +1,7 @@
 package imgzip;
 
-import imgzip.mainwindow.MainBox;
-import javafx.application.Application;
-import javafx.scene.Scene;
-import javafx.scene.layout.Pane;
+import imgzip.mainpane.Course;
+import imgzip.mainwindow.FunctionBox;
 import javafx.stage.Stage;
 /**
  * AlertWindow class
@@ -13,13 +11,21 @@ import javafx.stage.Stage;
  */
 public class FunctionPane{
     static private Stage primaryStage;
+    static private FunctionBox scene;
     public FunctionPane() {
         primaryStage = new Stage();
-        MainBox scene = new MainBox();
+        if(scene==null){
+            scene = new FunctionBox();
+        }
         primaryStage.setTitle("图像压缩处理");
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        primaryStage.setOnCloseRequest(e->{
+            new Course();
+        });
+
     }
 
     public static void close(){

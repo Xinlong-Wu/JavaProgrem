@@ -1,12 +1,9 @@
 package imgzip.mainwindow;
 
 
-import imgzip.alertwindow.AlertButton;
-import imgzip.alertwindow.AlertWindow;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
-import javafx.geometry.Pos;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -23,15 +20,9 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
-import javax.imageio.ImageIO;
 import javax.imageio.stream.FileImageInputStream;
-import java.awt.*;
-import java.awt.image.BufferedImage;
-import java.awt.image.MemoryImageSource;
-import java.awt.image.PixelGrabber;
 import java.io.File;
 import java.io.IOException;
-import java.sql.Time;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
@@ -272,7 +263,7 @@ class ImgBlock extends BorderPane {
 
         //关闭按钮
         btClose.setOnAction(e->{
-            MainBox.drop(this);
+            FunctionBox.drop(this);
             //销毁实例
             e.consume();
         });
@@ -352,7 +343,7 @@ class ImgBlock extends BorderPane {
             return;
         }
 
-        MainBox.upLoading(uploadImg.getUuid());
+        FunctionBox.upLoading(uploadImg.getUuid());
     }
     void uploadImg(String uuid){
         ivstate.setImage(LOADING);

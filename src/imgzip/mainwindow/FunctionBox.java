@@ -33,7 +33,7 @@ import java.util.UUID;
 /**
  * @author 乌鑫龙
  */
-public class MainBox extends Scene {
+public class FunctionBox extends Scene {
     /**
      *  静态参数图像计数器和blockList，借此完成图片block的新建及删除
      */
@@ -46,7 +46,7 @@ public class MainBox extends Scene {
     static Image ADDD = new Image("res/icon/add-dark.png");
     static Image CLEARD = new Image("res/icon/clear-dark.png");
     static Image UPLOADD = new Image("res/icon/upload&font-dark.png");
-    static Image BACKD = new Image("res/icon/back.png");
+    static Image BACKD = new Image("res/icon/back-dark.png");
     private static int imgCount=0;
     private static FlowPane blockList = new FlowPane();
     private static BorderPane homePane = new BorderPane();
@@ -78,7 +78,7 @@ public class MainBox extends Scene {
      *  height 800
      *
      */
-    public MainBox() {
+    public FunctionBox() {
         //窗口尺寸
         super(homePane, 1024, 800);
         this.getStylesheets().add("css/imgblock.css");
@@ -295,8 +295,8 @@ public class MainBox extends Scene {
             e.consume();
         });
         btBack.setOnAction(e->{
-//            new Course();
-//            FunctionPane.close();
+            new Course();
+            FunctionPane.close();
         });
 
         /**
