@@ -214,3 +214,27 @@
     -fx-pref-height: 40px;
     /*-fx-background-color: #ff3550;*/
 }
+
+.toRightBox{
+    -fx-pref-height: 80px;
+    -fx-alignment: center-right;
+    -fx-pref-width: 550px;
+    /*-fx-background-color: #d251ff;*/
+}
+
+.imgDownloadBox{
+    -fx-pref-height: 50px;
+    -fx-max-height: 50px;
+    -fx-min-height: 50px;
+    -fx-background-color: #fff;
+    -fx-alignment: center-left;
+    -fx-border-width: 1px;
+    -fx-border-color: #B5B5B5;
+    -fx-border-radius: 5px;
+    -fx-background-radius: 5px;
+}
+
+.btImgIdInput{
+    -fx-pref-height: 50px;
+    -fx-background-color: #ffffff;
+}

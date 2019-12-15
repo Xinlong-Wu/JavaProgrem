@@ -3,23 +3,20 @@ package imgzip.mainwindow;
 import imgzip.FunctionPane;
 import imgzip.alertwindow.AlertButton;
 import imgzip.alertwindow.AlertWindow;
+import imgzip.mainpane.Course;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.Menu;
-import javafx.scene.control.MenuBar;
-import javafx.scene.control.MenuItem;
-import javafx.scene.control.ScrollPane;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.*;
 import javafx.scene.layout.*;
 import javafx.scene.paint.Color;
+import javafx.scene.text.Text;
 import javafx.stage.DirectoryChooser;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
@@ -44,10 +41,12 @@ public class MainBox extends Scene {
     static Image ADD = new Image("res/icon/add.png");
     static Image CLEAR = new Image("res/icon/clear.png");
     static Image UPLOAD = new Image("res/icon/upload&font.png");
+    static Image BACK = new Image("res/icon/back.png");
     static Image SAVED = new Image("res/icon/save-dark.png");
     static Image ADDD = new Image("res/icon/add-dark.png");
     static Image CLEARD = new Image("res/icon/clear-dark.png");
     static Image UPLOADD = new Image("res/icon/upload&font-dark.png");
+    static Image BACKD = new Image("res/icon/back.png");
     private static int imgCount=0;
     private static FlowPane blockList = new FlowPane();
     private static BorderPane homePane = new BorderPane();
@@ -69,7 +68,7 @@ public class MainBox extends Scene {
     private ImageView ivAdd = new ImageView(ADD);
     private ImageView ivClear = new ImageView(CLEAR);
     private ImageView ivUpload = new ImageView(UPLOAD);
-
+    private ImageView ivBack = new ImageView(BACK);
 
     /**
      * 将主界面整合成一个Scene类，方便调用
@@ -127,11 +126,32 @@ public class MainBox extends Scene {
 
         btClear.setGraphic(ivClear);
         btClear.getStyleClass().addAll("top-ctrl-bt");
+
+        Button btBack = new Button();
+        btBack.setGraphic(ivBack);
+        btBack.getStyleClass().addAll("top-ctrl-bt");
+
+        TextField btImgIdInput = new TextField();
+        btImgIdInput.getStyleClass().addAll("btImgIdInput");
+        btImgIdInput.setPromptText("请输入图片提取码");
+
+        Button btLoad = new Button("GO!");
+        btLoad.getStyleClass().addAll("top-ctrl-bt");
+        HBox imgDownloadBox = new HBox(5);
+        imgDownloadBox.getStyleClass().addAll("imgDownloadBox");
+
+        imgDownloadBox.getChildren().addAll(btImgIdInput,btLoad);
+
+        HBox toRightBox = new HBox(0);
+        toRightBox.getStyleClass().addAll("toRightBox");
+        toRightBox.getChildren().addAll(imgDownloadBox);
+        toRightBox.setPadding(new Insets(0,10,0,0));
+
         btClear.setDisable(true);
         btSave.setDisable(true);
         btUpload.setDisable(true);
         HBox ctrlBar = new HBox(20);
-        ctrlBar.getChildren().addAll(btAdd,btSave,btClear,btUpload);
+        ctrlBar.getChildren().addAll(btAdd,btSave,btClear,btUpload,btBack,toRightBox);
         ctrlBar.getStyleClass().addAll("top-ctrl");
         ctrlBar.setPadding(new Insets(0,0,0,20));
         VBox topPane = new VBox();
@@ -166,7 +186,7 @@ public class MainBox extends Scene {
             checkBlockList();
         });
 
-        //  允许拖放文件（不写这个拖放总不成功，不会写网上查的）
+        //  允许拖放文件（不写这个拖放总不成功）
         centerPane.setOnDragOver(e->{
             if (e.getGestureSource() != centerPane
                     && e.getDragboard().hasFiles()) {
@@ -175,7 +195,7 @@ public class MainBox extends Scene {
                 for (File img : imgs) {
                     String[] path = img.getPath().split("\\.");
                     String type = path[path.length - 1].toLowerCase();
-                    if ("png".equals(type) || "jpg".equals(type) || "bmp".equals(type) || "tif".equals(type)) {
+                    if ("png".equals(type) || "jpg".equals(type) || "bmp".equals(type)) {
                         /* allow for both copying and moving, whatever user chooses */
                         e.acceptTransferModes(TransferMode.COPY_OR_MOVE);
                     } else {
@@ -264,6 +284,19 @@ public class MainBox extends Scene {
                 System.out.println("MainBos->btAdd->action->list: "+ex);
             }
             checkBlockList();
+        });
+
+        btBack.setOnMouseEntered(e->{
+            setImg(ivBack,BACKD);
+            e.consume();
+        });
+        btBack.setOnMouseExited(e->{
+            setImg(ivBack,BACK);
+            e.consume();
+        });
+        btBack.setOnAction(e->{
+//            new Course();
+//            FunctionPane.close();
         });
 
         /**
@@ -392,11 +425,10 @@ public class MainBox extends Scene {
             FileChooser fileChooser = new FileChooser();
             fileChooser.setTitle("选择图片");
             fileChooser.getExtensionFilters().addAll(
-                    new FileChooser.ExtensionFilter("全部图片（.bmp/.png/.jpg/.tif", "*.bmp","*.jpg","*.png","*.tif"),
+                    new FileChooser.ExtensionFilter("全部图片（.bmp/.png/.jpg）", "*.bmp","*.jpg","*.png"),
                     new FileChooser.ExtensionFilter("BMP", "*.bmp"),
                     new FileChooser.ExtensionFilter("JPG", "*.jpg"),
-                    new FileChooser.ExtensionFilter("PNG", "*.png"),
-                    new FileChooser.ExtensionFilter("TIF", "*.tif"));
+                    new FileChooser.ExtensionFilter("PNG", "*.png"));
             try{
                 List list = fileChooser.showOpenMultipleDialog(stage);
                 list.forEach(li->{
