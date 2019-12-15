@@ -16,47 +16,24 @@ import java.io.IOException;
  *   保存文件的线程
  */
 class SaveImg implements Runnable{
-    String imgUrl;
+    File img;
     String[] newUrl;
     String storeName;
     ComboBox<String> trans;
     ImgBlock imgBlock;
+
     public SaveImg(ImgBlock imgBlock,String newUrl)throws IIOException {
-        imgUrl = imgBlock.getUrl();
-        if(! new File(imgUrl).exists()&&!imgUrl.startsWith("http:")){
-            throw new IIOException("Imgae "+ imgUrl + " not exists");
-        }
-        this.newUrl = newUrl.split("\\.");
-        this.imgBlock=imgBlock;
-        this.trans = imgBlock.getTrans();
-    }
-
-    public SaveImg(ImgBlock imgBlock,String url ,String newUrl)throws IIOException {
-        imgUrl = imgBlock.getUrl();
-        if(! new File(imgUrl).exists()){
-            throw new IIOException("Imgae "+ imgUrl + " not exists");
-        }
-
+        this.img = imgBlock.getFile();
         this.newUrl = newUrl.split("\\.");
         this.imgBlock=imgBlock;
         this.trans = imgBlock.getTrans();
     }
     @Override
     public void run() {
-        File f2;
-        if(imgUrl.startsWith("http:")){
-            f2 = imgBlock.getNetUrlHttp(imgUrl);
-        }else {
-            //通过split截取文件路径
-            String[] url=imgUrl.split("\\.");
-            System.out.println(url[0]);
-            f2 =new File(imgUrl);
-        }
-
         //使用imgeIO来读取图片
         BufferedImage srcImg = null;
         try {
-            srcImg = ImageIO.read(f2);
+            srcImg = ImageIO.read(img);
             if (trans.getValue().equals(ImgBlock.JPG)) {
                 //重新创建图片
                 BufferedImage newBufferedImage = new BufferedImage(srcImg.getWidth(), srcImg.getHeight(), BufferedImage.TYPE_INT_RGB);

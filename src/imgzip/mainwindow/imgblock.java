@@ -2,6 +2,7 @@ package imgzip.mainwindow;
 
 
 
+import imgzip.alertwindow.AlertWindow;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -53,6 +54,7 @@ class ImgBlock extends BorderPane {
     static ExecutorService zipPool = Executors.newCachedThreadPool();
     static ExecutorService uploadPool = Executors.newCachedThreadPool();
 
+
     /**
      *  私有参数用于各个类特定的值、和对象，用来组成
      */
@@ -69,11 +71,14 @@ class ImgBlock extends BorderPane {
     private Label size;
     private int index;
     private Boolean isUpload = false;
+    private File file;
+    private Boolean isHttpSorce = false;
+    private Boolean isAcceed = true;
     HBox topBar = new HBox();
     VBox botBar = new VBox();
     HBox transBar = new HBox();
-    HBox sliderBox = new HBox();
-    Slider sliderBar = new Slider(0,100,100);
+
+
 
 
 //    Menu
@@ -91,6 +96,16 @@ class ImgBlock extends BorderPane {
         this.setCenter(cent);
         this.index = imgCount;
         this.url = imgUrl;
+        if (imgUrl.startsWith("http:")){
+            file=getNetUrlHttp(imgUrl);
+            if (file == null){
+                setAcceed(false);
+                return;
+            }
+            this.isHttpSorce = true;
+        } else {
+            file= new File(imgUrl);
+        }
 
         // 边框阴影设置
         DropShadow dropShadow =new DropShadow();
@@ -104,7 +119,7 @@ class ImgBlock extends BorderPane {
 
         //私有属性设定
         Image tmp ;
-        if(imgUrl.startsWith("http:")){
+        if(isHttpSorce){
             tmp = new Image(imgUrl);
         } else {
             tmp = new Image("file:"+imgUrl);
@@ -125,23 +140,6 @@ class ImgBlock extends BorderPane {
         ivUpload.setFitHeight(15);
         ivUpload.setFitWidth(15);
 
-        Label lbZip = new Label("压缩：");
-        Label lbZipPre = new Label("100%");
-        lbZipPre.setPrefWidth(40);
-        sliderBox.getChildren().addAll(lbZip,sliderBar,lbZipPre);
-        sliderBox.getStyleClass().addAll("slidebox");
-
-        Label size = new Label(this.getFileSize(imgUrl));
-        size.getStyleClass().addAll("size-Label");
-        Label split = new Label("/");
-        Label dialog = new Label(size.getText());
-        dialog.getStyleClass().addAll("size-Label");
-        HBox sizeBox = new HBox();
-        sizeBox.getChildren().addAll(dialog,split,size);
-//        sizeBox.setAlignment(Pos.BOTTOM_RIGHT);
-        sizeBox.getStyleClass().addAll("sizeBox");
-
-
         //关闭按钮设定
         btClose.setGraphic(ivClose);
         btClose.getStyleClass().add("block-box-close");
@@ -158,7 +156,7 @@ class ImgBlock extends BorderPane {
         cent.getChildren().addAll(ivimg);
 
         //底部栏属性设定
-        botBar.getChildren().addAll(sliderBox,transBar);
+        botBar.getChildren().addAll(transBar);
         botBar.getStyleClass().setAll("block-botbar");
 //        botBar.setPadding(new Insets(0,0,0,10));
 
@@ -189,15 +187,12 @@ class ImgBlock extends BorderPane {
 
         //底部栏设定
 
-
-        sliderBar.getStyleClass().addAll("slidebar");
-
         trans.setPadding(new Insets(0,0,0,10));
         trans.getItems().addAll(JPG,PNG,BMP);
         trans.getStyleClass().addAll("block-combo");
-        transBar.getChildren().addAll(trans, sizeBox);
+        transBar.getChildren().addAll(trans);
         transBar.getStyleClass().addAll("transbar");
-        String type = imgUrl.split("\\.")[1].toLowerCase();
+        String type = file.getPath().split("\\.")[1].toLowerCase();
         if("jpg".equals(type)){
             trans.setValue(JPG);
         }
@@ -221,7 +216,7 @@ class ImgBlock extends BorderPane {
         save.setOnAction(e->{
             ivstate.setImage(LOADING);
             try {
-                saveImg(imgUrl);
+                saveImg(file.getPath());
             }
             catch (IIOException ex){
                 System.out.println("Imgblock->save->action: "+ex.getMessage());
@@ -276,24 +271,6 @@ class ImgBlock extends BorderPane {
         });
 
 
-        /**
-         *  图片压缩监听
-         */
-        sliderBar.valueProperty().addListener(new ChangeListener<Number>() {
-            @Override
-            public void changed(ObservableValue<? extends Number> ov,
-                                Number old_val, Number new_val) {
-                lbZipPre.setText(String.format("%.0f",sliderBar.getValue())+"%");
-                System.out.println(sliderBar.getValue());
-            }
-        });
-
-        sliderBar.setOnMouseReleased(event ->{
-            this.setState(LOADING);
-            zipImg(sliderBar.getValue());
-            event.consume();
-        });
-
     }
 
     void setState(Image state){
@@ -322,14 +299,6 @@ class ImgBlock extends BorderPane {
      */
     void saveImg(String path) throws IIOException{
             saverPool.execute(new SaveImg(this,path));
-    }
-
-    /**
-     * 压缩图片方法
-     * @param rate
-     */
-    void zipImg(double rate){
-        zipPool.execute(new ZipImg(this,rate));
     }
 
     /**
@@ -374,6 +343,20 @@ class ImgBlock extends BorderPane {
     }
 
     /**
+     * block 创建是否成功访问器和修改器
+     * @return
+     */
+    public Boolean getAcceed() {
+        return isAcceed;
+    }
+
+    public void setAcceed(Boolean acceed) {
+        isAcceed = acceed;
+    }
+
+
+
+    /**
      * 图像序号访问器
      * @return
      */
@@ -382,39 +365,20 @@ class ImgBlock extends BorderPane {
     }
 
     /**
-     * 获取文件大小
-     * @param url
+     * 图像文件访问器
+     * @return
      */
-    String getFileSize(String url){
-        String str = "null";
-        File file ;
-        Boolean b = url.startsWith("http:");
-        if (b) {
-            file = getNetUrlHttp(url);
-        } else {
-            file = new File(url);
-        }
-        try {
-            FileImageInputStream fiis = new FileImageInputStream(file);
-            Float fsize = (float) fiis.length() / 1024;
-            if(fsize<100){
-                str = String.format("%.2f",fsize) + "KB";
-            }
-            else {
-                str = String.format("%.2f",fsize/1024) + "MB";
-            }
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        return str;
+    public File getFile() {
+        return file;
     }
+
 
     public File getNetUrlHttp(String netUrl) {
         String[] tmps = netUrl.split("\\.");
         String type = tmps[tmps.length-1];
 
         //对本地文件命名
-        String fileName = getIndex()+"."+type;
+        String fileName = getIndex()+FunctionBox.crateUuid()+"."+type;
         File file = null;
 
 
@@ -434,8 +398,11 @@ class ImgBlock extends BorderPane {
                 os.write(buffer, 0, bytesRead);
             }
         } catch (Exception e) {
-            System.out.println("远程图片获取错误："+netUrl);
+            System.out.println("远程图片获取错误"+netUrl);
+            AlertWindow alertWindow = new AlertWindow("远程图片获取错误",netUrl);
+            alertWindow.start(new Stage());
             e.printStackTrace();
+            file = null;
         } finally {
             try {
                 if (null != os) {

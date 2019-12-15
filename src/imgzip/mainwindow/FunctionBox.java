@@ -236,7 +236,7 @@ public class FunctionBox extends Scene {
         });
         btUpload.setOnAction(e->{
             // 用UUID作为提取码
-            String uuid = UUID.randomUUID().toString().replaceAll("-","");
+            String uuid = crateUuid();
             //获取图片列表
             List imgBlockList = blockList.getChildren();
             for (int i = 0;i < imgCount;i++){
@@ -354,7 +354,9 @@ public class FunctionBox extends Scene {
     private void addToBlockList(String path){
         if(imgList.add(path)){
             ImgBlock tmp = new ImgBlock(++imgCount,path);
-            blockList.getChildren().add(tmp);
+            if(tmp.getAcceed()){
+                blockList.getChildren().add(tmp);
+            }
         }
     }
 
@@ -468,7 +470,7 @@ public class FunctionBox extends Scene {
     void loadImgs(String uuid){
         String[] fileName = getImgsUrl(uuid);
         for (String s : fileName) {
-            addToBlockList("http://cdn.wulongxin.com//usr/uploads/2019/20190705184214.jpg");
+            addToBlockList("http://wx3.sinaimg.cn/mw690/93fc3339ly1g9wh08v2uxj22m81h0e83.jpg");
         }
         checkBlockList();
     }
@@ -496,5 +498,9 @@ public class FunctionBox extends Scene {
         }
         dbc.close();
         return urls;
+    }
+
+    public static String crateUuid(){
+        return UUID.randomUUID().toString().replaceAll("-","");
     }
 }

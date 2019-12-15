@@ -35,27 +35,33 @@ public class UploadImg implements Runnable {
     static int count=1;
     static Object Lock = new Object();
     String imgUrl;
+    String imgPath;
     String storeName;
     ImgBlock imgBlock;
     String uuid = "NULL";
+    File file;
     Lock lock = new ReentrantLock();
     public UploadImg(ImgBlock imgBlock)throws IIOException {
+        file=imgBlock.getFile();
         imgUrl = imgBlock.getUrl();
-        if(! new File(imgUrl).exists()){
+        imgPath = imgBlock.getFile().getPath();
+        if(! file.exists()){
             throw new IIOException("Imgae "+ imgUrl + " not exists");
         }
-        String[] Urls = imgUrl.split("\\.");
+        String[] Urls = imgPath.split("\\.");
         this.storeName = Urls[Urls.length-1];
         this.imgBlock=imgBlock;
 
         this.uuid = getImgId();
     }
     public UploadImg(ImgBlock imgBlock,String uuid)throws IIOException {
+        file=imgBlock.getFile();
         imgUrl = imgBlock.getUrl();
+        imgPath = imgBlock.getFile().getPath();
         if(! new File(imgUrl).exists()){
             throw new IIOException("Imgae "+ imgUrl + " not exists");
         }
-        String[] Urls = imgUrl.split("\\.");
+        String[] Urls = imgPath.split("\\.");
         this.storeName = Urls[Urls.length-1];
         this.imgBlock=imgBlock;
 
@@ -84,7 +90,7 @@ public class UploadImg implements Runnable {
          * 如果使用绝对路径，不要忘记使用'/'和'\'的区别
          * 具体区别，请读者自行查询
          * */
-        File sendfile = new File(imgUrl);
+        File sendfile = file;
         /**定义文件输入流，用来打开、读取即将要发送的文件*/
         FileInputStream fis = null;
         /**定义byte数组来作为数据包的存储数据包*/
