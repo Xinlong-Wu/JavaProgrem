@@ -1,6 +1,7 @@
 package imgzip.mainwindow;
 
 
+
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
@@ -21,10 +22,11 @@ import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
 import javax.imageio.stream.FileImageInputStream;
-import java.io.File;
-import java.io.IOException;
+import java.io.*;
+import java.net.URL;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+
 
 
 
@@ -101,7 +103,12 @@ class ImgBlock extends BorderPane {
 
 
         //私有属性设定
-        Image tmp = new Image("file:"+imgUrl);
+        Image tmp ;
+        if(imgUrl.startsWith("http:")){
+            tmp = new Image(imgUrl);
+        } else {
+            tmp = new Image("file:"+imgUrl);
+        }
         ivimg.setImage(tmp);
         ivimg.setPreserveRatio(true);
         if(tmp.getHeight()>tmp.getWidth()){
@@ -380,8 +387,15 @@ class ImgBlock extends BorderPane {
      */
     String getFileSize(String url){
         String str = "null";
+        File file ;
+        Boolean b = url.startsWith("http:");
+        if (b) {
+            file = getNetUrlHttp(url);
+        } else {
+            file = new File(url);
+        }
         try {
-            FileImageInputStream fiis = new FileImageInputStream(new File(url));
+            FileImageInputStream fiis = new FileImageInputStream(file);
             Float fsize = (float) fiis.length() / 1024;
             if(fsize<100){
                 str = String.format("%.2f",fsize) + "KB";
@@ -395,6 +409,47 @@ class ImgBlock extends BorderPane {
         return str;
     }
 
+    public File getNetUrlHttp(String netUrl) {
+        String[] tmps = netUrl.split("\\.");
+        String type = tmps[tmps.length-1];
 
+        //对本地文件命名
+        String fileName = getIndex()+"."+type;
+        File file = null;
+
+
+        URL urlfile;
+        InputStream inStream = null;
+        OutputStream os = null;
+        try {
+            file = File.createTempFile("net_url", fileName);
+            //下载
+            urlfile = new URL(netUrl);
+            inStream = urlfile.openStream();
+            os = new FileOutputStream(file);
+
+            int bytesRead = 0;
+            byte[] buffer = new byte[8192];
+            while ((bytesRead = inStream.read(buffer, 0, 8192)) != -1) {
+                os.write(buffer, 0, bytesRead);
+            }
+        } catch (Exception e) {
+            System.out.println("远程图片获取错误："+netUrl);
+            e.printStackTrace();
+        } finally {
+            try {
+                if (null != os) {
+                    os.close();
+                }
+                if (null != inStream) {
+                    inStream.close();
+                }
+
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }
+        return file;
+    }
 }
 

@@ -128,6 +128,7 @@ public class UploadImg implements Runnable {
         DataBaseController dbc = new DataBaseController();
         String sql = "INSERT INTO `imgcount` (`imgUrl`, `groupUuid`) VALUES ('"+fileName+"','"+uuid+"')";
         dbc.queryUpdate(sql);
+        dbc.close();
 
         /**首先先向服务器发送关于文件的信息，以便于服务器进行接收的相关准备工作
          * 发送的内容包括：发送文件协议码（此处为512）/#文件名（带后缀名）/#文件大小
@@ -203,9 +204,11 @@ public class UploadImg implements Runnable {
         try {
             rs.next();
             imgId = Integer.valueOf(rs.getString("maxx")) + 1;
+            rs.close();
         } catch (SQLException e) {
             e.printStackTrace();
         }finally {
+            dbc.close();
             return String.format("%04d",imgId);
         }
     }

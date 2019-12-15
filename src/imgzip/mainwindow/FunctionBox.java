@@ -1,6 +1,7 @@
 package imgzip.mainwindow;
 
 import imgzip.FunctionPane;
+import imgzip.LoginSignIn.DataBaseController;
 import imgzip.alertwindow.AlertButton;
 import imgzip.alertwindow.AlertWindow;
 import imgzip.mainpane.Course;
@@ -25,6 +26,8 @@ import javax.imageio.IIOException;
 import java.awt.datatransfer.StringSelection;
 import java.awt.datatransfer.Transferable;
 import java.io.File;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
@@ -131,16 +134,16 @@ public class FunctionBox extends Scene {
         btBack.setGraphic(ivBack);
         btBack.getStyleClass().addAll("top-ctrl-bt");
 
-        TextField btImgIdInput = new TextField();
-        btImgIdInput.getStyleClass().addAll("btImgIdInput");
-        btImgIdInput.setPromptText("请输入图片提取码");
+        TextField tfImgIdInput = new TextField();
+        tfImgIdInput.getStyleClass().addAll("btImgIdInput");
+        tfImgIdInput.setPromptText("请输入图片提取码");
 
         Button btLoad = new Button("GO!");
         btLoad.getStyleClass().addAll("top-ctrl-bt");
         HBox imgDownloadBox = new HBox(5);
         imgDownloadBox.getStyleClass().addAll("imgDownloadBox");
 
-        imgDownloadBox.getChildren().addAll(btImgIdInput,btLoad);
+        imgDownloadBox.getChildren().addAll(tfImgIdInput,btLoad);
 
         HBox toRightBox = new HBox(0);
         toRightBox.getStyleClass().addAll("toRightBox");
@@ -254,7 +257,9 @@ public class FunctionBox extends Scene {
         });
         btAdd.setOnAction(new OpenFiles());
 
-
+        /**
+         * 保存图片
+         */
         btSave.setOnMouseEntered(e->{
             setImg(ivSave,SAVED);
             e.consume();
@@ -286,6 +291,9 @@ public class FunctionBox extends Scene {
             checkBlockList();
         });
 
+        /**
+         * 返回按钮
+         */
         btBack.setOnMouseEntered(e->{
             setImg(ivBack,BACKD);
             e.consume();
@@ -297,6 +305,17 @@ public class FunctionBox extends Scene {
         btBack.setOnAction(e->{
             new Course();
             FunctionPane.close();
+        });
+
+        /**
+         * 图片提取
+         */
+        btLoad.setOnAction(e->{
+            String id = tfImgIdInput.getText();
+            if(!id.isEmpty()){
+                loadImgs(id);
+                tfImgIdInput.clear();
+            }
         });
 
         /**
@@ -444,5 +463,38 @@ public class FunctionBox extends Scene {
                 checkBlockList();
             }
         }
+    }
+
+    void loadImgs(String uuid){
+        String[] fileName = getImgsUrl(uuid);
+        for (String s : fileName) {
+            addToBlockList("http://cdn.wulongxin.com//usr/uploads/2019/20190705184214.jpg");
+        }
+        checkBlockList();
+    }
+
+    String[] getImgsUrl(String uuid){
+        DataBaseController dbc = new DataBaseController();
+        String sql = "SELECT `imgUrl` AS `url` FROM `imgcount` where `groupUuid` = '"+uuid+"'";
+        ResultSet rs = dbc.queryExcecute(sql);
+        int count = 0;
+        String[] urls = null;
+        try {
+            rs.last();
+            int row = rs.getRow();
+            urls = new String[row];
+            rs.first();
+            while(rs.next()){
+                urls[count] = rs.getString(1);
+                count++;
+            }
+            rs.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            AlertWindow alertWindow = new AlertWindow("数据库登陆失败",e.getMessage());  // 此处写警告弹窗的标题和内容
+            alertWindow.start(new Stage());
+        }
+        dbc.close();
+        return urls;
     }
 }

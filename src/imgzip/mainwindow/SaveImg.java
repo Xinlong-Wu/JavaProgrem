@@ -23,7 +23,7 @@ class SaveImg implements Runnable{
     ImgBlock imgBlock;
     public SaveImg(ImgBlock imgBlock,String newUrl)throws IIOException {
         imgUrl = imgBlock.getUrl();
-        if(! new File(imgUrl).exists()){
+        if(! new File(imgUrl).exists()&&!imgUrl.startsWith("http:")){
             throw new IIOException("Imgae "+ imgUrl + " not exists");
         }
         this.newUrl = newUrl.split("\\.");
@@ -43,10 +43,16 @@ class SaveImg implements Runnable{
     }
     @Override
     public void run() {
-        //通过split截取文件路径
-        String[] url=imgUrl.split("\\.");
-        System.out.println(url[0]);
-        File f2=new File(imgUrl);
+        File f2;
+        if(imgUrl.startsWith("http:")){
+            f2 = imgBlock.getNetUrlHttp(imgUrl);
+        }else {
+            //通过split截取文件路径
+            String[] url=imgUrl.split("\\.");
+            System.out.println(url[0]);
+            f2 =new File(imgUrl);
+        }
+
         //使用imgeIO来读取图片
         BufferedImage srcImg = null;
         try {
