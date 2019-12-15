@@ -46,9 +46,9 @@ public class Login extends Application {
 
             try {
                 File file = new File("src/txtFile/RememberAccount&Password.txt");
-//                if(!file.exists()){
-//                    file.createNewFile();
-//                }
+                if(!file.exists()){
+                    file.createNewFile();
+                }
 
                 FileReader fr = new FileReader(file);
                 BufferedReader br = new BufferedReader(fr);
