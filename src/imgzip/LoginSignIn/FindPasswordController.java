@@ -1,26 +1,13 @@
-package imgzip.Login_SignIn;
+package imgzip.LoginSignIn;
 
-import imgzip.alertwindow.AlertButton;
 import imgzip.alertwindow.AlertWindow;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
-import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
-import javafx.scene.control.Alert;
-import javafx.scene.web.WebEngine;
-import javafx.scene.web.WebView;
 import javafx.stage.Stage;
-import javafx.scene.control.Dialog;
 
-import java.awt.*;
-
-import java.io.IOException;
-import java.net.URI;
-import java.net.URISyntaxException;
 import java.sql.ResultSet;
-import java.sql.SQLException;
+
 public class FindPasswordController {
 
     @FXML

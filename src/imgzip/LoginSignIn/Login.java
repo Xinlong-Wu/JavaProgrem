@@ -1,9 +1,6 @@
-package imgzip.Login_SignIn;
+package imgzip.LoginSignIn;
 
 import javafx.application.Application;
-import javafx.application.Platform;
-import javafx.beans.InvalidationListener;
-import javafx.beans.Observable;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
@@ -11,13 +8,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
-import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
-import java.awt.*;
-import java.awt.event.FocusEvent;
-import java.awt.event.FocusListener;
 import java.io.*;
 
 /**

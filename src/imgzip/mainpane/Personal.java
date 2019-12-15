@@ -1,13 +1,11 @@
 package imgzip.mainpane;
 
-import imgzip.Login_SignIn.DataBaseController;
-import imgzip.Login_SignIn.GlobalStringManager;
-import javafx.application.Application;
+import imgzip.LoginSignIn.DataBaseController;
+import imgzip.LoginSignIn.GlobalStringManager;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.TextArea;
-import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;

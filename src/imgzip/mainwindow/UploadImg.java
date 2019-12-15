@@ -1,10 +1,7 @@
 package imgzip.mainwindow;
 
 
-import imgzip.Login_SignIn.DataBaseController;
-import imgzip.alertwindow.AlertWindow;
-import javafx.scene.control.ComboBox;
-import javafx.stage.Stage;
+import imgzip.LoginSignIn.DataBaseController;
 
 import javax.imageio.IIOException;
 import java.io.File;

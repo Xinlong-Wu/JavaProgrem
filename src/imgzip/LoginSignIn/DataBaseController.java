@@ -1,4 +1,4 @@
-package imgzip.Login_SignIn;
+package imgzip.LoginSignIn;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

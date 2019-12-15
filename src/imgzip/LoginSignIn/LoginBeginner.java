@@ -1,33 +1,16 @@
-package imgzip.Login_SignIn;
+package imgzip.LoginSignIn;
 
+import imgzip.mainpane.Course;
+import imgzip.mainpane.Pane_sceenbeginner;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.CheckBox;
-import javafx.scene.control.PasswordField;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
-
-
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.scene.control.Button;
-import javafx.scene.control.TextField;
-import javafx.stage.Stage;
-import javafx.scene.control.CheckBox;
-import java.util.regex.*;
-
-import javafx.scene.control.Label;
-
-import java.sql.ResultSet;
 
 public class LoginBeginner {
     public LoginBeginner(){
@@ -47,20 +30,21 @@ public class LoginBeginner {
              如果上一次登录点击了记住密码，则在本次打开时会将账号和密码写入
              */
             try {
-
-                File file = new File("src/txtFile/RememberAccount&Password.txt");
+                File fi = new File("txtFile");
+                File file = new File("txtFile/RememberAccount&Password.txt");
+                if(!fi.exists()){
+                    fi.mkdir();
+                }
                 if(!file.exists()){
                     file.createNewFile();
                 }
-
-                File file1 = new File("src/txtFile/RememberAccount&Password.txt");
-                FileReader fr = new FileReader(file1);
+                FileReader fr = new FileReader(file);
                 BufferedReader br = new BufferedReader(fr);
 
                 String line = "";
                 line = br.readLine();
 
-                if(file1.length() != 0){
+                if(file.length() != 0){
 
                     String[] judge = line.split("\\|");
                     String truejudge = "true";
@@ -89,6 +73,9 @@ public class LoginBeginner {
             primaryStage.setScene(new Scene(root, 638, 400));
             primaryStage.show();
 
+            primaryStage.setOnCloseRequest(e->{
+                new Pane_sceenbeginner();
+            });
         }catch (Exception e){
             e.printStackTrace();
 

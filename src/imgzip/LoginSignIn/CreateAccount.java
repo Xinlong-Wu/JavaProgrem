@@ -1,5 +1,6 @@
-package imgzip.Login_SignIn;
+package imgzip.LoginSignIn;
 
+import imgzip.mainpane.Pane_sceenbeginner;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.fxml.FXMLLoader;
@@ -193,6 +194,9 @@ public class CreateAccount {
             primaryStage.setScene(new Scene(root, 600.0000999999975, 633));
             primaryStage.show();
 
+            primaryStage.setOnCloseRequest(e->{
+                new Pane_sceenbeginner();
+            });
         }catch (Exception e){
             e.printStackTrace();
         }

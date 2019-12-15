@@ -1,11 +1,9 @@
 package imgzip.mainpane;
 
-import imgzip.Login_SignIn.LoginBeginner;
+import imgzip.LoginSignIn.LoginBeginner;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.shape.Line;
 import javafx.stage.Stage;
 
 import java.net.URL;

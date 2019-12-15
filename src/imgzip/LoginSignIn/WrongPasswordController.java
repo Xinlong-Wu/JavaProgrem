@@ -1,12 +1,7 @@
-package imgzip.Login_SignIn;
-import javafx.application.Platform;
+package imgzip.LoginSignIn;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
-import sun.rmi.runtime.Log;
-
-import java.sql.ResultSet;
-import java.sql.SQLException;
 
 
 /**

@@ -1,8 +1,7 @@
 package imgzip.mainpane;
 
-import imgzip.Login_SignIn.CreateAccount;
-import imgzip.Login_SignIn.Login;
-import imgzip.Login_SignIn.*;
+import imgzip.LoginSignIn.CreateAccount;
+import imgzip.LoginSignIn.*;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
@@ -10,13 +9,9 @@ import javafx.scene.shape.Line;
 import javafx.scene.control.Label;
 import javafx.scene.layout.Pane;
 
-import java.io.IOException;
 import java.net.URL;
 import java.util.ResourceBundle;
-import javafx.application.Application;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
+
 import javafx.stage.Stage;
 
 /**
@@ -39,6 +34,7 @@ public class Pane_sceenController implements Initializable {
 	@FXML
 	private Pane changepane;
 
+	@Override
 	public void initialize(URL lacation, ResourceBundle resources){
 		/**
 		 本页面连接到注册页面

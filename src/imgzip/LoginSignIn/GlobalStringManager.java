@@ -1,4 +1,4 @@
-package imgzip.Login_SignIn;
+package imgzip.LoginSignIn;
 
 public class GlobalStringManager {
     static String account = "";

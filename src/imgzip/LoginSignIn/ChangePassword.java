@@ -1,4 +1,4 @@
-package imgzip.Login_SignIn;
+package imgzip.LoginSignIn;
 
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;

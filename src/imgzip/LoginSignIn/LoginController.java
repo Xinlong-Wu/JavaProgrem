@@ -1,23 +1,15 @@
-package imgzip.Login_SignIn;
+package imgzip.LoginSignIn;
 
 import imgzip.mainpane.Personal;
-import javafx.application.Platform;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 
-import java.io.BufferedReader;
-import java.io.FileReader;
-import java.io.BufferedReader;
 import java.io.BufferedWriter;
-import java.io.FileReader;
 import java.io.FileWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
-import java.sql.Statement;
 
 
 /**
@@ -165,7 +157,7 @@ public class LoginController {
         }
 
         try {
-            FileWriter fw = new FileWriter("src/txtFile/RememberAccount&Password.txt");
+            FileWriter fw = new FileWriter("txtFile/RememberAccount&Password.txt");
             BufferedWriter fis = new BufferedWriter(fw);
 
             fis.write(account.getText() +"|"+ password.getText() + "|" + judgeIfclick );
