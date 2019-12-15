@@ -126,10 +126,11 @@ class ImgBlock extends BorderPane {
         }
         ivimg.setImage(tmp);
         ivimg.setPreserveRatio(true);
-        if(tmp.getHeight()>tmp.getWidth()){
+        ivimg.setPreserveRatio(true);
+        if(tmp.getHeight()>=tmp.getWidth()*2/3){
             ivimg.setFitHeight(205);
         }else{
-            ivimg.setFitWidth(225);
+            ivimg.setFitWidth(295);
         }
         ivstate.setFitHeight(15);
         ivstate.setFitWidth(15);

@@ -317,6 +317,13 @@ public class FunctionBox extends Scene {
                 tfImgIdInput.clear();
             }
         });
+        tfImgIdInput.setOnAction(e->{
+            String id = tfImgIdInput.getText();
+            if(!id.isEmpty()){
+                loadImgs(id);
+                tfImgIdInput.clear();
+            }
+        });
 
         /**
          * 键盘快捷键
@@ -470,7 +477,7 @@ public class FunctionBox extends Scene {
     void loadImgs(String uuid){
         String[] fileName = getImgsUrl(uuid);
         for (String s : fileName) {
-            addToBlockList("http://wx3.sinaimg.cn/mw690/93fc3339ly1g9wh08v2uxj22m81h0e83.jpg");
+            addToBlockList("http://cdn.wulongxin.com//usr/uploads/2019/20190705184214.jpg");
         }
         checkBlockList();
     }
