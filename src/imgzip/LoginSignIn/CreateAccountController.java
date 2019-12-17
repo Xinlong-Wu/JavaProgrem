@@ -55,7 +55,7 @@ public class CreateAccountController {
      */
     public void backToLogin() {
         Stage stage = (Stage) signIn.getScene().getWindow();
-        new Loginbeginner();
+        new LoginBeginner();
         stage.close();
 
     }

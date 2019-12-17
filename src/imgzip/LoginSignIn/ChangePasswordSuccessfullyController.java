@@ -19,7 +19,7 @@ public class ChangePasswordSuccessfullyController {
      */
     public void backToLogin(){
         Stage stage = (Stage) SignUp.getScene().getWindow();
-        new Loginbeginner();
+        new LoginBeginner();
         stage.close();
     }
 

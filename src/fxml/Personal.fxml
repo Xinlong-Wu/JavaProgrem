@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
+<?import java.lang.*?>
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
@@ -7,121 +8,56 @@
 <?import javafx.scene.shape.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.PersonalController">
-   <children>
-      <ImageView fitHeight="763.0" fitWidth="961.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
-         <image>
-            <Image url="@../res/icon/timg.jpg" />
-         </image>
-      </ImageView>
-      <Label fx:id="Personal" alignment="CENTER" layoutX="22.0" layoutY="21.0" prefHeight="72.0" prefWidth="224.0" text="Personal">
-         <font>
-            <Font name="Verdana Italic" size="34.0" />
-         </font>
-      </Label>
-      <Line endX="100.0" layoutX="134.0" layoutY="100.0" startX="-100.0" />
-      <Button fx:id="course" layoutX="730.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
-         <font>
-            <Font size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="price" layoutX="640.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
-         <font>
-            <Font size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor>
-      </Button>
-      <Button fx:id="functionpage" layoutX="500.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Function page">
-         <font>
-            <Font size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <Button fx:id="signout" layoutX="830.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Sign out">
-         <font>
-            <Font size="17.0" />
-         </font>
-         <cursor>
-            <Cursor fx:constant="HAND" />
-         </cursor></Button>
-      <AnchorPane layoutX="34.0" layoutY="200.0" prefHeight="400.0" prefWidth="600.0">
-         <children>
-            <Label layoutX="51.0" layoutY="28.0" text="用户名：">
-               <font>
-                  <Font size="16.0" />
-               </font></Label>
-            <TextArea id="accountname" fx:id="accountname" layoutX="150.0" layoutY="20.0" opacity="0.14" prefHeight="20.0" prefWidth="200.0" />
-            <Button fx:id="changname" layoutX="400.0" layoutY="28.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改" underline="true">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label layoutX="51.0" layoutY="87.0" text="邮箱：">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <TextArea id="password" fx:id="password" layoutX="150.0" layoutY="80.0" opacity="0.14" prefHeight="20.0" prefWidth="200.0" />
-            <Button fx:id="changeemail" layoutX="400.0" layoutY="87.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改" underline="true">
-               <font>
-                  <Font size="14.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Label layoutX="51.0" layoutY="149.0" text="性别：">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <RadioButton layoutX="150.0" layoutY="152.0" mnemonicParsing="false" text="男">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </RadioButton>
-            <RadioButton layoutX="254.0" layoutY="154.0" mnemonicParsing="false" text="女">
-               <font>
-                  <Font size="14.0" />
-               </font>
-            </RadioButton>
-            <Label layoutX="51.0" layoutY="210.0" text="电话：">
-               <font>
-                  <Font size="16.0" />
-               </font>
-            </Label>
-            <PasswordField id="tel" fx:id="tel" layoutX="150.0" layoutY="205.0" opacity="0.14" prefHeight="34.0" prefWidth="200.0" />
-         </children>
-      </AnchorPane>
-      <AnchorPane layoutX="34.0" layoutY="110.0" prefHeight="80.0" prefWidth="500.0">
-         <children>
-            <Line endX="350.0" layoutX="100.0" layoutY="66.0" opacity="0.38" startX="-50.0" />
-            <Button fx:id="message" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="个人信息">
-               <font>
-                  <Font size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-            <Button layoutX="216.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改密码">
-               <font>
-                  <Font size="17.0" />
-               </font>
-               <cursor>
-                  <Cursor fx:constant="HAND" />
-               </cursor>
-            </Button>
-         </children>
-      </AnchorPane>
-   </children>
+<AnchorPane prefHeight="685.0" prefWidth="951.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="imgzip.mainpane.PersonalController">
+  <children>
+    <ImageView fitHeight="763.0" fitWidth="961.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
+      <image>
+        <Image url="@../res/icon/timg.jpg" />
+      </image>
+    </ImageView>
+    <Label fx:id="Personal" alignment="CENTER" layoutX="22.0" layoutY="21.0" prefHeight="72.0" prefWidth="224.0" text="Personal">
+      <font>
+        <Font name="Verdana Italic" size="34.0" />
+      </font>
+    </Label>
+    <Line endX="100.0" layoutX="134.0" layoutY="100.0" startX="-100.0" />
+    <Button fx:id="course" layoutX="730.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Course">
+      <font>
+        <Font size="17.0" fx:id="x1" />
+      </font>
+    </Button>
+    <Button fx:id="price" font="$x1" layoutX="640.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price" />
+    <Button fx:id="functionpage" font="$x1" layoutX="500.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Function page" />
+    <Button fx:id="signout" font="$x1" layoutX="830.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Sign out" />
+    <AnchorPane layoutX="34.0" layoutY="200.0" prefHeight="400.0" prefWidth="600.0">
+      <children>
+        <Label layoutX="51.0" layoutY="28.0" text="用户名：">
+          <font>
+            <Font size="16.0" fx:id="x2" />
+          </font>
+        </Label>
+        <TextArea fx:id="accountname" layoutX="150.0" layoutY="20.0" opacity="0.14" prefHeight="20.0" prefWidth="200.0" />
+        <Button fx:id="changname" layoutX="400.0" layoutY="28.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改" underline="true">
+          <font>
+            <Font size="14.0" fx:id="x3" />
+          </font>
+        </Button>
+        <Label font="$x2" layoutX="51.0" layoutY="87.0" text="邮箱：" />
+        <TextArea fx:id="password" layoutX="150.0" layoutY="80.0" opacity="0.14" prefHeight="20.0" prefWidth="200.0" />
+        <Button fx:id="changeemail" font="$x3" layoutX="400.0" layoutY="87.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改" underline="true" />
+        <Label font="$x2" layoutX="51.0" layoutY="149.0" text="性别：" />
+        <RadioButton font="$x3" layoutX="150.0" layoutY="152.0" mnemonicParsing="false" text="男" />
+        <RadioButton font="$x3" layoutX="254.0" layoutY="154.0" mnemonicParsing="false" text="女" />
+        <Label font="$x2" layoutX="51.0" layoutY="210.0" text="电话：" />
+        <TextArea id="tel" fx:id="tel" layoutX="150.0" layoutY="205.0" opacity="0.14" prefHeight="34.0" prefWidth="200.0" />
+      </children>
+    </AnchorPane>
+    <AnchorPane layoutX="34.0" layoutY="110.0" prefHeight="80.0" prefWidth="500.0">
+      <children>
+        <Line endX="350.0" layoutX="100.0" layoutY="66.0" opacity="0.38" startX="-50.0" />
+        <Button fx:id="message" font="$x1" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="个人信息" />
+        <Button font="$x1" layoutX="216.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改密码" />
+      </children>
+    </AnchorPane>
+  </children>
 </AnchorPane>
