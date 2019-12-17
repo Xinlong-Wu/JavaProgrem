@@ -16,6 +16,8 @@ import java.io.*;
 /**
  @Author:   肖尧
  @Date: 2019.12.4
+
+ 登录页面的页面类，用于用户登录页面。
  */
 public class Login extends Application {
 
@@ -91,6 +93,12 @@ public class Login extends Application {
 
 }
 
+/**
+ @Author:   肖尧
+ @Date: 2019.12.12
+
+ 登录页面的启动类，写成构造方法形式被调用，方便该文件夹其他页面调用。
+ */
 
 class Loginbeginner{
     public Loginbeginner(){

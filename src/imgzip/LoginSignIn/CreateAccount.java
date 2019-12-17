@@ -19,6 +19,8 @@ import java.sql.ResultSet;
 /**
  @Author:   肖尧
  @Date: 2019.12.4
+
+ 提供用户创造密码的页面类，通过调用构造方法创建。
  */
 
 public class CreateAccount {
@@ -39,6 +41,10 @@ public class CreateAccount {
             already.setVisible(false);
             already2.setVisible(false);
             createAccount.setDisable(true);
+            /**
+             * change方法：当account输入框失去/得到焦点时，检查一次是否与数据库中的某个账号重复
+             * 保证账号的唯一性。
+             */
 
 
             userName.focusedProperty().addListener(new ChangeListener<Boolean>() {
@@ -101,6 +107,12 @@ public class CreateAccount {
                 }
             });
 
+            /**
+                email的change方法：
+                当email输入框失去\获得焦点时，检查email框输入的值是否符合邮箱格式，以及是否已经在数据库中存在。
+                保证格式正确以及数据库中数据唯一性。
+             */
+
             email.focusedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
@@ -108,10 +120,10 @@ public class CreateAccount {
                     if(checkIfIsEmail(email.getText())){
 
                         if(already2.getText().equals("Invalid email!")){
-                            already2.setText("Already taken!!");
+                            already2.setText("Already taken!");
                         }
 
-                        if (already2.isVisible()){
+                        if (already2.isVisible() || "".equals(email.getText())){
                             already2.setVisible(false);
                         }
 
@@ -164,12 +176,15 @@ public class CreateAccount {
 
                     }else{
 
-                         if("Already taken!!".equals(already2.getText())){
+                         if("Already taken!".equals(already2.getText())){
                              already2.setText("Invalid email!");
                          }
 
-                         if("".equals(already2.getText())){
+                         if("".equals(email.getText())){
                              already2.setVisible(false);
+                             if(!createAccount.isDisable()){
+                                 createAccount.setDisable(true);
+                             }
 
                          }else {
 
@@ -180,8 +195,6 @@ public class CreateAccount {
                             if (!createAccount.isDisable()){
                                 createAccount.setDisable(true);
                             }
-
-
 
                          }
                     }
@@ -203,7 +216,9 @@ public class CreateAccount {
 
     }
 
-
+    /**
+     * 检查邮箱格式是否正确.
+     */
     public boolean checkIfIsEmail(String email){
 
         String check = "^([a-z0-9A-Z]+[-|\\.]?)+[a-z0-9A-Z]@([a-z0-9A-Z]+(-[a-z0-9A-Z]+)?\\.)+[a-zA-Z]{2,}$";
@@ -217,6 +232,13 @@ public class CreateAccount {
 
 
 }
+
+/**
+ @Author:   肖尧
+ @Date: 2019.12.12
+
+ 提醒用户成功改变密码的页面类，写成构造方法形式被调用。
+ */
 
 class CreateSuccessfully{
 

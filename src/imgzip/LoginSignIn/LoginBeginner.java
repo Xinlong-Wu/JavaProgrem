@@ -12,6 +12,13 @@ import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
 
+/**
+ @Author:   肖尧
+ @Date: 2019.12.12
+
+ 登录页面的启动类，写成构造方法形式被调用，方便其他文件夹中其他页面调用。
+ */
+
 public class LoginBeginner {
     public LoginBeginner(){
         try {

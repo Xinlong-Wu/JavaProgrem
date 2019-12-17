@@ -10,6 +10,8 @@ import javafx.stage.Stage;
 /**
  @Author:   肖尧
  @Date: 2019.12.12
+
+ 改变密码的页面类，写成构造方法形式被调用。
  */
 public class ChangePassword {
 
@@ -36,6 +38,13 @@ public class ChangePassword {
 
     }
 }
+
+/**
+ @Author:   肖尧
+ @Date: 2019.12.12
+
+ 提醒用户成功改变密码的页面类，写成构造方法形式被调用。
+ */
 
 class ChangePasswordSuccessfully{
 
