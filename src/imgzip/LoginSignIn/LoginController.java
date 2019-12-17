@@ -144,6 +144,7 @@ public class LoginController {
 
     /**
      设置记住账号密码按钮的方法。
+     调用方法后，将会往文本文件中写入用户名及密码。
      */
 
     public void remember(){

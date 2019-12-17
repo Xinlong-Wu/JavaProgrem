@@ -6,6 +6,12 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.stage.Stage;
 
+/**
+ @Author:   肖尧
+ @Date: 2019.12.12
+
+ 验证用户，决定用户是否可以改变密码的页面类，写成构造方法形式被调用。
+ */
 public class FindPassword {
 
     public FindPassword(){

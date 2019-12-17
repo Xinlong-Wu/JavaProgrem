@@ -1,5 +1,12 @@
 package imgzip.LoginSignIn;
 
+/**
+ @Author:   肖尧
+ @Date: 2019.12.12
+
+ 全局变量类，用于项目内页面之间的信息传递。
+ */
+
 public class GlobalStringManager {
     static String account = "";
     static String emial = "";

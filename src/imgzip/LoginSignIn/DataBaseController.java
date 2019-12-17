@@ -4,6 +4,12 @@ import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+/**
+ @Author:   肖尧
+ @Date: 2019.12.12
+
+ 数据库操作继承类，用于数据库各项操作。
+ */
 
 public class DataBaseController {
 
