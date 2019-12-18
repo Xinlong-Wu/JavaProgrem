@@ -1,5 +1,6 @@
 package imgzip.LoginSignIn;
 
+import imgzip.mainpane.Pane_sceenbeginner;
 import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
@@ -90,6 +91,9 @@ public class Login extends Application {
         primaryStage.setTitle("XXX login");
         primaryStage.setScene(new Scene(root, 638, 400));
         primaryStage.show();
+        primaryStage.setOnCloseRequest(e->{
+            new Pane_sceenbeginner();
+        });
 
         }
 

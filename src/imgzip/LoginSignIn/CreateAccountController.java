@@ -185,7 +185,6 @@ public class CreateAccountController {
              */
             String encryptedPassword = HashUtil.hash(passWord.getText());
 
-
             String currentInstruction = "INSERT INTO login (userName,pwd,email,tel) values(" + "'"+userName.getText().trim()+ "'" + "," + "'"+ encryptedPassword.trim()+ "'" + "," + "'"+ email.getText().trim() + "'"+ "," +  "'"+telephone.getText().trim()+ "'"+")" ;
             createAccountInstruction.queryUpdate(currentInstruction);
 
