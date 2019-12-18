@@ -11,7 +11,7 @@
    <children>
       <ImageView fitHeight="763.0" fitWidth="951.0" opacity="0.55" pickOnBounds="true" preserveRatio="true">
          <image>
-            <Image url="@../res/icon/timg.jpg" />
+            <Image url="@../res/icon/p34.jpg" />
          </image>
       </ImageView>
       <Label fx:id="logo" alignment="CENTER" layoutX="22.0" layoutY="21.0" prefHeight="72.0" prefWidth="224.0" text="Price">

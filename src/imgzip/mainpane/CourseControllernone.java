@@ -6,7 +6,8 @@ import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
-
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import java.net.URL;
 import java.util.ResourceBundle;
 
@@ -30,11 +31,15 @@ public class CourseControllernone implements Initializable {
     @FXML
     private Button forget;
     @FXML
+    private Button remember;
+    @FXML
     private Button change;
     @FXML
-    private Button compress;
+    private Button pic_upload;
     @FXML
-    private BorderPane page;
+    private Button pics_upload;
+    @FXML
+    private ImageView gif;
 
 
     public void initialize(URL lacation, ResourceBundle resources){
@@ -78,55 +83,56 @@ public class CourseControllernone implements Initializable {
          把登录教程的gif放到page版面上
          */
         login.setOnAction(e -> {
-//            page.getChildren().clear();
-//            Image image = new Image("pkq.gif");
-//            ImageView imageView = new ImageView();
-//            imageView.setImage(image);
-//            page.setCenter(imageView);
+            Image image = new Image("/res/icon/Login.gif");
+            gif.setImage(image);
         });
 
         /**
          把注册教程的gif放到page版面上
          */
         register.setOnAction(e -> {
-//            page.getChildren().clear();
-//            Image image = new Image("C:\\Users\\24472\\Desktop\\image\\pkq.gif");
-//            ImageView imageView = new ImageView();
-//            imageView.setImage(image);
-//            page.setCenter(imageView);
+            Image image = new Image("/res/icon/createAccount.gif");
+            gif.setImage(image);
         });
 
         /**
          把忘记密码教程的gif放到page版面上
          */
         forget.setOnAction(e->{
-//            page.getChildren().clear();
-//            Image image = new Image("C:\\Users\\24472\\Desktop\\image\\pkq.gif");
-//            ImageView imageView = new ImageView();
-//            imageView.setImage(image);
-//            page.setCenter(imageView);
+            Image image = new Image("/res/icon/ChangePassword.gif");
+            gif.setImage(image);
+        });
+
+        /**
+         把记住用户名教程的gif放到page版面上
+         */
+        remember.setOnAction(e->{
+            Image image = new Image("/res/icon/RememberAccount.gif");
+            gif.setImage(image);
         });
 
         /**
          把改变图像格式教程的gif放到page版面上
          */
         change.setOnAction( e-> {
-//            page.getChildren().clear();
-//            Image image = new Image("C:\\Users\\24472\\Desktop\\image\\pkq.gif");
-//            ImageView imageView = new ImageView();
-//            imageView.setImage(image);
-//            page.setCenter(imageView);
+            Image image = new Image("/res/icon/格式转换.gif");
+            gif.setImage(image);
         });
 
         /**
-         把图片压缩教程的gif放到page版面上
+         把单一图片上传教程的gif放到page版面上
          */
-        compress.setOnAction( e-> {
-//            page.getChildren().clear();
-//            Image image = new Image("C:\\Users\\24472\\Desktop\\image\\pkq.gif");
-//            ImageView imageView = new ImageView();
-//            imageView.setImage(image);
-//            page.setCenter(imageView);
+        pic_upload.setOnAction( e-> {
+            Image image = new Image("/res/icon/单一图片上传.gif");
+            gif.setImage(image);
+        });
+
+        /**
+         把批量图片上传教程的gif放到page版面上
+         */
+        pics_upload.setOnAction( e-> {
+            Image image = new Image("/res/icon/批量图片上传.gif");
+            gif.setImage(image);
         });
     }
 }

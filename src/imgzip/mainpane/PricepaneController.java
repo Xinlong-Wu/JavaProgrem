@@ -17,9 +17,7 @@ import java.util.ResourceBundle;
  */
 public class PricepaneController implements Initializable {
     @FXML
-    private Label logo;
-    @FXML
-    private Line line;
+    private Button personal;
     @FXML
     private Button functionpage;
     @FXML
@@ -28,7 +26,11 @@ public class PricepaneController implements Initializable {
     private Button price;
     @FXML
     private Button signout;
-    @Override
+    @FXML
+    private Button button1;
+    @FXML
+    private Button button3;
+
     public void initialize(URL lacation, ResourceBundle resources){
         /**
          本页面连接到functionpage
@@ -65,5 +67,29 @@ public class PricepaneController implements Initializable {
             Stage stage = (Stage)signout.getScene().getWindow();
             stage.close();
         });
+
+        /**
+         本页面连接到personal
+         */
+        personal.setOnAction(e -> {
+            new Personal();
+            Stage stage = (Stage)personal.getScene().getWindow();
+            stage.close();
+        });
+
+        /**
+         本页面连接到priceimg
+         */
+        button1.setOnAction(e -> {
+            new Priceimg();
+        });
+
+        /**
+         本页面连接到priceimg
+         */
+        button3.setOnAction(e -> {
+            new Priceimg();
+        });
+
     }
 }

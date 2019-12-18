@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+
+
+<AnchorPane prefHeight="327.0" prefWidth="237.0" xmlns="http://javafx.com/javafx/10.0.2-internal" >
+   <children>
+      <ImageView fitHeight="327.0" fitWidth="237.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../res/icon/pricewechat.jpg" />
+         </image>
+      </ImageView>
+   </children>
+</AnchorPane>
