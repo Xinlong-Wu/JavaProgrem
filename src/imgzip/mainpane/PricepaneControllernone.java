@@ -22,6 +22,11 @@ public class PricepaneControllernone implements Initializable {
     private Button loginnone;
     @FXML
     private Button homepagenone;
+    @FXML
+    private Button button1;
+    @FXML
+    private Button button3;
+
     public void initialize(URL lacation, ResourceBundle resources){
         /**
          本页面连接到course未登录页面
@@ -57,6 +62,20 @@ public class PricepaneControllernone implements Initializable {
             new Pane_sceenbeginner();
             Stage stage = (Stage)homepagenone.getScene().getWindow();
             stage.close();
+        });
+
+        /**
+         本页面连接到priceimg
+         */
+        button1.setOnAction(e -> {
+            new Priceimg();
+        });
+
+        /**
+         本页面连接到priceimg
+         */
+        button3.setOnAction(e -> {
+            new Priceimg();
         });
     }
 }

@@ -45,11 +45,15 @@ public class CourseController implements Initializable {
     @FXML
     private Button forget;
     @FXML
+    private Button remember;
+    @FXML
     private Button change;
     @FXML
-    private Button compress;
+    private Button pic_upload;
     @FXML
-    private BorderPane page;
+    private Button pics_upload;
+    @FXML
+    private Button personal;
     @FXML
     private ImageView gif;
 
@@ -92,6 +96,15 @@ public class CourseController implements Initializable {
             stage.close();
         });
 
+        /**
+         本页面连接到personal
+         */
+        personal.setOnAction(e -> {
+            new Personal();
+            Stage stage = (Stage)personal.getScene().getWindow();
+            stage.close();
+        });
+
 
 
 
@@ -99,7 +112,7 @@ public class CourseController implements Initializable {
          把登录教程的gif放到page版面上
          */
         login.setOnAction(e -> {
-            Image image = new Image("/res/icon/pkq.gif");
+            Image image = new Image("/res/icon/Login.gif");
             gif.setImage(image);
         });
 
@@ -107,7 +120,7 @@ public class CourseController implements Initializable {
          把注册教程的gif放到page版面上
          */
         register.setOnAction(e -> {
-            Image image = new Image("/res/icon/pkq2.gif");
+            Image image = new Image("/res/icon/createAccount.gif");
             gif.setImage(image);
         });
 
@@ -115,7 +128,15 @@ public class CourseController implements Initializable {
          把忘记密码教程的gif放到page版面上
          */
         forget.setOnAction(e->{
-            Image image = new Image("/res/icon/pkq3.gif");
+            Image image = new Image("/res/icon/ChangePassword.gif");
+            gif.setImage(image);
+        });
+
+        /**
+         把记住用户名教程的gif放到page版面上
+         */
+        remember.setOnAction(e->{
+            Image image = new Image("/res/icon/RememberAccount.gif");
             gif.setImage(image);
         });
 
@@ -123,15 +144,23 @@ public class CourseController implements Initializable {
          把图片格式转换教程的gif放到page版面上
          */
         change.setOnAction( e-> {
-            Image image = new Image("/res/icon/pkq.gif");
+            Image image = new Image("/res/icon/格式转换.gif");
             gif.setImage(image);
         });
 
         /**
-         把图片压缩教程的gif放到page版面上
+         把单一图片上传教程的gif放到page版面上
          */
-        compress.setOnAction( e-> {
-            Image image = new Image("/res/icon/pkq.gif");
+        pic_upload.setOnAction( e-> {
+            Image image = new Image("/res/icon/单一图片上传.gif");
+            gif.setImage(image);
+        });
+
+        /**
+         把批量图片上传教程的gif放到page版面上
+         */
+        pics_upload.setOnAction( e-> {
+            Image image = new Image("/res/icon/批量图片上传.gif");
             gif.setImage(image);
         });
     }

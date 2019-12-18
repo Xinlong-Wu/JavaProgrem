@@ -31,8 +31,9 @@ public class Pane_sceenController implements Initializable {
 	private Button course;
 	@FXML
 	private Button price;
+
 	@FXML
-	private Pane changepane;
+	private Button personal;
 
 	@Override
 	public void initialize(URL lacation, ResourceBundle resources){
@@ -58,7 +59,7 @@ public class Pane_sceenController implements Initializable {
 		 本页面连接到course未登录页面
 		 */
 		course.setOnAction(e -> {
-			new Course();
+			new Course(1);
 			Stage stage = (Stage)course.getScene().getWindow();
 			stage.close();
 		});
@@ -71,6 +72,12 @@ public class Pane_sceenController implements Initializable {
 			Stage stage = (Stage)price.getScene().getWindow();
 			stage.close();
 		});
+
+//		personal.setOnAction(e -> {
+//			new Personal();
+//			Stage stage = (Stage)personal.getScene().getWindow();
+//			stage.close();
+//		});
 	}
 
 }
