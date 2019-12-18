@@ -19,6 +19,10 @@ public class FindPasswordController {
     @FXML
     private Button verify;
 
+
+    /**
+     * 检查账号是否为空，设置按钮是否可被点击。
+     */
     boolean accountIsEmpty = true;
     public void checkAccountIsEmpty(){
 
@@ -37,6 +41,9 @@ public class FindPasswordController {
         }
     }
 
+    /**
+     * 检查邮箱是否为空，设置按钮是否可被点击。
+     */
     boolean emailIsEmpty = true;
     public void checkEmailIsEmpty(){
 
@@ -55,6 +62,11 @@ public class FindPasswordController {
         }
     }
 
+
+
+    /**
+     * 检查用户名和邮箱是否唯一匹配，如果不匹配则会弹出提示窗口，如果匹配则可以进入修改密码的页面。
+     */
     public void verifyEmailAndAccount(){
 
     DataBaseController verifyInstruction = new DataBaseController();

@@ -38,7 +38,8 @@ public class ChangePasswordController {
 
         try{
 
-            String currentInstruction = "update login set pwd = " + "'" + checkPassword.getText().trim() + "'" + "where userName = "+ "'" + a.trim() + "'";
+            String encryptedPassword = HashUtil.hash(checkPassword.getText());
+            String currentInstruction = "update login set pwd = " + "'" + encryptedPassword + "'" + "where userName = "+ "'" + a.trim() + "'";
             changeInstruction.queryUpdate(currentInstruction);
 
             String currentInstruction2 = "SELECT pwd FROM login WHERE userName=" + "'" + a.trim() + "'";

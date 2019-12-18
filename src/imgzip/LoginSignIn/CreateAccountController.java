@@ -67,7 +67,6 @@ public class CreateAccountController {
     public void checkAccountExistence() {
         DataBaseController createAccountInstruction = new DataBaseController();
         ResultSet rs = null;
-        ResultSet rs2 = null;
 
         try {
             /**
@@ -101,7 +100,7 @@ public class CreateAccountController {
                     judgeAccountExists = false;
                     already.setVisible(false);
 
-                    if(!judgeEmialexist && agree.isSelected()){
+                    if(!judgeEmialexist && agree.isSelected() && !"".equals(passWord.getText())){
                         createAccount.setDisable(false);
 
                     }
@@ -125,7 +124,6 @@ public class CreateAccountController {
     public void checkEmailExistence() {
 
         DataBaseController createAccountInstruction = new DataBaseController();
-        ResultSet rs = null;
         ResultSet rs2 = null;
 
         try {
@@ -156,13 +154,11 @@ public class CreateAccountController {
                     judgeEmialexist = false;
                     already2.setVisible(false);
 
-                    if(!judgeAccountExists && agree.isSelected()){
+                    if(!judgeAccountExists && agree.isSelected() && !"".equals(passWord.getText())){
                         createAccount.setDisable(false);
 
                     }
-
                 }
-
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -171,7 +167,6 @@ public class CreateAccountController {
             createAccountInstruction.close();
 
         }
-
     }
 
     /**
@@ -185,7 +180,10 @@ public class CreateAccountController {
             /**
              向数据库中插入数据
              */
-            String currentInstruction = "INSERT INTO login (userName,pwd,email,tel) values(" + "'"+userName.getText().trim()+ "'" + "," + "'"+ passWord.getText().trim()+ "'" + "," + "'"+ email.getText().trim() + "'"+ "," +  "'"+telephone.getText().trim()+ "'"+")" ;
+            String encryptedPassword = HashUtil.hash(passWord.getText());
+
+
+            String currentInstruction = "INSERT INTO login (userName,pwd,email,tel) values(" + "'"+userName.getText().trim()+ "'" + "," + "'"+ encryptedPassword.trim()+ "'" + "," + "'"+ email.getText().trim() + "'"+ "," +  "'"+telephone.getText().trim()+ "'"+")" ;
             createAccountInstruction.queryUpdate(currentInstruction);
 
             /**
@@ -227,8 +225,10 @@ public class CreateAccountController {
         boolean userNmae = "".equals(userName.getText());
         boolean emial = "".equals(email.getText());
 
-        if(agree.isSelected() && !userNmae && !emial && createAccount.isDisable() && !already.isVisible() && !already2.isVisible()){
+        if(agree.isSelected() && !userNmae && !emial && createAccount.isDisable() && !already.isVisible() && !already2.isVisible() && !"".equals(passWord.getText())){
             createAccount.setDisable(false);
+        }else {
+            createAccount.setDisable(true);
         }
     }
 
@@ -250,7 +250,6 @@ public class CreateAccountController {
 
         }
     }
-
 
     /**
      * 点击Service 的 hyperlink后，跳出网页进入服务说明。

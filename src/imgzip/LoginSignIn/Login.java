@@ -26,6 +26,9 @@ public class Login extends Application {
 
         Parent root = FXMLLoader.load(getClass().getResource("/fxml/Login.fxml"));
 
+        /**
+         * 将组件载入到start/main方法中，使得可以调用。以便于执行一些需要在页面生成就可以自动执行生成的效果
+         */
         TextField account = (TextField)root.lookup("#Account");
         PasswordField password = (PasswordField)root.lookup("#password");
         CheckBox remember = (CheckBox)root.lookup("#remember");
@@ -38,6 +41,10 @@ public class Login extends Application {
          如果上一次登录点击了记住密码，则在本次打开时会将账号和密码写入
          */
         try {
+
+            /**
+             * 读取记录账号密码的文本文件，如果不存在则会创造文件夹和文件，保持一致性。
+             */
             File fi = new File("txtFile");
             File file = new File("txtFile/RememberAccount&Password.txt");
             if(!fi.exists()){
@@ -52,6 +59,9 @@ public class Login extends Application {
             String line = "";
             line = br.readLine();
 
+            /**
+             * 读取账号和密码。
+             */
             if(file.length() != 0){
 
                 String[] judge = line.split("\\|");

@@ -10,9 +10,9 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane prefHeight="633.0" prefWidth="607.0000999999975" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="imgzip.LoginSignIn.CreateAccountController">
+<AnchorPane prefHeight="633.0" prefWidth="637.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="imgzip.LoginSignIn.CreateAccountController">
   <children>
-    <VBox layoutX="-2.0" layoutY="1.0" prefHeight="633.0" prefWidth="601.0">
+    <VBox layoutX="-2.0" layoutY="1.0" prefHeight="633.0" prefWidth="637.0">
       <children>
         <HBox alignment="CENTER" minHeight="130.0" prefHeight="135.0" prefWidth="601.0">
           <children>
@@ -30,30 +30,30 @@
           <children>
             <Label text="CREATE AN ACCOUNT">
               <font>
-                <Font name="Arial Black" size="33.0" />
+                <Font name="Arial Black" size="39.0" />
               </font>
             </Label>
           </children>
         </HBox>
         <VBox alignment="TOP_LEFT" prefHeight="426.0" prefWidth="601.0">
           <children>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="588.0001220703125" spacing="5.0">
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="588.0001220703125" spacing="5.0">
               <children>
-                <HBox id="AccountBox" alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="397.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;&#10;&#10;&#10;&#10;&#10;">
+                <HBox id="AccountBox" alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="437.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;&#10;&#10;&#10;&#10;&#10;">
                   <children>
-                    <TextField fx:id="userName" prefHeight="36.0" prefWidth="260.0" promptText="UserName ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;" styleClass="null">
+                    <TextField fx:id="userName" prefHeight="36.0" prefWidth="290.0" promptText="Length:4-15,Letters&amp;numbers_" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;" styleClass="null" text="">
                       <HBox.margin>
-                        <Insets />
+                        <Insets fx:id="x1" />
                       </HBox.margin>
                     </TextField>
-                    <Label id="Al" fx:id="already" alignment="CENTER" prefHeight="31.0" prefWidth="124.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="Already taken!" textAlignment="LEFT" textFill="RED">
+                    <Label id="Al" fx:id="already" alignment="CENTER" prefHeight="31.0" prefWidth="137.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="Already taken!" textAlignment="LEFT" textFill="RED">
                       <font>
                         <Font name="Arial Black" size="15.0" fx:id="x3" />
                       </font>
                     </Label>
                   </children>
                   <HBox.margin>
-                    <Insets left="103.5" fx:id="x1" />
+                    <Insets fx:id="x1" />
                   </HBox.margin>
                 </HBox>
               </children>
@@ -61,49 +61,45 @@
                 <Insets top="5.0" />
               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="601.0" spacing="19.0">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="601.0" spacing="19.0">
               <children>
-                <PasswordField fx:id="passWord" prefHeight="45.0" prefWidth="397.0" promptText="Password" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:2;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;&#10;&#10;&#10;">
-                  <HBox.margin>
-                    <Insets left="103.5" fx:id="5" />
-                  </HBox.margin>
-                </PasswordField>
+                <PasswordField fx:id="passWord" prefHeight="45.0" prefWidth="437.0" promptText="password" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:2;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;&#10;&#10;&#10;" HBox.margin="$x1" />
               </children>
               <VBox.margin>
                 <Insets top="10.0" fx:id="x2" />
               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="601.0" spacing="47.0" VBox.margin="$x2">
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="601.0" spacing="47.0" VBox.margin="$x2">
               <children>
-                <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="397.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;">
+                <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="437.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;">
                   <children>
-                    <TextField fx:id="email" prefHeight="40.0" prefWidth="260.0" promptText="Email ( Not Empty!)" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;">
+                    <TextField fx:id="email" prefHeight="40.0" prefWidth="290.0" promptText="Email(Not Empty)!" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;">
                       <HBox.margin>
-                        <Insets />
+                        <Insets fx:id="x1" />
                       </HBox.margin>
                     </TextField>
                     <Label id="Al2" fx:id="already2" alignment="CENTER" font="$x3" prefHeight="31.0" prefWidth="136.00009999999747" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="Already taken!" textAlignment="LEFT" textFill="RED" />
                   </children>
                   <HBox.margin>
-                    <Insets left="103.5" fx:id="2" />
+                    <Insets fx:id="x1" />
                   </HBox.margin>
                 </HBox>
               </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="60.0" prefWidth="601.0" spacing="10.0" VBox.margin="$x2">
+            <HBox alignment="CENTER" prefHeight="60.0" prefWidth="601.0" spacing="10.0" VBox.margin="$x2">
               <children>
-                <TextField fx:id="telephone" prefHeight="40.0" prefWidth="397.0" promptText="Telephone" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;">
+                <TextField fx:id="telephone" prefHeight="40.0" prefWidth="437.0" promptText="Telephone" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-border-style:solid inside;&#10;-fx-font-size:18px;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;">
                   <HBox.margin>
-                    <Insets left="103.5" fx:id="3" />
+                    <Insets fx:id="x1" />
                   </HBox.margin>
                 </TextField>
               </children>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="601.0">
+            <HBox alignment="CENTER" prefHeight="36.0" prefWidth="601.0">
               <children>
                 <CheckBox fx:id="agree" alignment="CENTER_LEFT" contentDisplay="RIGHT" font="$x3" mnemonicParsing="false" onAction="#checkIfSelectedPrivacy" prefWidth="269.0" text="I have read and agree to the" textAlignment="LEFT" underline="false" wrapText="false">
                   <HBox.margin>
-                    <Insets left="103.5" fx:id="1" />
+                    <Insets left="25.0" />
                   </HBox.margin>
                 </CheckBox>
                 <Hyperlink font="$x3" onAction="#openService" text="terms of services">
@@ -116,11 +112,14 @@
                 <Insets top="15.0" />
               </VBox.margin>
             </HBox>
-            <HBox alignment="CENTER_LEFT" prefHeight="45.0" prefWidth="601.0">
+            <HBox alignment="CENTER" prefHeight="45.0" prefWidth="601.0">
               <children>
-                <Button fx:id="createAccount" font="$x3" mnemonicParsing="false" onAction="#createAccount" prefHeight="36.0" prefWidth="391.0" style="-fx-background-color: linear-gradient(to bottom,#BEBEBE,#363636);&#10;&#9;-fx-text-alignment: center;&#10;&#9;-fx-text-fill: #fff;&#10;&#9;-fx-border-radius: 8px;&#10;&#9;-fx-background-radius: 8px;&#10;-fx-cursor:HAND;&#10;" text="CREATE ACCOUNT">
+                <Button fx:id="createAccount" mnemonicParsing="false" onAction="#createAccount" prefHeight="36.0" prefWidth="421.0" style="-fx-background-color: linear-gradient(to bottom,#BEBEBE,#363636);&#10;&#9;-fx-text-alignment: center;&#10;&#9;-fx-text-fill: #fff;&#10;&#9;-fx-border-radius: 8px;&#10;&#9;-fx-background-radius: 8px;&#10;-fx-cursor:HAND;&#10;" text="CREATE ACCOUNT">
+                  <font>
+                    <Font name="Arial Black" size="18.0" />
+                  </font>
                   <HBox.margin>
-                    <Insets left="103.5" fx:id="4" />
+                    <Insets fx:id="x1" />
                   </HBox.margin>
                 </Button>
               </children>
@@ -128,7 +127,7 @@
                 <Insets top="17.0" />
               </VBox.margin>
             </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="601.0">
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="601.0">
               <children>
                 <Hyperlink fx:id="privacy" onAction="#openPrivacy" text="Privacy Policy">
                   <font>
@@ -137,7 +136,7 @@
                 </Hyperlink>
               </children>
             </HBox>
-            <HBox alignment="BOTTOM_CENTER" prefHeight="40.0" prefWidth="601.0" spacing="5.0">
+            <HBox alignment="CENTER" prefHeight="40.0" prefWidth="601.0" spacing="5.0">
               <children>
                 <Label font="$x3" text="Already had an Account?" />
                 <Hyperlink fx:id="signIn" font="$x3" onAction="#backToLogin" text="Sign In" />
