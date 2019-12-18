@@ -30,17 +30,16 @@ public class PersonalController implements Initializable {
     @FXML
     private Button functionpage;
     @FXML
-    private Button changename;
-    @FXML
     private Button changeemail;
     @FXML
+    private Button changetel;
+    @FXML
     private Button changepw;
-    @FXML
-    public static Pane accountp;
-    @FXML
-    private Pane emailp;
+//    @FXML
+//    public static Pane accountp;
+//    @FXML
+//    private Pane emailp;
 
-    @Override
     public void initialize(URL lacation, ResourceBundle resources){
         /**
          本页面连接到homepage
@@ -78,12 +77,6 @@ public class PersonalController implements Initializable {
             stage.close();
         });
 
-        /**
-         修改用户名称
-         */
-//        changename.setOnAction(e -> {
-//
-//        });
 
         /**
          修改邮箱
@@ -91,6 +84,15 @@ public class PersonalController implements Initializable {
         changeemail.setOnAction(e -> {
             new Change_email();
             Stage stage = (Stage) changeemail.getScene().getWindow();
+            stage.close();
+        });
+
+        /**
+         修改电话号
+         */
+        changetel.setOnAction(e -> {
+            new Change_tel();
+            Stage stage = (Stage) changetel.getScene().getWindow();
             stage.close();
         });
 

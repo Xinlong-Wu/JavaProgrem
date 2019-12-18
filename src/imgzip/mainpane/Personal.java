@@ -49,10 +49,6 @@ public class Personal {
 
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Personal.fxml"));
 
-//            Label account = (Label) root.lookup("#account");
-//            Label email = (Label)root.lookup("#email");
-//            Label tel = (Label)root.lookup("#tel");
-
             Pane accountp = (Pane)root.lookup("#accountp");
             Pane emailp = (Pane)root.lookup("#emailp");
             Pane telp= (Pane)root.lookup("#telp");
@@ -64,15 +60,19 @@ public class Personal {
                 rs = loginInstruction.queryExcecute(currentInstruction);
 
                 if (rs.next()) {
-//                    account.setFont(Font.font(rs.getString(1)));
-//                    email.setFont(Font.font(rs.getString(3)));
-//                    tel.setFont(Font.font(rs.getString(4)));
 
                     Label a = new Label(rs.getString(1));
+                    a.setStyle("-fx-font-family: 'FangSong';-fx-font-size: 20;");
                     accountp.getChildren().add(a);
+                    GlobalStringManager.setAccount(rs.getString(1));
+
                     Label e = new Label(rs.getString(3));
+                    e.setStyle("-fx-font-family: 'FangSong';-fx-font-size: 20;");
                     emailp.getChildren().add(e);
+                    GlobalStringManager.setEmial(rs.getString(3));
+
                     Label t = new Label(rs.getString(4));
+                    t.setStyle("-fx-font-family: 'FangSong';-fx-font-size: 20;");
                     telp.getChildren().add(t);
                 }
 
@@ -83,10 +83,6 @@ public class Personal {
             }finally {
                 loginInstruction.close();
             }
-
-
-
-
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Personal");
             primaryStage.setScene(new Scene(root, 939, 685));

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+
+<AnchorPane prefHeight="300.0" prefWidth="400.0" xmlns="http://javafx.com/javafx/10.0.2-internal" xmlns:fx="http://javafx.com/fxml/1" fx:controller="imgzip.mainpane.Change_telController">
+   <children>
+      <ImageView fitHeight="300.0" fitWidth="400.0" pickOnBounds="true" preserveRatio="true">
+         <image>
+            <Image url="@../res/icon/p34.jpg" />
+         </image>
+      </ImageView>
+      <Label layoutX="30.0" layoutY="30.0" text="修改电话号码">
+         <font>
+            <Font size="19.0" />
+         </font>
+      </Label>
+      <Label layoutX="30.0" layoutY="110.0" text="新电话号码：">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Label>
+      <TextField fx:id="text" layoutX="128.0" layoutY="106.0" prefHeight="30.0" />
+      <Button fx:id="certain" layoutX="271.0" layoutY="195.0" mnemonicParsing="false" prefWidth="65.0" text="确定">
+         <font>
+            <Font size="14.0" />
+         </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
+      </Button>
+   </children>
+</AnchorPane>
