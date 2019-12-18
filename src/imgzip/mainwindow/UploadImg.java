@@ -2,6 +2,7 @@ package imgzip.mainwindow;
 
 
 import imgzip.LoginSignIn.DataBaseController;
+import imgzip.LoginSignIn.GlobalStringManager;
 
 import javax.imageio.IIOException;
 import java.io.File;
@@ -73,7 +74,7 @@ public class UploadImg implements Runnable {
         try {
             synchronized (Lock) {
                 upLoad();
-                imgBlock.setUpload(true);
+                imgBlock.setUpload();
             }
         } catch (Exception e) {
 //            AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
@@ -134,6 +135,9 @@ public class UploadImg implements Runnable {
         DataBaseController dbc = new DataBaseController();
         String sql = "INSERT INTO `imgcount` (`imgUrl`, `groupUuid`) VALUES ('"+fileName+"','"+uuid+"')";
         dbc.queryUpdate(sql);
+        sql = "INSERT INTO `UplodUser` (`userName`, `uuid`) VALUES ('"+ GlobalStringManager.getAccount()+"', '"+uuid+"')";
+        dbc.queryUpdate(sql);
+        GlobalStringManager.setPicSequences(uuid);
         dbc.close();
 
         /**首先先向服务器发送关于文件的信息，以便于服务器进行接收的相关准备工作

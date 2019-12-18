@@ -1,4 +1,7 @@
 package imgzip.LoginSignIn;
+
+import imgzip.LoginSignIn.LoginBeginner;
+
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;

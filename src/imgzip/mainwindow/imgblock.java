@@ -3,12 +3,9 @@ package imgzip.mainwindow;
 
 
 import imgzip.alertwindow.AlertWindow;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
 import javafx.scene.control.MenuItem;
 import javafx.scene.effect.DropShadow;
 import javafx.scene.image.Image;
@@ -22,7 +19,6 @@ import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
 import javax.imageio.IIOException;
-import javax.imageio.stream.FileImageInputStream;
 import java.io.*;
 import java.net.URL;
 import java.util.concurrent.ExecutorService;
@@ -39,24 +35,52 @@ import java.util.concurrent.Executors;
  */
 class ImgBlock extends BorderPane {
     /**
-     *  静态参数加载各种资源图像
-      */
+     * 静态参数加载各种资源图像
+     * 静态变量：
+     *      1. 静态图像资源：
+     *          WAITING block左上角的等待图片（黄点）
+     *          LOADING block左上角的队列中图片（会转的小彩虹）
+     *          DONE block左上角的完成图片（绿点）
+     *          DOWNLOAD block左上部的保存按钮图片
+     *          UPLOAD block左上部的上传按钮图片
+     *          CLOSE block左上部的上传按钮图片
+     *      2. 静态变量：
+     *          JPG 左下部下拉菜单的字符串
+     *          PNG 左下部下拉菜单的字符串
+     *          BMP 左下部下拉菜单的字符串
+     *          saverPool 用于多线程保存图片的线程池
+     *          uploadPool 用于多线程上传图片的线程池
+     */
     static Image WAITING = new Image("res/icon/waiting.png");
     static Image LOADING = new Image("res/icon/loading.gif");
     static Image DONE = new Image("res/icon/done.png");
-    static Image DOWNLOAD = new Image("res/icon/download.png");
-    static Image UPLOAD = new Image("res/icon/upload.png");
-    static Image CLOSE = new Image("res/icon/close.png");
+    private static Image DOWNLOAD = new Image("res/icon/download.png");
+    private static Image UPLOAD = new Image("res/icon/upload.png");
+    private static Image CLOSE = new Image("res/icon/close.png");
     static String JPG = "To JPG";
     static String PNG = "To PNG";
     static String BMP = "To BMP";
-    static ExecutorService saverPool = Executors.newCachedThreadPool();
-    static ExecutorService zipPool = Executors.newCachedThreadPool();
-    static ExecutorService uploadPool = Executors.newCachedThreadPool();
+    private static ExecutorService saverPool = Executors.newCachedThreadPool();
+    private static ExecutorService uploadPool = Executors.newCachedThreadPool();
 
 
     /**
      *  私有参数用于各个类特定的值、和对象，用来组成
+     *
+     *  ivimg block中心放置图片的类
+     *  ivstate block左上角显示当前状态的类
+     *  ivDwonLoad block左上部的下载按钮图标
+     *  ivClose block右上部的关闭按钮图标
+     *  ivUpload block左上部的上传按钮图标
+     *  btClose block右上部的关闭按钮
+     *  cent 用来显示边框线，美化界面
+     *  trans 转换目标格式的下拉菜单
+     *  url 图片的URL路径
+     *  index Imgblock的编号
+     *  isUpload 标记是否已经上传，来避免重复上传
+     *  file block的图片文件
+     *  isHttpSorce 标记是否是通过文件提取码提取
+     *  isAcceed 判断该block是否成功创建，主要针对于提取码提取的图片，如果不成功，则不将imgBlock加入BlockList
      */
     private ImageView ivimg = new ImageView();
     private ImageView ivstate = new ImageView(WAITING);
@@ -67,35 +91,31 @@ class ImgBlock extends BorderPane {
     private StackPane cent = new StackPane();
     private ComboBox<String> trans = new ComboBox<>();
     private String url;
-    private String dialog = "";
-    private Label size;
     private int index;
     private Boolean isUpload = false;
     private File file;
     private Boolean isHttpSorce = false;
     private Boolean isAcceed = true;
-    HBox topBar = new HBox();
-    VBox botBar = new VBox();
-    HBox transBar = new HBox();
-
-
 
 
 //    Menu
     /**
      *
-     * 图片预览框 构造方法
+     * 图片预览框
      *
      */
     public ImgBlock(int imgCount,String imgUrl){
         //父属性及子属性设定
         this.setPadding(new Insets(10));
+        HBox topBar = new HBox();
         this.setTop(topBar);
+        VBox botBar = new VBox();
         this.setBottom(botBar);
         this.getStyleClass().add("block-bg");
         this.setCenter(cent);
         this.index = imgCount;
         this.url = imgUrl;
+        //判断Url是否来自网络
         if (imgUrl.startsWith("http:")){
             file=getNetUrlHttp(imgUrl);
             if (file == null){
@@ -157,9 +177,9 @@ class ImgBlock extends BorderPane {
         cent.getChildren().addAll(ivimg);
 
         //底部栏属性设定
+        HBox transBar = new HBox();
         botBar.getChildren().addAll(transBar);
         botBar.getStyleClass().setAll("block-botbar");
-//        botBar.setPadding(new Insets(0,0,0,10));
 
         //保存菜单设定
         MenuButton downLoad = new MenuButton();
@@ -185,26 +205,24 @@ class ImgBlock extends BorderPane {
         topBar.getChildren().add(btUpload);
         topBar.getChildren().add(btBox);
 
-
         //底部栏设定
-
         trans.setPadding(new Insets(0,0,0,10));
         trans.getItems().addAll(JPG,PNG,BMP);
         trans.getStyleClass().addAll("block-combo");
         transBar.getChildren().addAll(trans);
         transBar.getStyleClass().addAll("transbar");
         String type = file.getPath().split("\\.")[1].toLowerCase();
-        if("jpg".equals(type)){
-            trans.setValue(JPG);
-        }
-        else if("png".equals(type)){
-            trans.setValue(PNG);
-        }
-        else if("bmp".equals(type)){
-            trans.setValue(BMP);
-        }
-
-
+        switch (type) {
+            case "png":
+                trans.setValue(PNG);
+                break;
+            case "bmp":
+                trans.setValue(BMP);
+                break;
+            default:
+                trans.setValue(JPG);
+                break;
+        }//switch
 
         // 事件响应部分
         trans.setOnAction(e->{
@@ -278,24 +296,21 @@ class ImgBlock extends BorderPane {
         ivstate.setImage(state);
     }
 
-    public ImageView getIvstate() {
+    ImageView getIvstate() {
         return ivstate;
     }
 
-    public ComboBox<String> getTrans() {
+    ComboBox<String> getTrans() {
         return trans;
     }
 
-    public Boolean getUpload() {
-        return isUpload;
-    }
 
-    public void setUpload(Boolean upload) {
-        isUpload = upload;
+    void setUpload() {
+        isUpload = true;
     }
 
     /**
-     * 保存图片的储存路径方法
+     * 保存图片方法
      * @param path
      */
     void saveImg(String path) throws IIOException{
@@ -321,7 +336,8 @@ class ImgBlock extends BorderPane {
         }
 
         FunctionBox.upLoading(uploadImg.getUuid());
-    }
+    }//uploadImg
+
     void uploadImg(String uuid){
         ivstate.setImage(LOADING);
         if(isUpload){
@@ -333,7 +349,7 @@ class ImgBlock extends BorderPane {
         } catch (IIOException e) {
             ivstate.setImage(WAITING);
         }
-    }
+    }//uploadImg
 
     /**
      *  图片url访问器
@@ -354,8 +370,6 @@ class ImgBlock extends BorderPane {
     public void setAcceed(Boolean acceed) {
         isAcceed = acceed;
     }
-
-
 
     /**
      * 图像序号访问器
@@ -381,7 +395,6 @@ class ImgBlock extends BorderPane {
         //对本地文件命名
         String fileName = getIndex()+FunctionBox.crateUuid()+"."+type;
         File file = null;
-
 
         URL urlfile;
         InputStream inStream = null;
@@ -418,6 +431,5 @@ class ImgBlock extends BorderPane {
             }
         }
         return file;
-    }
-}
-
+    }//getNetUrlHttp
+}//class ImgBlock
