@@ -1,5 +1,6 @@
 package imgzip.LoginSignIn;
 
+import imgzip.mainpane.Pane_sceenbeginner;
 import imgzip.mainpane.Personal;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -111,6 +112,8 @@ public class LoginController {
                         passwordWrong.setVisible(false);
                     }
                     GlobalStringManager.setAccount(account.getText());
+                    loadPicturesSequences();
+
                     Stage stage = (Stage)account.getScene().getWindow();
                     new Personal();
                     stage.close();
@@ -138,6 +141,7 @@ public class LoginController {
     public void cancel(){
 
         Stage stage = (Stage)cancel.getScene().getWindow();
+        new Pane_sceenbeginner();
         stage.close();
     }
 
@@ -189,6 +193,41 @@ public class LoginController {
         Stage stage = (Stage)cantSign.getScene().getWindow();
         stage.close();
     }
+
+
+
+    public void loadPicturesSequences(){
+
+
+        DataBaseController loadingInstruction = new DataBaseController();
+        ResultSet rs = null;
+        try{
+
+            String currentInstruction = "SELECT uuid FROM UplodUser WHERE userName= " + "'" + account.getText().trim() + "'";
+            rs = loadingInstruction.queryExcecute(currentInstruction);
+
+            if(rs.next()){
+
+                int columnCount = rs.getRow();
+                for(int i = 1 ; i <= columnCount ; i++){
+                    GlobalStringManager.setPicSequences(rs.getString(i));
+                }
+
+
+            }
+
+        }catch (SQLException e){
+            e.printStackTrace();
+
+        }finally {
+            loadingInstruction.close();
+        }
+
+
+
+
+    }
+
 
 }
 

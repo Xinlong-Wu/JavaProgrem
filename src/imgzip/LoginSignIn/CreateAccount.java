@@ -258,7 +258,7 @@ public class CreateAccount {
             primaryStage.show();
 
             primaryStage.setOnCloseRequest(e->{
-                new Pane_sceenbeginner();
+                new LoginBeginner();
             });
         }catch (Exception e){
             e.printStackTrace();
@@ -314,7 +314,9 @@ class CreateSuccessfully{
             primaryStage.setTitle("Create an Account Successfully!");
             primaryStage.setScene(new Scene(root, 638, 406));
             primaryStage.show();
-
+            primaryStage.setOnCloseRequest(e->{
+                new LoginBeginner();
+            });
         }catch (Exception e){
             e.printStackTrace();
         }

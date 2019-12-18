@@ -32,6 +32,10 @@ public class ChangePassword {
             primaryStage.setScene(new Scene(root, 607, 500));
             primaryStage.show();
 
+            primaryStage.setOnCloseRequest(e->{
+                new LoginBeginner();
+            });
+
         }catch (Exception e){
             e.printStackTrace();
         }

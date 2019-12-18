@@ -40,6 +40,7 @@ public class PersonalController implements Initializable {
     @FXML
     private Pane emailp;
 
+    @Override
     public void initialize(URL lacation, ResourceBundle resources){
         /**
          本页面连接到homepage
@@ -80,9 +81,9 @@ public class PersonalController implements Initializable {
         /**
          修改用户名称
          */
-        changename.setOnAction(e -> {
-
-        });
+//        changename.setOnAction(e -> {
+//
+//        });
 
         /**
          修改邮箱
