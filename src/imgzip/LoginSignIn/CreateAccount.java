@@ -36,27 +36,35 @@ public class CreateAccount {
             Button createAccount = (Button)root.lookup("#createAccount");
             TextField userName = (TextField)root.lookup("#userName");
             TextField email = (TextField)root.lookup("#email");
+            TextField password = (TextField)root.lookup("#passWord");
             CheckBox agree = (CheckBox)root.lookup("#agree");
 
             already.setVisible(false);
             already2.setVisible(false);
             createAccount.setDisable(true);
+
+
+
             /**
              * change方法：当account输入框失去/得到焦点时，检查一次是否与数据库中的某个账号重复
              * 保证账号的唯一性。
              */
-
-
             userName.focusedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 
-                    if("".equals(userName.getText())){
+                    if(checkIfIsAccount(userName.getText())){
 
-                    }else {
+                        if("Invalid account!".equals(already.getText())){
+                            already.setText("Already taken!");
+                        }
+
+                        if (already.isVisible() || "".equals(userName.getText())){
+                            already.setVisible(false);
+                        }
+
                         DataBaseController createAccountInstruction = new DataBaseController();
                         ResultSet rs = null;
-                        ResultSet rs2 = null;
 
                         try {
                             /**
@@ -90,36 +98,58 @@ public class CreateAccount {
                                     judgeAccountExists = false;
                                     already.setVisible(false);
 
-                                    if(!judgeEmialexist && agree.isSelected()){
+                                    if(!judgeEmialexist && agree.isSelected() &&!"".equals(password.getText())){
                                         createAccount.setDisable(false);
-
                                     }
-
                                 }
-
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
                         } finally {
                             createAccountInstruction.close();
                         }
+
+                    }else {
+
+                        if("Already taken!".equals(already.getText())){
+                            already.setText("Invalid account!");
+                        }
+
+                        if("".equals(userName.getText())){
+                            already.setVisible(false);
+                            if(!createAccount.isDisable()){
+                                createAccount.setDisable(true);
+                            }
+
+                        }else {
+
+                            if (!already.isVisible()){
+                                already.setVisible(true);
+                            }
+
+                            if (!createAccount.isDisable()){
+                                createAccount.setDisable(true);
+                            }
+                        }
                     }
                 }
             });
+
+
+
 
             /**
                 email的change方法：
                 当email输入框失去\获得焦点时，检查email框输入的值是否符合邮箱格式，以及是否已经在数据库中存在。
                 保证格式正确以及数据库中数据唯一性。
              */
-
             email.focusedProperty().addListener(new ChangeListener<Boolean>() {
                 @Override
                 public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
 
                     if(checkIfIsEmail(email.getText())){
 
-                        if(already2.getText().equals("Invalid email!")){
+                        if("Invalid email!".equals(already2.getText())){
                             already2.setText("Already taken!");
                         }
 
@@ -158,7 +188,7 @@ public class CreateAccount {
                                     judgeEmialexist = false;
                                     already2.setVisible(false);
 
-                                    if(!judgeAccountExists && agree.isSelected()){
+                                    if(!judgeAccountExists && agree.isSelected() && !"".equals(password.getText())){
                                         createAccount.setDisable(false);
 
                                     }
@@ -195,11 +225,31 @@ public class CreateAccount {
                             if (!createAccount.isDisable()){
                                 createAccount.setDisable(true);
                             }
-
                          }
                     }
                 }
             });
+
+
+            password.focusedProperty().addListener(new ChangeListener<Boolean>() {
+                @Override
+                public void changed(ObservableValue<? extends Boolean> observable, Boolean oldValue, Boolean newValue) {
+                    if("".equals(password.getText())){
+
+                        if (!createAccount.isDisable()){
+                            createAccount.setDisable(true);
+                        }
+
+                    }else {
+
+                        if (!already.isVisible() && !already2.isVisible() && !"".equals(userName.getText()) && !"".equals(email.getText()) && agree.isSelected()){
+                            createAccount.setDisable(false);
+                        }
+
+                    }
+                }
+            });
+
 
 
             Stage primaryStage = new Stage();
@@ -216,6 +266,8 @@ public class CreateAccount {
 
     }
 
+
+
     /**
      * 检查邮箱格式是否正确.
      */
@@ -225,6 +277,17 @@ public class CreateAccount {
 
         Pattern regex = Pattern.compile(check);
         Matcher matcher = regex.matcher(email);
+        boolean isMatched = matcher.matches();
+
+        return isMatched;
+    }
+
+    public boolean checkIfIsAccount(String account){
+
+        String check = "^[a-zA-Z0-9_]{4,15}$";
+
+        Pattern regex = Pattern.compile(check);
+        Matcher matcher = regex.matcher(account);
         boolean isMatched = matcher.matches();
 
         return isMatched;

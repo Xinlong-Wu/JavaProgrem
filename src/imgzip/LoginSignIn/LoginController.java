@@ -95,13 +95,15 @@ public class LoginController {
         ResultSet rs = null;
         try{
 
+
+            String encryptedPassword = HashUtil.hash(password.getText());
             String currentInstruction = "SELECT pwd FROM login WHERE userName=" + "'" + account.getText().trim()+ "'";
             rs = loginInstruction.queryExcecute(currentInstruction);
 
 
             if (rs.next()) {
                 String rightPassword = rs.getString(1);
-                if (rightPassword.equals(password.getText())){
+                if (rightPassword.equals(encryptedPassword)){
 
                     remember();
                     //登入主页面，待定
@@ -109,7 +111,6 @@ public class LoginController {
                         passwordWrong.setVisible(false);
                     }
                     GlobalStringManager.setAccount(account.getText());
-
                     Stage stage = (Stage)account.getScene().getWindow();
                     new Personal();
                     stage.close();
