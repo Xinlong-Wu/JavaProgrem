@@ -36,7 +36,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <AnchorPane layoutX="100.0" layoutY="170.0" opacity="0.6" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+      <AnchorPane layoutX="100.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
          <children>
             <Label fx:id="label1" layoutX="70.0" layoutY="25.0" text="免费版">
                <font>
@@ -97,7 +97,7 @@
             </Label>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="365.0" layoutY="170.0" opacity="0.6" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+      <AnchorPane layoutX="365.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
          <children>
             <Label fx:id="label13" layoutX="70.0" layoutY="25.0" text="会员版">
                <font>
@@ -189,7 +189,7 @@
             </ImageView>
          </children>
       </AnchorPane>
-      <AnchorPane layoutX="630.0" layoutY="170.0" opacity="0.6" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+      <AnchorPane layoutX="630.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
          <children>
             <Label fx:id="label28" layoutX="50.0" layoutY="25.0" text="尊贵会员版">
                <font>

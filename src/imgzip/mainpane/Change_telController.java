@@ -5,23 +5,15 @@ import imgzip.LoginSignIn.GlobalStringManager;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.PasswordField;
 import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 
-
 import java.net.URL;
 import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.ResourceBundle;
 
-/**
- @Author:  吴泳仪
- @Date: 2019.12.17
- */
-public class Change_emailController implements Initializable {
-    public String a;
+public class Change_telController implements Initializable {
+    public String b;
     @FXML
     private Button certain;
     @FXML
@@ -36,14 +28,14 @@ public class Change_emailController implements Initializable {
 //            certain.setDisable(false);
 //        }
         certain.setOnAction(e -> {
-            a = text.getText();
-//            GlobalStringManager.setEmial(a);
+            b = text.getText();
+//            GlobalStringManager.setEmial(b);
             DataBaseController loginInstruction = new DataBaseController();
             ResultSet rs = null;
-            String currentInstruction = "UPDATE login SET email=" + "'" + a + "'" + "WHERE username=" + "'" + GlobalStringManager.getAccount() + "'";
+            String currentInstruction = "UPDATE login SET tel=" + "'" + b + "'" + "WHERE username=" + "'" + GlobalStringManager.getAccount() + "'";
             loginInstruction.queryUpdate(currentInstruction);
             loginInstruction.close();
-            GlobalStringManager.setEmial(a);
+            GlobalStringManager.setEmial(b);
             new Personal();
             Stage stage = (Stage) certain.getScene().getWindow();
             stage.close();
