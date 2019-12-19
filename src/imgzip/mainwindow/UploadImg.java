@@ -77,8 +77,6 @@ public class UploadImg implements Runnable {
                 imgBlock.setUpload();
             }
         } catch (Exception e) {
-//            AlertWindow alertWindow = new AlertWindow("上传失败",e.getMessage());
-//            alertWindow.start(new Stage());
             imgBlock.getIvstate().setImage(ImgBlock.WAITING);
         }
     }
@@ -141,7 +139,7 @@ public class UploadImg implements Runnable {
         dbc.close();
 
         /**首先先向服务器发送关于文件的信息，以便于服务器进行接收的相关准备工作
-         * 发送的内容包括：发送文件协议码（此处为512）/#文件名（带后缀名）/#文件大小
+         * 发送的内容包括：发送文件协议码（512发送图片）/#文件名（带后缀名）/#文件大小
          * */
         try {
             PrintStream ps = new PrintStream(s.getOutputStream());
@@ -153,21 +151,16 @@ public class UploadImg implements Runnable {
             throw new Exception("服务器连接中断");
         }
 
-
         /**
-         * 此处睡眠2s，等待服务器把相关的工作准备好
-         * 也是为了保证网络的延迟
+         * 等待服务器
+         * 保证网络的延迟
          * */
-
         Thread.sleep(2000);
-
-
 
         /**之前的准备工作结束之后
          * 下面就是文件传输的关键代码
          * */
         try {
-
             /**获取socket的OutputStream，以便向其中写入数据包*/
             os = s.getOutputStream();
 

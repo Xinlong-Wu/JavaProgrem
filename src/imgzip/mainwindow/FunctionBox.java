@@ -240,7 +240,6 @@ public class FunctionBox extends Scene {
             });
             checkBlockList();
         });
-
         //  设置允许拖放文件（不写这个拖放总不成功）
         //  并且利用这个监听器对拖入的文件对文件进行过滤，如果后缀名为png/jpg/bmp才允许放入，否则一律不允许
         centerPane.setOnDragOver(e->{
