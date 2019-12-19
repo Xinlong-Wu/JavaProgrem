@@ -29,15 +29,14 @@ public class Change_emailController implements Initializable {
 
     public void initialize(URL lacation, ResourceBundle resources){
 
-//        if(a.length() != 0) {
-//            certain.setDisable(true);
-//
-//        }else{
-//            certain.setDisable(false);
-//        }
+        /**
+         在Change_email中按确定按钮后把云端
+         数据库中对应的账号的邮箱换成TextField中的邮箱
+         并更新全局变量GlobalStringManager中的email
+         结束后更新并打开personal
+         */
         certain.setOnAction(e -> {
             a = text.getText();
-//            GlobalStringManager.setEmial(a);
             DataBaseController loginInstruction = new DataBaseController();
             ResultSet rs = null;
             String currentInstruction = "UPDATE login SET email=" + "'" + a + "'" + "WHERE username=" + "'" + GlobalStringManager.getAccount() + "'";

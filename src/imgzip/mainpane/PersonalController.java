@@ -35,10 +35,7 @@ public class PersonalController implements Initializable {
     private Button changetel;
     @FXML
     private Button changepw;
-//    @FXML
-//    public static Pane accountp;
-//    @FXML
-//    private Pane emailp;
+
 
     public void initialize(URL lacation, ResourceBundle resources){
         /**
@@ -79,7 +76,7 @@ public class PersonalController implements Initializable {
 
 
         /**
-         修改邮箱
+         加载修改邮箱的页面Change_email
          */
         changeemail.setOnAction(e -> {
             new Change_email();
@@ -88,7 +85,7 @@ public class PersonalController implements Initializable {
         });
 
         /**
-         修改电话号
+         加载修改电话号的页面Change_tel
          */
         changetel.setOnAction(e -> {
             new Change_tel();
@@ -97,7 +94,7 @@ public class PersonalController implements Initializable {
         });
 
         /**
-         修改密码
+         加载修改密码的页面
          */
         changepw.setOnAction(e -> {
             new ChangePassword(1);

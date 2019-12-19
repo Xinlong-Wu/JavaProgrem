@@ -70,7 +70,7 @@ public class CourseController implements Initializable {
         });
 
         /**
-         course页面自我更新到初始状态
+         course页面自我更新
          */
         course.setOnAction(e -> {
             new Course();
@@ -104,8 +104,6 @@ public class CourseController implements Initializable {
             Stage stage = (Stage)personal.getScene().getWindow();
             stage.close();
         });
-
-
 
 
         /**

@@ -78,14 +78,14 @@ public class PricepaneController implements Initializable {
         });
 
         /**
-         本页面连接到priceimg
+         本页面连接到priceimg（微信收费二维码页面）
          */
         button1.setOnAction(e -> {
             new Priceimg();
         });
 
         /**
-         本页面连接到priceimg
+         本页面连接到priceimg（微信收费二维码页面）
          */
         button3.setOnAction(e -> {
             new Priceimg();

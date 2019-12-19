@@ -21,15 +21,14 @@ public class Change_telController implements Initializable {
 
     public void initialize(URL lacation, ResourceBundle resources){
 
-//        if(a.length() != 0) {
-//            certain.setDisable(true);
-//
-//        }else{
-//            certain.setDisable(false);
-//        }
+        /**
+         在Change_tel中按确定按钮后把云端
+         数据库中对应的账号的电话号码换成TextField中的电话号码
+         并更新全局变量GlobalStringManager中的tel
+         结束后更新并打开personal页面
+         */
         certain.setOnAction(e -> {
             b = text.getText();
-//            GlobalStringManager.setEmial(b);
             DataBaseController loginInstruction = new DataBaseController();
             ResultSet rs = null;
             String currentInstruction = "UPDATE login SET tel=" + "'" + b + "'" + "WHERE username=" + "'" + GlobalStringManager.getAccount() + "'";
