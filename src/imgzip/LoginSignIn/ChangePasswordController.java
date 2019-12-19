@@ -30,41 +30,41 @@ public class ChangePasswordController {
      * 点击按钮后，更改密码，并检查是否更改成功。
      */
 
-    public void upDatePassword(){
-
-        String a = GlobalStringManager.getAccount();
-        DataBaseController changeInstruction = new DataBaseController();
-        ResultSet rs = null;
-
-        try{
-
-            String encryptedPassword = HashUtil.hash(checkPassword.getText());
-            String currentInstruction = "update login set pwd = " + "'" + encryptedPassword + "'" + "where userName = "+ "'" + a.trim() + "'";
-            changeInstruction.queryUpdate(currentInstruction);
-
-            String currentInstruction2 = "SELECT pwd FROM login WHERE userName=" + "'" + a.trim() + "'";
-            rs = changeInstruction.queryExcecute(currentInstruction2);
-
-            if(rs.next()){
-
-                Stage stage = (Stage) password.getScene().getWindow();
-                new ChangePasswordSuccessfully();
-                stage.close();
-            }else {
-
-
-                System.out.println("123");
-            }
-
-
-        }catch (Exception e){
-            e.printStackTrace();
-
-        }finally {
-            changeInstruction.close();
-
-        }
-    }
+//    public void upDatePassword(){
+//
+//        String a = GlobalStringManager.getAccount();
+//        DataBaseController changeInstruction = new DataBaseController();
+//        ResultSet rs = null;
+//
+//        try{
+//
+//            String encryptedPassword = HashUtil.hash(checkPassword.getText());
+//            String currentInstruction = "update login set pwd = " + "'" + encryptedPassword + "'" + "where userName = "+ "'" + a.trim() + "'";
+//            changeInstruction.queryUpdate(currentInstruction);
+//
+//            String currentInstruction2 = "SELECT pwd FROM login WHERE userName=" + "'" + a.trim() + "'";
+//            rs = changeInstruction.queryExcecute(currentInstruction2);
+//
+//            if(rs.next()){
+//
+//                Stage stage = (Stage) password.getScene().getWindow();
+//                new ChangePasswordSuccessfully();
+//                stage.close();
+//            }else {
+//
+//
+//                System.out.println("123");
+//            }
+//
+//
+//        }catch (Exception e){
+//            e.printStackTrace();
+//
+//        }finally {
+//            changeInstruction.close();
+//
+//        }
+//    }
 
     /**
      * 检查第一次输入的密码和第二次输入的密码是否相同，以及两个密码框是否为空。

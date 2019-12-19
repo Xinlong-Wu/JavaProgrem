@@ -192,20 +192,15 @@ public class CreateAccount {
                                         createAccount.setDisable(false);
 
                                     }
-
                                 }
-
                             }
                         } catch (Exception e) {
                             e.printStackTrace();
 
                         } finally {
                             createAccountInstruction.close();
-
                         }
-
                     }else{
-
                          if("Already taken!".equals(already2.getText())){
                              already2.setText("Invalid email!");
                          }
@@ -258,7 +253,7 @@ public class CreateAccount {
             primaryStage.show();
 
             primaryStage.setOnCloseRequest(e->{
-                new LoginBeginner();
+                new Pane_sceenbeginner();
             });
         }catch (Exception e){
             e.printStackTrace();
@@ -282,6 +277,9 @@ public class CreateAccount {
         return isMatched;
     }
 
+    /**
+     * 检查账号格式是否正确.
+     */
     public boolean checkIfIsAccount(String account){
 
         String check = "^[a-zA-Z0-9_]{4,15}$";

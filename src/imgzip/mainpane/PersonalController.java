@@ -100,7 +100,7 @@ public class PersonalController implements Initializable {
          修改密码
          */
         changepw.setOnAction(e -> {
-            new ChangePassword();
+            new ChangePassword(1);
             Stage stage = (Stage)changepw.getScene().getWindow();
             stage.close();
         });
