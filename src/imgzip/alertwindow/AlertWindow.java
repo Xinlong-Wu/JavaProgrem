@@ -102,7 +102,7 @@ public class AlertWindow extends Application {
         pane.getChildren().addAll(tittle,lbinfo,btBox);
     }
 
-    public final void anotherButton(ButtonHandler value) {
+    public final void anotherButton(ButtonHandler<VBox> value) {
         VBox vBox = new VBox();
         vBox.getStyleClass().addAll("ppane");
         value.start(vBox);

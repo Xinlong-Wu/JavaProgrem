@@ -3,6 +3,7 @@ package imgzip.mainpane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Pane_sceenbeginner {
@@ -13,6 +14,7 @@ public class Pane_sceenbeginner {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Homepage");
             primaryStage.setScene(new Scene(root, 939, 685));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
 
         }catch (Exception e){
