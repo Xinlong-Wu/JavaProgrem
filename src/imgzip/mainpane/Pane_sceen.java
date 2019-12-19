@@ -11,6 +11,9 @@ import javafx.stage.Stage;
  @Date: 2019.12.8
  */
 public class Pane_sceen extends Application {
+    /**
+    开启主页面
+     */
     @Override
     public void start(Stage primaryStage) throws Exception{
         try {

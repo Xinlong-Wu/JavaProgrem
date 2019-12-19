@@ -9,6 +9,9 @@ import javafx.stage.Stage;
  @Date: 2019.12.19
  */
 public class Change_tel {
+    /**
+    加载更改电话号码的页面
+     */
     public Change_tel(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Change_tel.fxml"));

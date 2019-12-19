@@ -13,6 +13,9 @@ import java.util.Objects;
  @Date: 2019.12.10
  */
 public class Course {
+    /**
+     加载登陆后的course页面
+     */
     public Course(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Course.fxml"));
@@ -25,6 +28,9 @@ public class Course {
             e.printStackTrace();
         }
     }
+    /**
+     加载没有登录前的页面
+     */
     public Course(int a){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Course(none).fxml"));

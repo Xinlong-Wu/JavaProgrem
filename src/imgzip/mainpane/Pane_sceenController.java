@@ -20,10 +20,6 @@ import javafx.stage.Stage;
  */
 public class Pane_sceenController implements Initializable {
 	@FXML
-	private Label homepage;
-	@FXML
-	private Line line;
-	@FXML
 	private Button register;
 	@FXML
 	private Button signin;
@@ -32,8 +28,6 @@ public class Pane_sceenController implements Initializable {
 	@FXML
 	private Button price;
 
-	@FXML
-	private Button personal;
 
 	@Override
 	public void initialize(URL lacation, ResourceBundle resources){
@@ -73,11 +67,6 @@ public class Pane_sceenController implements Initializable {
 			stage.close();
 		});
 
-//		personal.setOnAction(e -> {
-//			new Personal();
-//			Stage stage = (Stage)personal.getScene().getWindow();
-//			stage.close();
-//		});
 	}
 
 }
