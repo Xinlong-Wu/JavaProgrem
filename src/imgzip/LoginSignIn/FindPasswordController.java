@@ -82,7 +82,7 @@ public class FindPasswordController {
             if(rs.getString(1).equals(email.getText())){
 
                 GlobalStringManager.setAccount(account.getText());
-                new ChangePassword();
+                new ChangePassword(0);
                 Stage stage = (Stage)account.getScene().getWindow();
                 stage.close();
 
