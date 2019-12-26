@@ -21,6 +21,8 @@ public class Change_email {
             primaryStage.setScene(new Scene(root, 400, 300));
             primaryStage.show();
 
+
+
         }catch (Exception e){
             e.printStackTrace();
         }
