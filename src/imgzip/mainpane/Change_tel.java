@@ -19,7 +19,9 @@ public class Change_tel {
             primaryStage.setTitle("修改电话号码");
             primaryStage.setScene(new Scene(root, 400, 300));
             primaryStage.show();
-
+            primaryStage.setOnCloseRequest(e->{
+                new Personal();
+            });
         }catch (Exception e){
             e.printStackTrace();
         }
