@@ -86,6 +86,10 @@ public class FindPasswordController {
                 Stage stage = (Stage)account.getScene().getWindow();
                 stage.close();
 
+
+                /**
+                 * 当用户认证失败时，告诉用户是账户名错误还是邮箱错误。
+                 */
             }else {
                 AlertWindow alertWindow = new AlertWindow("验证失败","YOUR EMAIL IS WRONG");  // 此处写警告弹窗的标题和内容
                 // 用于新加按钮，可以新加多个，最后添加在VBox中

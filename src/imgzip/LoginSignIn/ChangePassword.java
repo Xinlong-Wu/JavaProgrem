@@ -79,7 +79,7 @@ public class ChangePassword {
                 if(judgeIsLogined == 0){
                     new LoginBeginner();
                 }else if(judgeIsLogined == 1){
-                    new Pane_sceenbeginner();
+                    new Personal();
                 }
             });
 
@@ -141,7 +141,7 @@ class ChangePasswordSuccessfully{
                 });
             }else {
                 primaryStage.setOnCloseRequest(e->{
-                    new Pane_sceenbeginner();
+                    new Personal();
                 });
             }
 

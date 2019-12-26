@@ -189,7 +189,7 @@ public class CreateAccountController {
             createAccountInstruction.queryUpdate(currentInstruction);
 
             /**
-             检查数据库中是否成功插入数据
+             检查数据库中是否成功插入数据,如果没有插入数据，则会跳出提醒框提醒用户
              */
             String currentInstruction2 = "SELECT pwd FROM login WHERE userName=" + "'" + userName.getText().trim() + "'";
             rs = createAccountInstruction.queryExcecute(currentInstruction2);

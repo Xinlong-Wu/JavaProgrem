@@ -11,6 +11,7 @@ import java.io.FileWriter;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 
 /**
@@ -114,6 +115,16 @@ public class LoginController {
                     GlobalStringManager.setAccount(account.getText());
                     loadPicturesSequences();
 
+                    /**
+                     * 测试是否载入成功
+                     */
+//                    ArrayList<String> now = new ArrayList<>();
+//                    now = GlobalStringManager.getPicSequences();
+//                    for (int i = 0 ; i < now.size() ; i++){
+//                        System.out.println(now.get(i));
+//                    }
+
+
                     Stage stage = (Stage)account.getScene().getWindow();
                     new Personal();
                     stage.close();
@@ -195,9 +206,12 @@ public class LoginController {
     }
 
 
-
+    /**
+     * 加载用户的图片序列。
+     * 图片序列是指：用户在上传图像的时候会得到一个随机的，一一对应的图片序列码，用于从服务器中提取对应的图片。
+     * 当用户登录时，程序会访问数据库中储存的所有序列码，并加载到全局变量类中供其他页面获取。
+     */
     public void loadPicturesSequences(){
-
 
         DataBaseController loadingInstruction = new DataBaseController();
         ResultSet rs = null;
@@ -207,13 +221,14 @@ public class LoginController {
             rs = loadingInstruction.queryExcecute(currentInstruction);
 
             if(rs.next()){
-
+                rs.last();
                 int columnCount = rs.getRow();
+                rs.first();
                 for(int i = 1 ; i <= columnCount ; i++){
-                    GlobalStringManager.setPicSequences(rs.getString(i));
+                    GlobalStringManager.setPicSequences(rs.getString(1));
+                    System.out.println(rs.getString(1));
+                    rs.next();
                 }
-
-
             }
 
         }catch (SQLException e){
@@ -223,11 +238,6 @@ public class LoginController {
             loadingInstruction.close();
         }
 
-
-
-
     }
-
-
 }
 
