@@ -10,7 +10,7 @@ import javafx.stage.Stage;
  @Author:  吴泳仪
  @Date: 2019.12.8
  */
-public class Pane_sceen extends Application {
+public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws Exception{
         try {

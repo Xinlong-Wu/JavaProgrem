@@ -33,29 +33,7 @@
 >[JavaFX之Drag And Drop拖放操作](https://blog.csdn.net/wingfourever/article/details/8858782)
 
 
-## 接口参数
- 
- - (Scene) MainBox:
-    - \- _SAVE_:Image 按钮图标    
-    - \- _ADD_:Image 按钮图标   
-    - \- _CLEAR_:Image 按钮图标   
-    - \- _SAVED_:Image 按钮图标-深色   
-    - \- _ADDD_:Image 按钮图标-深色   
-    - \- _CLEARD_:Image 按钮图标-深色   
-    - \- _imgCount_: int 用来记录imgblock的个数，方便删除
-    - \- _blockList_: FlowPane 用来储存imglock   
-    - \- _homePane_: BorderPane 主pane，因为要传给super所以必须为静态类   
-    - \- imgList: HashSet 用来防止图片重复插入   
-    - \- centerPane: ScollarPane 实现滚动显示   
-    - \- tipLabelDark: ImageView 实现拖动提示   
-    - \- ivSave: ImageView 按钮图标  
-    - \- ivAdd: ImageView 按钮图标  
-    - \- ivClear: ImageView 按钮图标 
-   - MainBox()  **构造方法，调用生成主界面窗口Scene**    
-   - \- setImg(ImageView iv, Image im):void **更改类中imgview的显示图片**   
-   - \- addToBlockList(String path): void **添加一个block窗格类到BlockList**    
-   - _drop_(ImgBlock block): void **静态方法删除图片(block窗格类)**    
-   - \- _dropAll_(): void **删除主窗口所有的block窗格**    
+## 类目录   
    
 ## API
    1. 警告弹窗AlertWindow类，添加按钮的实例如下    
