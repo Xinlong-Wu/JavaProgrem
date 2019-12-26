@@ -2,6 +2,7 @@
 
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -24,30 +25,42 @@
       <font>
         <Font size="17.0" fx:id="x1" />
       </font>
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor>
     </Button>
-    <Button fx:id="price" font="$x1" layoutX="640.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price" />
-    <Button fx:id="functionpage" font="$x1" layoutX="500.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Function page" />
-    <Button fx:id="signout" font="$x1" layoutX="830.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Sign out" />
-    <AnchorPane layoutX="34.0" layoutY="200.0" prefHeight="400.0" prefWidth="600.0">
+    <Button fx:id="price" font="$x1" layoutX="640.0" layoutY="45.0" mnemonicParsing="false" prefHeight="39.0" prefWidth="96.0" style="-fx-background-color: Transparent;" text="Price">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+    <Button fx:id="functionpage" font="$x1" layoutX="500.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Function page">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+    <Button fx:id="signout" font="$x1" layoutX="830.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Sign out">
+         <cursor>
+            <Cursor fx:constant="HAND" />
+         </cursor></Button>
+    <AnchorPane layoutX="34.0" layoutY="200.0" opacity="0.7" prefHeight="400.0" prefWidth="550.0" style="-fx-background-color: #F2F2F2; -fx-background-radius: 5;">
       <children>
-        <Label layoutX="51.0" layoutY="28.0" text="用户名：">
+        <Label alignment="CENTER" layoutX="51.0" layoutY="28.0" prefHeight="30.0" prefWidth="75.0" text="用户名：">
           <font>
-            <Font size="18.0" fx:id="x2" />
+            <Font size="17.0" fx:id="x2" />
           </font>
         </Label>
-        <Label font="$x2" layoutX="51.0" layoutY="87.0" text="邮箱：" />
-        <Button fx:id="changeemail" layoutX="400.0" layoutY="87.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改" underline="true">
+        <Label alignment="CENTER" font="$x2" layoutX="51.0" layoutY="93.0" prefHeight="25.0" prefWidth="75.0" text="邮箱：" />
+        <Button fx:id="changeemail" layoutX="400.0" layoutY="93.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改" underline="true">
                <font>
             <Font size="14.0" fx:id="x3" />
                </font>
                <cursor>
                   <Cursor fx:constant="HAND" />
                </cursor></Button>
-        <Label font="$x2" layoutX="51.0" layoutY="150.0" text="电话：" />
+        <Label alignment="CENTER" font="$x2" layoutX="51.0" layoutY="158.0" prefWidth="75.0" text="电话：" />
             <Pane id="accountp" fx:id="accountp" layoutX="150.0" layoutY="28.0" prefHeight="35.0" prefWidth="200.0" />
             <Pane id="emailp" fx:id="emailp" layoutX="150.0" layoutY="90.0" prefHeight="35.0" prefWidth="200.0" />
             <Pane id="telp" fx:id="telp" layoutX="150.0" layoutY="153.0" prefHeight="35.0" prefWidth="200.0" />
-            <Button fx:id="changetel" layoutX="400.0" layoutY="150.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改" underline="true">
+            <Button fx:id="changetel" layoutX="400.0" layoutY="158.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改" underline="true">
                <font>
                   <Font size="14.0" />
                </font>
@@ -55,13 +68,37 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
+            <Label layoutX="50.0" layoutY="222.0" text="图片序列：">
+               <font>
+                  <Font size="17.0" />
+               </font>
+            </Label>
+            <Pane layoutX="150.0" layoutY="218.0" prefHeight="35.0" prefWidth="200.0" />
       </children>
+         <effect>
+            <InnerShadow />
+         </effect>
     </AnchorPane>
     <AnchorPane layoutX="34.0" layoutY="110.0" prefHeight="80.0" prefWidth="500.0">
       <children>
-        <Line endX="350.0" layoutX="100.0" layoutY="66.0" opacity="0.38" startX="-50.0" />
-        <Button fx:id="message" font="$x1" layoutX="75.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="个人信息" />
-        <Button fx:id="changepw" font="$x1" layoutX="216.0" layoutY="35.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="修改密码" />
+        <Line endX="500.0" layoutX="50.0" layoutY="75.0" opacity="0.38" startX="-50.0" />
+        <Button fx:id="message" layoutY="35.0" mnemonicParsing="false" opacity="0.7" prefWidth="200.0" style="-fx-background-color: #F2F2F2;" text="个人信息">
+               <font>
+                  <Font size="17.0" />
+               </font>
+               <effect>
+                  <InnerShadow />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
+        <Button id="changepw" fx:id="changepw" font="$x1" layoutX="216.0" layoutY="35.0" mnemonicParsing="false" opacity="0.7" prefWidth="200.0" stylesheets="@../css/mainpanecss.css" text="修改密码">
+               <effect>
+                  <InnerShadow blurType="ONE_PASS_BOX" choke="0.13" height="11.91" radius="8.434999999999999" width="23.83" />
+               </effect>
+               <cursor>
+                  <Cursor fx:constant="HAND" />
+               </cursor></Button>
       </children>
     </AnchorPane>
   </children>
