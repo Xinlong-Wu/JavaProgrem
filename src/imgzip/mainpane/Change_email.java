@@ -10,6 +10,9 @@ import javafx.stage.Stage;
  @Date: 2019.12.17
  */
 public class Change_email {
+    /**
+     加载更改邮箱的页面
+     */
     public Change_email(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Change_email.fxml"));

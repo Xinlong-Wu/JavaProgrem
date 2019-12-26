@@ -7,7 +7,9 @@ import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 public class Pane_sceenbeginner {
-
+    /**
+     别的页面在切换到主页面时可调用的创建主页面的方法
+     */
     public Pane_sceenbeginner(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Pane_sceen.fxml"));

@@ -9,6 +9,9 @@ import javafx.stage.Stage;
  @Date: 2019.12.18
  */
 public class Priceimg {
+    /**
+     加载显示微信收费的页面
+     */
     public Priceimg(){
         try {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/Priceimg.fxml"));
