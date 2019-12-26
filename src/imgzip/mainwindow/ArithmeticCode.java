@@ -1,9 +1,10 @@
 package imgzip.mainwindow;
 
+import java.util.ArrayList;
 import java.util.Scanner;
 
 public class ArithmeticCode {
-    public Scanner sc = new Scanner(System.in);// 控制台输入对象
+    Scanner sc = new Scanner(System.in);
     public UnitCode[] arrU = new UnitCode[4];// 用以存储符号概率对象
     public int step = 1;
 
@@ -44,27 +45,29 @@ public class ArithmeticCode {
 
     // 解码过程
     public String deCoder(double n) {
-        int j = 7, i = 0;
+        int i = 0;
         double gNum = n;
-        String[] str = new String[j];
+        String str = "";
         double left = 0, right = 1, d = 1;
         UnitCode u1 = new UnitCode();
 
-        while (j > 0) {
+        while (true) {
             for (UnitCode u2 : arrU) {
                 double ltmp = left + d * u2.getlVal();
                 double rtmp = ltmp + d * u2.getP();
                 if (ltmp <= gNum && gNum < rtmp) {
                     u1 = u2;
-                    str[i++] = u1.getCode();
+                    str += u1.getCode();
                 }
             }
             left += d * u1.getlVal();
             right = left + d * u1.getP();
             d = d * u1.getP();
-            j--;
+            if("00".equals(u1.getCode())){
+                break;
+            }
         }
-        return join(str, " ");
+        return str;
     }
 
     // 将数组中元素插入指定字符串
@@ -109,8 +112,6 @@ public class ArithmeticCode {
 
 // 创建一个初始码类：UnitCode
 class UnitCode {
-
-
 
     private String code;// 符号
     private double lVal;// 初始码概率的左边界值
