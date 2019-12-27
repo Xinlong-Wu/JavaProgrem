@@ -95,7 +95,7 @@ public class ServerReceive {
             String filename = index[1];
             String filesize = index[2];
 
-            File dir = new File("D:\\javaProImgs\\");
+            File dir = new File("javaProImgs");
             if(!dir.exists()){
                 Boolean tmp = dir.mkdir();
                 if(!tmp){
@@ -104,7 +104,7 @@ public class ServerReceive {
             }
 
             /**创建空文件，用来进行接收文件*/
-            file = new File("D:\\javaProImgs\\"+filename);
+            file = new File("javaProImgs",filename);
             if(!file.exists()){
                 try {
                     file.createNewFile();
