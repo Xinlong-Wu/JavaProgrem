@@ -31,6 +31,11 @@ public class ChangePassword {
             Button change = (Button)root.lookup("#changeThePassword");
             change.setDisable(true);
 
+            /**
+             * 改变密码按钮事件：
+             * ①：引用全局变量，获得当前账号
+             * ②：更新密码后，通过查询当前账号而检查密码是否改变成功
+             */
             change.setOnAction(e1->{
 
                 String a = GlobalStringManager.getAccount();
@@ -38,7 +43,6 @@ public class ChangePassword {
                 ResultSet rs = null;
 
                 try{
-
                     String encryptedPassword = HashUtil.hash(checkPassword.getText());
                     String currentInstruction = "update login set pwd = " + "'" + encryptedPassword + "'" + "where userName = "+ "'" + a.trim() + "'";
                     changeInstruction.queryUpdate(currentInstruction);
@@ -60,10 +64,9 @@ public class ChangePassword {
 
                 }finally {
                     changeInstruction.close();
-
                 }
-
             });
+
 
             Label different = (Label)root.lookup("#checkThePassword");
             different.setVisible(false);
@@ -74,7 +77,11 @@ public class ChangePassword {
             primaryStage.show();
 
 
-
+            /**
+             * 更改密码取消页面后的事件：
+             * ①如果用户在“登录页面”点击忘记密码，即在未登录的情况下点击忘记密码时，退出页面会返回登录页面
+             * ②如果用户在“个人信息页面”点击修改密码，即在登录的情况下点击忘记密码时，退出页面会返回用户的个人信息页面。
+             */
             primaryStage.setOnCloseRequest(e->{
                 if(judgeIsLogined == 0){
                     new LoginBeginner();
@@ -86,12 +93,6 @@ public class ChangePassword {
         }catch (Exception e){
             e.printStackTrace();
         }
-
-    }
-
-
-    public void upDatePassword(){
-
 
     }
 }
