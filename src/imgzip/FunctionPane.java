@@ -2,6 +2,7 @@ package imgzip;
 
 import imgzip.mainpane.Course;
 import imgzip.mainwindow.FunctionBox;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 /**
  * AlertWindow class
@@ -21,7 +22,7 @@ public class FunctionPane{
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-
+        primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         primaryStage.setOnCloseRequest(e->{
             new Course();
         });

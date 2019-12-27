@@ -324,6 +324,7 @@ class ImgBlock extends BorderPane {
         if(isUpload){
             AlertWindow alertWindow = new AlertWindow("图片已经存在","图片已经存在于云端");
             alertWindow.start(new Stage());
+            ivstate.setImage(WAITING);
             return;
         }
         try {

@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.Objects;
@@ -38,7 +39,7 @@ public class Course {
             primaryStage.setTitle("Course");
             primaryStage.setScene(new Scene(root, 939, 685));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){
             e.printStackTrace();
         }

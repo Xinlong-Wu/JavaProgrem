@@ -7,6 +7,7 @@ import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
+import javafx.scene.image.Image;
 import javafx.scene.layout.Pane;
 import javafx.scene.text.Font;
 import javafx.scene.text.FontPosture;
@@ -70,7 +71,7 @@ public class Personal {
             primaryStage.setTitle("Personal");
             primaryStage.setScene(new Scene(root, 939, 685));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){
             e.printStackTrace();
         }

@@ -3,6 +3,7 @@ package imgzip.LoginSignIn;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -20,7 +21,7 @@ public class WrongPassword {
             primaryStage.setTitle("Password is wrong!");
             primaryStage.setScene(new Scene(root, 638.0, 400));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){
             e.printStackTrace();
         }

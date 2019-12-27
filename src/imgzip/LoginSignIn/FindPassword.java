@@ -4,6 +4,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -26,7 +27,7 @@ public class FindPassword {
             primaryStage.setTitle("Verify your ID");
             primaryStage.setScene(new Scene(root, 607, 500));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
 
             /**
              * ①当用户点击关闭窗口时，会跳转至登录页面

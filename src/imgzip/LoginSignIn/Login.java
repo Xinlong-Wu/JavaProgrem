@@ -9,6 +9,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
@@ -92,6 +93,7 @@ public class Login extends Application {
         primaryStage.setTitle("XXX login");
         primaryStage.setScene(new Scene(root, 638, 400));
         primaryStage.show();
+        primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         primaryStage.setOnCloseRequest(e->{
             new Pane_sceenbeginner();
         });

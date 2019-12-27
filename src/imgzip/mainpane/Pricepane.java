@@ -3,6 +3,7 @@ package imgzip.mainpane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 /**
@@ -35,7 +36,7 @@ public class Pricepane{
             primaryStage.setTitle("Price");
             primaryStage.setScene(new Scene(root, 939, 685));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){
             e.printStackTrace();
         }

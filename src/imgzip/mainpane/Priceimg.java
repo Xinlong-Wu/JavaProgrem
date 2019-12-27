@@ -3,6 +3,7 @@ package imgzip.mainpane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 /**
  @Author:  吴泳仪
@@ -19,7 +20,7 @@ public class Priceimg {
             primaryStage.setTitle("pay");
             primaryStage.setScene(new Scene(root, 237, 327));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){
             e.printStackTrace();
         }

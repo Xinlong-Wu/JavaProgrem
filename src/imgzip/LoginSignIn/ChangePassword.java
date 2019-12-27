@@ -9,6 +9,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.PasswordField;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.sql.ResultSet;
@@ -75,7 +76,7 @@ public class ChangePassword {
             primaryStage.setTitle("Verify your ID");
             primaryStage.setScene(new Scene(root, 607, 500));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
 
             /**
              * 更改密码取消页面后的事件：
@@ -135,7 +136,7 @@ class ChangePasswordSuccessfully{
             primaryStage.setTitle("Verify your ID");
             primaryStage.setScene(new Scene(root, 638, 400));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             if (judgeIsLogined == 0){
                 primaryStage.setOnCloseRequest(e->{
                     new LoginBeginner();

@@ -3,6 +3,7 @@ package imgzip.mainpane;
 import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 /**
  @Author:  吴泳仪
@@ -19,6 +20,7 @@ public class Change_tel {
             primaryStage.setTitle("修改电话号码");
             primaryStage.setScene(new Scene(root, 400, 300));
             primaryStage.show();
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             primaryStage.setOnCloseRequest(e->{
                 new Personal();
             });

@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.util.regex.*;
@@ -267,7 +268,7 @@ public class CreateAccount {
             primaryStage.setTitle("Create an Account");
             primaryStage.setScene(new Scene(root, 600.0000999999975, 633));
             primaryStage.show();
-
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             primaryStage.setOnCloseRequest(e->{
                 new Pane_sceenbeginner();
             });
@@ -328,6 +329,7 @@ class CreateSuccessfully{
             primaryStage.setTitle("Create an Account Successfully!");
             primaryStage.setScene(new Scene(root, 638, 406));
             primaryStage.show();
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             primaryStage.setOnCloseRequest(e->{
                 new LoginBeginner();
             });
