@@ -79,7 +79,6 @@ class ImgBlock extends BorderPane {
      *  index Imgblock的编号
      *  isUpload 标记是否已经上传，来避免重复上传
      *  file block的图片文件
-     *  isHttpSorce 标记是否是通过文件提取码提取
      *  isAcceed 判断该block是否成功创建，主要针对于提取码提取的图片，如果不成功，则不将imgBlock加入BlockList
      */
     private ImageView ivimg = new ImageView();
@@ -94,7 +93,6 @@ class ImgBlock extends BorderPane {
     private int index;
     private Boolean isUpload = false;
     private File file;
-    private Boolean isHttpSorce = false;
     private Boolean isAcceed = true;
 
 
@@ -122,7 +120,7 @@ class ImgBlock extends BorderPane {
                 setAcceed(false);
                 return;
             }
-            this.isHttpSorce = true;
+            this.isUpload = true;
         } else {
             file= new File(imgUrl);
         }
@@ -139,7 +137,7 @@ class ImgBlock extends BorderPane {
 
         //私有属性设定
         Image tmp ;
-        if(isHttpSorce){
+        if(isUpload){
             tmp = new Image(imgUrl);
         } else {
             tmp = new Image("file:"+imgUrl);
@@ -324,7 +322,8 @@ class ImgBlock extends BorderPane {
         ivstate.setImage(LOADING);
         UploadImg uploadImg;
         if(isUpload){
-            ivstate.setImage(DONE);
+            AlertWindow alertWindow = new AlertWindow("图片已经存在","图片已经存在于云端");
+            alertWindow.start(new Stage());
             return;
         }
         try {

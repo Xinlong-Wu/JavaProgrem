@@ -5,15 +5,44 @@ import java.util.Scanner;
 
 public class ArithmeticCode {
     Scanner sc = new Scanner(System.in);
-    public UnitCode[] arrU = new UnitCode[4];// 用以存储符号概率对象
+    public UnitCode[] arrU = new UnitCode[25];// 用以存储符号概率对象
     public int step = 1;
 
-    public ArithmeticCode() {
-        arrU[1] = new UnitCode("00", 0, 0.1);
-        arrU[0] = new UnitCode("01", 0.1, 0.5);
-        arrU[2] = new UnitCode("10", 0.5, 0.7);
-        arrU[3] = new UnitCode("11", 0.7, 1);
 
+// 5=74.4703    01100
+// 1=74.4643    01110
+// 2=74.4606    00000
+// #=64.7479    00010
+
+
+
+    public ArithmeticCode() {
+        int i = 0;
+        arrU[i++] = new UnitCode("~", 0, 0.6304);
+        arrU[i++] = new UnitCode("j", 0.6304, 11.4217);
+        arrU[i++] = new UnitCode("n", 11.4217, 22.213);
+        arrU[i++] = new UnitCode("b", 22.213, 33.0043);
+        arrU[i++] = new UnitCode("Z", 33.0043, 65.3782);
+        arrU[i++] = new UnitCode("_", 65.3782, 97.7521);
+        arrU[i++] = new UnitCode(".", 97.7521, 103.126);
+        arrU[i++] = new UnitCode("I", 103.126, 162.4999);
+        arrU[i++] = new UnitCode("i", 162.4999, 194.8738);
+        arrU[i++] = new UnitCode("P", 194.8738, 227.2477);
+        arrU[i++] = new UnitCode("p", 227.2477, 259.6216);
+        arrU[i++] = new UnitCode("0", 259.6216, 298.1109);
+        arrU[i++] = new UnitCode("3", 298.1109, 340.1935);
+        arrU[i++] = new UnitCode("8", 340.1935, 382.2763);
+        arrU[i++] = new UnitCode("7", 382.2763, 424.3596);
+        arrU[i++] = new UnitCode("4", 424.3596, 466.4436);
+        arrU[i++] = new UnitCode("6", 466.4436, 508.5279);
+        arrU[i++] = new UnitCode("9", 508.5279, 550.6161);
+        arrU[i++] = new UnitCode("m", 550.6161, 593.7814);
+        arrU[i++] = new UnitCode("g", 593.7814, 647.738);
+        arrU[i++] = new UnitCode("/", 647.738, 712.4859);
+        arrU[i++] = new UnitCode("#", 712.4859, 777.2338);
+        arrU[i++] = new UnitCode("2", 777.2338, 851.6944);
+        arrU[i++] = new UnitCode("1", 851.6944, 926.1587);
+        arrU[i++] = new UnitCode("5", 926.1587, 1000);
     }
 
     // 编码过程
@@ -26,20 +55,23 @@ public class ArithmeticCode {
 
         while (true) {
             String flag = sc.next();
-            if (flag.equalsIgnoreCase("exit")) {
-                return gNum;
+            int len = flag.length();
+            for(int i = 0;i<len;i++){
+                if (flag.equalsIgnoreCase("~")) {
+                    return gNum;
+                }
+                Character c = flag.charAt(i);
+                u1 = query(c.toString());
+                left += d * u1.getlVal();
+                right = left + d * u1.getP();
+                gNum = left + (Math.random() * d * u1.getP());
+                d = d * u1.getP();
+                this.step++;
+                /*
+                 * System.out.getP()rintln("左值为"+left); System.out.getP()rintln("中值为"+d);
+                 * System.out.getP()rintln("右值为"+right);
+                 */
             }
-            u1 = query(flag);
-            left += d * u1.getlVal();
-            right = left + d * u1.getP();
-            gNum = left + (Math.random() * d * u1.getP());
-            d = d * u1.getP();
-            this.step++;
-            /*
-             * System.out.getP()rintln("左值为"+left); System.out.getP()rintln("中值为"+d);
-             * System.out.getP()rintln("右值为"+right);
-             */
-
         }
     }
 
@@ -86,9 +118,9 @@ public class ArithmeticCode {
     // 查询输入符号
     public UnitCode query(String name) {
 
-        for (UnitCode UnitCode : arrU) {
-            if (name.equals(UnitCode.getCode())) {
-                return UnitCode;
+        for (int i = 24;i>=0;i--) {
+            if (name.equals(arrU[i].getCode())) {
+                return arrU[i];
             }
         }
 

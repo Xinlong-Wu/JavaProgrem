@@ -28,6 +28,7 @@ import java.sql.SQLException;
 import java.util.HashSet;
 import java.util.List;
 import java.util.UUID;
+import java.util.regex.Pattern;
 
 
 /**
@@ -513,9 +514,16 @@ public class FunctionBox extends Scene {
     }//setclipboardtext
 
     private void loadImgs(String uuid){
+        boolean t = Pattern.matches(".*[^a-z|0-9].*",uuid );
+        if(t){
+            AlertWindow alertWindow = new AlertWindow("提取码有误","您的提取码有误，请重新输入");
+            alertWindow.start(new Stage());
+            return;
+        }
         String[] fileName = getImgsUrl(uuid);
         for (String s : fileName) {
-            addToBlockList("http://cdn.wulongxin.com//usr/uploads/2019/20190705184214.jpg");
+            System.out.println("http://www.wulongxin.com/javaP/javaProImgs/"+s);
+            addToBlockList("http://www.wulongxin.com/javaP/javaProImgs/"+s);
         }
         checkBlockList();
     }
@@ -535,8 +543,9 @@ public class FunctionBox extends Scene {
             int row = rs.getRow();
             urls = new String[row];
             rs.first();
-            for(int count = 0;rs.next();count++) {
+            for(int count = 0;count<row;count++) {
                 urls[count] = rs.getString(1);
+                rs.next();
             }
             rs.close();
         } catch (SQLException e) {

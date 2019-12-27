@@ -217,7 +217,7 @@ public class LoginController {
         ResultSet rs = null;
         try{
 
-            String currentInstruction = "SELECT uuid FROM UplodUser WHERE userName= " + "'" + account.getText().trim() + "'";
+            String currentInstruction = "SELECT distinct uuid FROM UplodUser WHERE userName= " + "'" + account.getText().trim() + "'";
             rs = loadingInstruction.queryExcecute(currentInstruction);
 
             if(rs.next()){

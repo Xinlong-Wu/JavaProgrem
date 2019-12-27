@@ -14,6 +14,7 @@ import java.io.File;
         import java.net.Socket;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -108,7 +109,7 @@ public class UploadImg implements Runnable {
 
         /**与服务器建立连接*/
         try {
-            s = new Socket("127.0.0.1", 1234);
+            s = new Socket("120.78.208.4", 1234);
 //            s.setSoTimeout(5000);
         }catch (IOException e) {
             System.out.println("未连接到服务器");
@@ -123,14 +124,15 @@ public class UploadImg implements Runnable {
         /**
          * 向数据库提交数据
          */
+        DataBaseController dbc = new DataBaseController();
         String fileName = "";
         if(!"-1".equals(String.valueOf(uuid))){
-            fileName = uuid +"_imgZIP." +storeName;
+            int fileharder = Integer.valueOf(getImgId()) ;
+            fileName = fileharder +"_imgZIP." +storeName;
         }
         else {
             throw new Exception("数据库连接出错");
         }
-        DataBaseController dbc = new DataBaseController();
         String sql = "INSERT INTO `imgcount` (`imgUrl`, `groupUuid`) VALUES ('"+fileName+"','"+uuid+"')";
         dbc.queryUpdate(sql);
         sql = "INSERT INTO `UplodUser` (`userName`, `uuid`) VALUES ('"+ GlobalStringManager.getAccount()+"', '"+uuid+"')";

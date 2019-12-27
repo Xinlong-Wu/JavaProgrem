@@ -1,9 +1,7 @@
 package imgzip.LoginSignIn;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.sql.*;
+
 /**
  @Author:   肖尧
  @Date: 2019.12.12
@@ -91,7 +89,9 @@ public class DataBaseController {
 
             ps.executeUpdate();
 
-        }catch (Exception ex){
+        }catch (SQLIntegrityConstraintViolationException e){
+            // 数据库记录去重，该异常可以不处理
+        } catch (Exception ex){
             ex.printStackTrace();
 
         }
