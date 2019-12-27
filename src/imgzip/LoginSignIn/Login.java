@@ -62,6 +62,7 @@ public class Login extends Application {
 
             /**
              * 读取账号和密码。
+             * 账号密码由"\"分割 ，第一位是账号，第二位是密码。
              */
             if(file.length() != 0){
 

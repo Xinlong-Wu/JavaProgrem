@@ -8,6 +8,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 import javafx.scene.control.Alert;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 import java.awt.*;
@@ -15,6 +16,8 @@ import java.io.IOException;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.sql.ResultSet;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 /**
  @Author:   肖尧
@@ -26,7 +29,7 @@ public class CreateAccountController {
     private TextField userName;
 
     @FXML
-    private TextField passWord;
+    private PasswordField passWord;
 
     @FXML
     private TextField email;
@@ -48,6 +51,9 @@ public class CreateAccountController {
 
     @FXML
     private Label already2;
+
+    @FXML
+    private Label already3;
 
     @FXML
     private Hyperlink signIn;
@@ -219,6 +225,86 @@ public class CreateAccountController {
     }
 
     /**
+     * 检查当前的密码安全度：
+     * ①当前密码非法时，Label显示"Invalid"且为红色
+     * ②当前密码为弱密码时，lable显示"Weak Passoword"且为红色
+     * ③当前密码为中等强度密码时，label显示"Medium Passoword"且为黄色
+     * ④当前密码为强密码时，lable显示"Strong Password"且为绿色
+     */
+    public void checkTheStrengtenOfPassowrd(){
+        System.out.println(checkTheStengthOfPassword(passWord.getText()));
+        if (!"".equals(passWord.getText())){
+
+            if(checkTheStengthOfPassword(passWord.getText()) == 0){
+                already3.setText("Invalid!");
+                already3.setTextFill(Color.RED);
+                already3.setVisible(true);
+                createAccount.setDisable(true);
+
+            }else if (checkTheStengthOfPassword(passWord.getText()) == 1){
+                already3.setText("Weak Password");
+                already3.setTextFill(Color.RED);
+                already3.setVisible(true);
+
+            }else if(checkTheStengthOfPassword(passWord.getText()) == 2){
+                already3.setText("Medium Password");
+                already3.setTextFill(Color.YELLOW);
+                already3.setVisible(true);
+            }else if (checkTheStengthOfPassword(passWord.getText()) == 3){
+                already3.setText("Strong Password");
+                already3.setTextFill(Color.GREEN);
+                already3.setVisible(true);
+            }
+
+        }else {
+            if (already3.isVisible()){
+                already3.setVisible(false);
+                createAccount.setDisable(true);
+            }
+        }
+    }
+
+
+    /**
+     *
+     * @param password
+     * @return int
+     * 检查密码格式： ①长度为5-30位，小于5位或大于30位或使用了特殊字符都会坚定为非法密码
+     *               ②当长度大于5，小于8，且符合一级密码格式的密码，界定为弱安全密码
+     *               ③当长度大于8，符合一级密码格式但是不符合二级强密码格式的密码，界定为中等安全密码
+     *               ④当长度大于8，符合一级、二级密码格式的密码，界定为强安全密码。
+     */
+
+    public int checkTheStengthOfPassword(String password){
+
+        String strongFormula = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{5,30}$";
+        String weakFormula = "[a-zA-Z0-9]\\w{5,30}";
+
+        Pattern weakPattern = Pattern.compile(weakFormula);
+        Pattern strongPattern = Pattern.compile(strongFormula);
+
+        Matcher weakMatcher = weakPattern.matcher(password);
+        Matcher strongMatcher = strongPattern.matcher(password);
+
+
+        if(weakMatcher.matches()){
+            if (strongMatcher.matches()){
+                return 3;
+            }else {
+
+                if (password.length() <= 8){
+                    return 1;
+                }else {
+
+                    return 2;
+                }
+            }
+        }else {
+            return 0;
+        }
+    }
+
+    /**
      * 检查是否点击了同意privacy协议，如果不同意，则无法点击 createaccount 按钮。
      */
     public void checkIfSelectedPrivacy(){
@@ -227,7 +313,7 @@ public class CreateAccountController {
         boolean userNmae = "".equals(userName.getText());
         boolean emial = "".equals(email.getText());
 
-        if(agree.isSelected() && !userNmae && !emial && createAccount.isDisable() && !already.isVisible() && !already2.isVisible() && !"".equals(passWord.getText())){
+        if(agree.isSelected() && !userNmae && !emial && createAccount.isDisable() && !already.isVisible() && !already2.isVisible() && !"".equals(passWord.getText() )&& !already3.getText().equals("Invalid!")){
             createAccount.setDisable(false);
         }else {
             createAccount.setDisable(true);
@@ -271,6 +357,9 @@ public class CreateAccountController {
 
         }
     }
+
+
+
 
 }
 
