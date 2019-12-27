@@ -27,6 +27,10 @@ public class FindPassword {
             primaryStage.setScene(new Scene(root, 607, 500));
             primaryStage.show();
 
+
+            /**
+             * ①当用户点击关闭窗口时，会跳转至登录页面
+             */
             primaryStage.setOnCloseRequest(e->{
                 new LoginBeginner();
             });

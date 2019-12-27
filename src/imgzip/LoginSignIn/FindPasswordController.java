@@ -22,6 +22,8 @@ public class FindPasswordController {
 
     /**
      * 检查账号是否为空，设置按钮是否可被点击。
+     * ①：如果验证的账号为空则无法点击验证按钮
+     * ②：当输入的账号符合规则时，依旧会检查邮箱符不符合规则
      */
     boolean accountIsEmpty = true;
     public void checkAccountIsEmpty(){
@@ -43,6 +45,8 @@ public class FindPasswordController {
 
     /**
      * 检查邮箱是否为空，设置按钮是否可被点击。
+     * ①如果输入的邮箱为空，则按钮无法被点击。
+     * ②当输入的邮箱符合规则时，依旧会检查账号符不符合规则。
      */
     boolean emailIsEmpty = true;
     public void checkEmailIsEmpty(){
@@ -62,10 +66,10 @@ public class FindPasswordController {
         }
     }
 
-
-
     /**
      * 检查用户名和邮箱是否唯一匹配，如果不匹配则会弹出提示窗口，如果匹配则可以进入修改密码的页面。
+     * ①：若账号与邮箱不匹配，或账号在数据库中不存在，则会弹出窗口提醒用户账号出错
+     * ②：若邮箱与账号不匹配，或邮箱在数据库中不存在，则会弹出窗口提醒用户邮箱出错
      */
     public void verifyEmailAndAccount(){
 
@@ -109,10 +113,11 @@ public class FindPasswordController {
     }finally {
         verifyInstruction.close();
     }
-
     }
 
-
+    /**
+     * ①当用户点击“Signin”超链接时，会自动跳转至登录页面。
+     */
     public void backToSignIn(){
         Stage stage = (Stage) verify.getScene().getWindow();
         new LoginBeginner();

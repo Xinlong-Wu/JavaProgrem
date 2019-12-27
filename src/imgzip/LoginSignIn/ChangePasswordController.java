@@ -68,7 +68,7 @@ public class ChangePasswordController {
 
     /**
      * 检查第一次输入的密码和第二次输入的密码是否相同，以及两个密码框是否为空。
-     * 如果相同或者为空，则无法点击按钮，并会有提示。
+     * 如果不相同或者为空，则无法点击按钮，并会有提示。
      */
 
     public void checkPasswordTheSame(){
@@ -111,6 +111,4 @@ public class ChangePasswordController {
         }
 
     }
-
-
 }
