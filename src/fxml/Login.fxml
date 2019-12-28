@@ -1,15 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import java.lang.*?>
-<?import java.util.*?>
+
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
-<?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
 
-<AnchorPane id="AnchorPane" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.9999000000025" prefWidth="648.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="imgzip.LoginSignIn.LoginController">
+<AnchorPane id="AnchorPane" fx:id="main" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="399.9999000000025" prefWidth="648.0" xmlns:fx="http://javafx.com/fxml/1" xmlns="http://javafx.com/javafx/2.2" fx:controller="imgzip.LoginSignIn.LoginController">
   <children>
     <BorderPane id="whole" layoutX="13.0" layoutY="14.0" prefHeight="373.0" prefWidth="611.0">
       <bottom>
@@ -85,7 +83,7 @@
             </HBox>
             <HBox prefHeight="100.0" prefWidth="200.0" spacing="15.0" VBox.margin="$x3">
               <children>
-                <Button id="Login" fx:id="login" alignment="CENTER_LEFT" disable="true" mnemonicParsing="false" onAction="#login" prefWidth="210.0" style="" text="LOGIN">
+                <Button id="Login" fx:id="login" alignment="CENTER_LEFT" disable="true" mnemonicParsing="false" prefWidth="210.0" style="" text="LOGIN">
                   <HBox.margin>
                     <Insets left="151.0" />
                   </HBox.margin>

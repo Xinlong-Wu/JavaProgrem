@@ -3,26 +3,34 @@ package imgzip.LoginSignIn;
 import imgzip.mainpane.Pane_sceenbeginner;
 import imgzip.mainpane.Personal;
 import javafx.fxml.FXML;
+import javafx.fxml.Initializable;
 import javafx.scene.control.*;
+import javafx.scene.input.KeyCode;
+import javafx.scene.layout.AnchorPane;
 import javafx.stage.Stage;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.net.URL;
 import java.sql.ResultSet;
 
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.ResourceBundle;
 
 
 /**
     @Author:肖尧
     @Date:2019.11.24
  */
-public class LoginController {
+public class LoginController implements Initializable {
 
 
     @FXML
     private TextField account;
+
+    @FXML
+    private AnchorPane main;
 
     @FXML
     private TextField password;
@@ -237,6 +245,20 @@ public class LoginController {
             loadingInstruction.close();
         }
 
+    }
+
+    @Override
+    public void initialize(URL lacation, ResourceBundle resources){
+
+        main.setOnKeyPressed(e->{
+            if (e.getCode() == KeyCode.ENTER){
+                login();
+            }
+        });
+
+        login.setOnAction(event -> {
+            login();
+        });
     }
 }
 

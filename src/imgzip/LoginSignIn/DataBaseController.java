@@ -11,18 +11,17 @@ import java.sql.*;
 
 public class DataBaseController {
 
-    PreparedStatement ps = null;
-    Connection ct = null;
-    ResultSet rs = null;
-    String url = "jdbc:mysql://120.78.208.4/javaProgrem";//待定调整
-    String user =  "javaP" ;//待定调整
-    String password  = "1801090042"; //待定调整
-    String driver = "com.mysql.cj.jdbc.Driver";
+    private PreparedStatement ps = null;
+    private Connection ct = null;
+    private ResultSet rs = null;
+    private String url = "jdbc:mysql://120.78.208.4/javaProgrem";
+    private String user =  "javaP" ;
+    private String password  = "1801090042";
+    private String driver = "com.mysql.cj.jdbc.Driver";
 
 
     //关闭资源
     public void close(){
-
         try{
 
             if(rs != null) {
@@ -41,6 +40,7 @@ public class DataBaseController {
         }
     }
 
+    //检查连接是否成功
     public void jdbcConnection(){
         try {
 
@@ -50,13 +50,11 @@ public class DataBaseController {
         }catch (Exception ex){
             System.out.println("连接失败");
             ex.printStackTrace();
-
         }
 
     }
 
-    
-    //执行某个查询方法
+    //执行某个查询语句
     public ResultSet queryExcecute(String sql){
 
         try {
@@ -77,7 +75,7 @@ public class DataBaseController {
         return rs;
     }
 
-
+    //执行某个更新语句
     public void queryUpdate(String sql){
         try {
 
@@ -95,8 +93,6 @@ public class DataBaseController {
             ex.printStackTrace();
 
         }
-
     }
-
 
 }
