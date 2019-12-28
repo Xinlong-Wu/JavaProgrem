@@ -226,7 +226,6 @@ public class LoginController {
                 rs.first();
                 for(int i = 1 ; i <= columnCount ; i++){
                     GlobalStringManager.setPicSequences(rs.getString(1));
-                    System.out.println(rs.getString(1));
                     rs.next();
                 }
             }

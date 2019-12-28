@@ -82,6 +82,7 @@ public class Personal {
             Scene scene = new Scene(root, 939, 685);
             scene.getStylesheets().add("css/mainpanecss.css");
             primaryStage.setScene(scene);
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){

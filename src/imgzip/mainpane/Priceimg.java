@@ -19,6 +19,7 @@ public class Priceimg {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("pay");
             primaryStage.setScene(new Scene(root, 237, 327));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){

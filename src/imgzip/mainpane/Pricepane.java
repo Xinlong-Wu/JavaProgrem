@@ -20,6 +20,7 @@ public class Pricepane{
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Price");
             primaryStage.setScene(new Scene(root, 939, 685));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
 
         }catch (Exception e){
@@ -35,6 +36,7 @@ public class Pricepane{
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Price");
             primaryStage.setScene(new Scene(root, 939, 685));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){

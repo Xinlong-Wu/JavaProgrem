@@ -21,6 +21,7 @@ public class Main extends Application {
         	Parent root=FXMLLoader.load(getClass().getResource("/fxml/Pane_sceen.fxml"));
             primaryStage.setTitle("Homepage");
             primaryStage.setScene(new Scene(root, 939, 685));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
 

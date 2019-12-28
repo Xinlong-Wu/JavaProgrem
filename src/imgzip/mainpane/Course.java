@@ -23,6 +23,7 @@ public class Course {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Course");
             primaryStage.setScene(new Scene(root, 939, 685));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
 
         }catch (Exception e){
@@ -38,6 +39,7 @@ public class Course {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Course");
             primaryStage.setScene(new Scene(root, 939, 685));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){

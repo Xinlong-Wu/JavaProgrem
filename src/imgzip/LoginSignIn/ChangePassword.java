@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 
 /**
  @Author:   肖尧
- @Date: 2019.12.12
+ @Date: 2019.12.28
 
  改变密码的页面类，写成构造方法形式被调用。
  */
@@ -75,6 +75,7 @@ public class ChangePassword {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Verify your ID");
             primaryStage.setScene(new Scene(root, 607, 500));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
 
@@ -100,7 +101,7 @@ public class ChangePassword {
 
 /**
  @Author:   肖尧
- @Date: 2019.12.12
+ @Date: 2019.12.28
 
  提醒用户成功改变密码的页面类，写成构造方法形式被调用。
  */
@@ -135,6 +136,7 @@ class ChangePasswordSuccessfully{
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Verify your ID");
             primaryStage.setScene(new Scene(root, 638, 400));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             if (judgeIsLogined == 0){

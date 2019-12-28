@@ -19,6 +19,7 @@ public class Change_tel {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("修改电话号码");
             primaryStage.setScene(new Scene(root, 400, 300));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             primaryStage.setOnCloseRequest(e->{

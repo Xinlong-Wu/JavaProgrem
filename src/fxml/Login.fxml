@@ -4,6 +4,7 @@
 <?import java.util.*?>
 <?import javafx.geometry.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.paint.*?>
 <?import javafx.scene.text.*?>
@@ -98,11 +99,22 @@
       <top>
         <HBox alignment="CENTER_LEFT" prefHeight="73.0" prefWidth="573.0" BorderPane.alignment="CENTER">
           <children>
-            <Label text="Welcome to ImgZip" textAlignment="LEFT">
+            <Label prefHeight="58.0" prefWidth="77.0" text="Img" textAlignment="LEFT">
               <font>
-                <Font name="System Bold" size="36.0" />
+                <Font name="Book Antiqua Bold" size="36.0" />
               </font>
+              <HBox.margin>
+                <Insets left="20.0" />
+              </HBox.margin>
             </Label>
+            <ImageView fitHeight="89.25" fitWidth="119.0" pickOnBounds="true" preserveRatio="true">
+              <image>
+                <Image url="@../res/icon/logo.png" />
+              </image>
+              <HBox.margin>
+                <Insets fx:id="x3" />
+              </HBox.margin>
+            </ImageView>
           </children>
         </HBox>
       </top>

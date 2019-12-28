@@ -90,10 +90,10 @@ public class Login extends Application {
             e.printStackTrace();
         }
 
-        primaryStage.setTitle("XXX login");
+        primaryStage.setTitle("Imgzip login");
         primaryStage.setScene(new Scene(root, 638, 400));
         primaryStage.show();
-        primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
+        primaryStage.getIcons().add(new Image("res/icon/logo.png"));
         primaryStage.setOnCloseRequest(e->{
             new Pane_sceenbeginner();
         });

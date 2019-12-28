@@ -18,7 +18,7 @@
           <children>
             <ImageView fitHeight="141.0" fitWidth="141.0" pickOnBounds="true" preserveRatio="true">
               <image>
-                <Image url="@../res/icon/Happyface.png" />
+                <Image url="@../res/icon/logo.png" />
               </image>
             </ImageView>
           </children>
@@ -28,9 +28,9 @@
         </HBox>
         <HBox alignment="CENTER" prefHeight="67.0" prefWidth="601.0">
           <children>
-            <Label text="CREATE AN ACCOUNT">
+            <Label text="Create an Account">
               <font>
-                <Font name="Arial Black" size="39.0" />
+                <Font name="Arial Black" size="40.0" />
               </font>
             </Label>
           </children>
@@ -65,7 +65,7 @@
               <children>
                 <HBox id="AccountBox" alignment="CENTER_LEFT" prefHeight="36.0" prefWidth="437.0" style="-fx-border-style:solid inside;&#10;-fx-border-width:1px;&#10;-fx-border-insets:0;&#10;-fx-border-radius:5;&#10;-fx-border-color:grey;&#10;-fx-background-color:transparent, white, transparent, white;&#10;&#10;&#10;&#10;&#10;">
                   <children>
-                    <PasswordField fx:id="passWord" onKeyReleased="#checkTheStrengtenOfPassowrd" prefHeight="36.0" prefWidth="250.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;" />
+                    <PasswordField fx:id="passWord" onKeyReleased="#checkTheStrengtenOfPassowrd" prefHeight="36.0" prefWidth="250.0" promptText="Longer than 5 letters" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;-fx-font-size:18px;&#10;" text="" />
                     <Label id="Al3" fx:id="already3" alignment="CENTER" font="$x3" prefHeight="31.0" prefWidth="175.0" style="-fx-background-insets:0;&#10;-fx-background-color:transparent, white, transparent, white;&#10;" text="Weak passoword" textAlignment="LEFT" textFill="RED" />
                   </children>
                 </HBox>
