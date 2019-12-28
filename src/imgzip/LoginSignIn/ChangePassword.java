@@ -29,8 +29,10 @@ public class ChangePassword {
             Parent root = FXMLLoader.load(getClass().getResource("/fxml/ChangePassword.fxml"));
 
             PasswordField checkPassword = (PasswordField)root.lookup("#checkpassword");
+            Label different1 = (Label)root.lookup("#checkThePassword");
             Button change = (Button)root.lookup("#changeThePassword");
             change.setDisable(true);
+            different1.setVisible(false);
 
             /**
              * 改变密码按钮事件：

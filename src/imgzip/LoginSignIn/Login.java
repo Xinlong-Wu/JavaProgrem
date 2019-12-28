@@ -10,6 +10,7 @@ import javafx.scene.control.CheckBox;
 import javafx.scene.control.TextField;
 import javafx.scene.control.PasswordField;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
 import javafx.stage.Stage;
 import javafx.scene.control.Label;
 
@@ -89,6 +90,8 @@ public class Login extends Application {
         }catch (Exception e){
             e.printStackTrace();
         }
+
+
 
         primaryStage.setTitle("Imgzip login");
         primaryStage.setScene(new Scene(root, 638, 400));
