@@ -5,6 +5,7 @@ import imgzip.LoginSignIn.DataBaseController;
 import imgzip.alertwindow.AlertButton;
 import imgzip.alertwindow.AlertWindow;
 import imgzip.mainpane.Course;
+import imgzip.mainpane.Personal;
 import javafx.collections.ObservableList;
 import javafx.event.Event;
 import javafx.event.EventHandler;
@@ -367,7 +368,7 @@ public class FunctionBox extends Scene {
         // 设置响应主体
         btBack.setOnAction(e->{
             //唤起其他窗口
-            new Course();
+            new Personal();
             FunctionPane.close();
         });
 
@@ -506,7 +507,7 @@ public class FunctionBox extends Scene {
      * ImgBlock中也会进行调用，所以设为静态
      * @param note
      */
-    private static void setclipboardtext(String note) {
+    public static void setclipboardtext(String note) {
         Clipboard clip = Clipboard.getSystemClipboard();
         ClipboardContent clipboardContent = new ClipboardContent();
         clipboardContent.putString(note);

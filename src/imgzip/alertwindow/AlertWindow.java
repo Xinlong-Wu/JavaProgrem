@@ -2,6 +2,7 @@ package imgzip.alertwindow;
 
 import imgzip.interfaces.ButtonHandler;
 import javafx.application.Application;
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.geometry.Insets;
 import javafx.geometry.Pos;
@@ -31,7 +32,7 @@ public class AlertWindow extends Application {
     private Button View = new Button("访问主页");
     private VBox pane = new VBox(5);
     private VBox btBox = new VBox(10);
-
+    private int time = -1;
 
     public AlertWindow(){
         HBox tittle = new HBox(10);
@@ -102,6 +103,38 @@ public class AlertWindow extends Application {
         pane.getChildren().addAll(tittle,lbinfo,btBox);
     }
 
+    public AlertWindow(String alertTitle, String desc,int delay){
+        this.time = delay;
+        this.alertTitle = alertTitle;
+
+        HBox tittle = new HBox(10);
+        ImageView iminfo = new ImageView(new Image("res/icon/Information.png"));
+        iminfo.getStyleClass().addAll("iminfo");
+        iminfo.setFitHeight(45);
+        iminfo.setFitWidth(45);
+        Label lbinfocT = new Label(alertTitle);
+        lbinfocT.getStyleClass().addAll("lbinfocT");
+        tittle.getChildren().addAll(iminfo,lbinfocT);
+        tittle.setPadding(new Insets(0,0,0,15));
+        tittle.getStyleClass().addAll("tittle");
+
+        Label lbinfo = new Label(desc);
+
+        ImageView tar = new ImageView(new Image("res/icon/target.png"));
+        tar.setFitHeight(20);
+        tar.setFitWidth(20);
+        ok.setGraphic(tar);
+        ok.setGraphicTextGap(10);
+        ok.setAlignment(Pos.CENTER_LEFT);
+        ok.getStyleClass().addAll("button");
+
+        btBox.getChildren().addAll(ok);
+        btBox.getStyleClass().addAll("ppane","btBox");
+
+        pane.getStyleClass().addAll("ppane");
+        pane.getChildren().addAll(tittle,lbinfo,btBox);
+    }
+
     public final void anotherButton(ButtonHandler<VBox> value) {
         VBox vBox = new VBox();
         vBox.getStyleClass().addAll("ppane");
@@ -123,6 +156,19 @@ public class AlertWindow extends Application {
         primaryStage.getIcons().add(new Image("res/icon/Information.png"));
         primaryStage.setResizable(false);
         primaryStage.show();
+
+        if(time != -1){
+            Thread thread = new Thread(() -> {
+                try {
+                    Thread.sleep(time);
+                    Platform.runLater(() -> primaryStage.close());
+                } catch (Exception exp) {
+                    exp.printStackTrace();
+                }
+            });
+            thread.setDaemon(true);
+            thread.start();
+        }
 
         ok.setOnAction(event -> {
             primaryStage.close();

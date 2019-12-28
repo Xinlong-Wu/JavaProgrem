@@ -110,6 +110,7 @@ public class UploadImg implements Runnable {
         /**与服务器建立连接*/
         try {
             s = new Socket("120.78.208.4", 1234);
+//            s = new Socket("127.0.0.1", 1234);
 //            s.setSoTimeout(5000);
         }catch (IOException e) {
             System.out.println("未连接到服务器");

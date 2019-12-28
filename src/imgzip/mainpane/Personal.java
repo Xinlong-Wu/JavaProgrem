@@ -69,7 +69,9 @@ public class Personal {
             }
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Personal");
-            primaryStage.setScene(new Scene(root, 939, 685));
+            Scene scene = new Scene(root, 939, 685);
+            scene.getStylesheets().add("css/mainpanecss.css");
+            primaryStage.setScene(scene);
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         }catch (Exception e){

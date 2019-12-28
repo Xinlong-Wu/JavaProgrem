@@ -1,6 +1,7 @@
 package imgzip;
 
 import imgzip.mainpane.Course;
+import imgzip.mainpane.Personal;
 import imgzip.mainwindow.FunctionBox;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
@@ -24,7 +25,7 @@ public class FunctionPane{
         primaryStage.show();
         primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
         primaryStage.setOnCloseRequest(e->{
-            new Course();
+            new Personal();
         });
 
     }
