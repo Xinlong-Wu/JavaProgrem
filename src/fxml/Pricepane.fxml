@@ -2,6 +2,7 @@
 
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -52,7 +53,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <AnchorPane layoutX="100.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+      <AnchorPane layoutX="100.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE; -fx-background-radius: 5;">
          <children>
             <Label fx:id="label1" layoutX="70.0" layoutY="25.0" text="免费版">
                <font>
@@ -112,8 +113,11 @@
                </font>
             </Label>
          </children>
+         <effect>
+            <InnerShadow />
+         </effect>
       </AnchorPane>
-      <AnchorPane layoutX="365.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+      <AnchorPane layoutX="365.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE; -fx-background-radius: 5;">
          <children>
             <Label fx:id="label13" layoutX="70.0" layoutY="25.0" text="会员版">
                <font>
@@ -204,8 +208,11 @@
                </image>
             </ImageView>
          </children>
+         <effect>
+            <InnerShadow />
+         </effect>
       </AnchorPane>
-      <AnchorPane layoutX="630.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE;">
+      <AnchorPane layoutX="630.0" layoutY="170.0" opacity="0.7" prefHeight="450.0" prefWidth="210.0" style="-fx-background-color: WHITE; -fx-background-radius: 5;">
          <children>
             <Label fx:id="label28" layoutX="50.0" layoutY="25.0" text="尊贵会员版">
                <font>
@@ -282,7 +289,10 @@
                   <Image url="@../res/icon/check.jpg" />
                </image>
             </ImageView>
-         </children></AnchorPane>
+         </children>
+         <effect>
+            <InnerShadow />
+         </effect></AnchorPane>
       <Button fx:id="personal" layoutX="385.0" layoutY="45.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="Personal">
          <font>
             <Font size="17.0" />

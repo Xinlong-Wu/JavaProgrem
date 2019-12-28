@@ -2,6 +2,7 @@
 
 <?import javafx.scene.*?>
 <?import javafx.scene.control.*?>
+<?import javafx.scene.effect.*?>
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.shape.*?>
@@ -52,7 +53,7 @@
             <Cursor fx:constant="HAND" />
          </cursor>
       </Button>
-      <AnchorPane layoutX="35.0" layoutY="110.0" opacity="0.6" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: WHITE;">
+      <AnchorPane layoutX="35.0" layoutY="110.0" opacity="0.6" prefHeight="500.0" prefWidth="200.0" style="-fx-background-color: WHITE; -fx-background-radius: 5;">
          <children>
             <Button fx:id="register" layoutX="55.0" layoutY="70.0" mnemonicParsing="false" style="-fx-background-color: Transparent;" text="注册账号" underline="true">
                <font>
@@ -119,7 +120,10 @@
                   <Cursor fx:constant="HAND" />
                </cursor>
             </Button>
-         </children></AnchorPane>
+         </children>
+         <effect>
+            <InnerShadow />
+         </effect></AnchorPane>
       <ButtonBar layoutX="315.0" layoutY="150.0" prefHeight="40.0" prefWidth="200.0" />
       <BorderPane fx:id="page" layoutX="300.0" layoutY="110.0" opacity="0.8" prefHeight="500.0" prefWidth="550.0" style="-fx-background-color: WHITE;">
          <center>
