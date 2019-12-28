@@ -16,7 +16,7 @@ import java.sql.ResultSet;
 
 /**
  @Author:   肖尧
- @Date: 2019.12.4
+ @Date: 2019.12.28
 
  提供用户创造密码的页面类，通过调用构造方法创建。
  */
@@ -267,6 +267,7 @@ public class CreateAccount {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Create an Account");
             primaryStage.setScene(new Scene(root, 600.0000999999975, 633));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             primaryStage.setOnCloseRequest(e->{
@@ -313,7 +314,7 @@ public class CreateAccount {
 
 /**
  @Author:   肖尧
- @Date: 2019.12.12
+ @Date: 2019.12.28
 
  提醒用户成功改变密码的页面类，写成构造方法形式被调用。
  */
@@ -328,6 +329,7 @@ class CreateSuccessfully{
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Create an Account Successfully!");
             primaryStage.setScene(new Scene(root, 638, 406));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             primaryStage.setOnCloseRequest(e->{

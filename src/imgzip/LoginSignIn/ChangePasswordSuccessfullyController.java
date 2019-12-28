@@ -6,7 +6,7 @@ import javafx.stage.Stage;
 
 /**
  @Author:   肖尧
- @Date: 2019.12.12
+ @Date: 2019.12.28
  */
 public class ChangePasswordSuccessfullyController {
 

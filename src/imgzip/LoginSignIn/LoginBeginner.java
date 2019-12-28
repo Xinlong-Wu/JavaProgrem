@@ -7,6 +7,7 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
 import java.io.BufferedReader;
@@ -89,9 +90,11 @@ public class LoginBeginner {
                 e.printStackTrace();
             }
 
-            primaryStage.setTitle("XXX login");
+            primaryStage.setTitle("Imgzip login");
             primaryStage.setScene(new Scene(root, 638, 400));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
+            primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
 
             primaryStage.setOnCloseRequest(e->{
                 new Pane_sceenbeginner();

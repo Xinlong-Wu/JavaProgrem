@@ -26,6 +26,7 @@ public class FindPassword {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("Verify your ID");
             primaryStage.setScene(new Scene(root, 607, 500));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
 

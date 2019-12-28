@@ -20,6 +20,7 @@ public class Change_email {
             Stage primaryStage = new Stage();
             primaryStage.setTitle("修改用户名");
             primaryStage.setScene(new Scene(root, 400, 300));
+            primaryStage.getIcons().add(new Image("res/icon/logo.png"));
             primaryStage.show();
             primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
             primaryStage.setOnCloseRequest(e->{
