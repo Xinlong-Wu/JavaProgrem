@@ -10,7 +10,6 @@ import java.io.InputStreamReader;
 import java.net.ServerSocket;
 import java.net.Socket;
 
-
 /**
  *
  * 文件名：ServerReceive.java
@@ -30,7 +29,9 @@ import java.net.Socket;
 
 public class ServerReceive {
 
+
     public static void main(String[] args) {
+        FileManger.fileMangePool.execute(new FileManger());
 
         /**与服务器建立连接的通信句柄*/
         ServerSocket ss = null;

@@ -11,11 +11,7 @@ import javafx.geometry.Pos;
 import javafx.scene.Cursor;
 import javafx.scene.control.Button;
 import javafx.scene.control.ScrollPane;
-import javafx.scene.layout.Background;
-import javafx.scene.layout.BackgroundFill;
 import javafx.scene.layout.VBox;
-import javafx.scene.paint.Color;
-import javafx.scene.text.Font;
 import javafx.stage.Stage;
 
 import java.net.URL;
@@ -116,7 +112,7 @@ public class PersonalController implements Initializable {
 
         /**
          * @Author:乌鑫龙
-         * 加载用户上传的图片提取码
+         * 加载用户上传的图片提取码，显示在个人用户界面
          */
         codeList.getChildren().addAll(getCodes());
     }

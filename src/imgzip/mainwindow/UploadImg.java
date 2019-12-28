@@ -25,7 +25,7 @@ import java.util.concurrent.locks.ReentrantLock;
  * 实现功能：作为客户端向服务器发送一个文件
  *
  * 具体实现过程：
- * 1、建立与服务器端的连接，IP：127.0.0.1， port：1234
+ * 1、建立与服务器端的连接，IP：127.0.0.1(本地），120.78.208.4（服务器）， port：1234
  * 2、将文件的名字和大小通过自定义的文件传输协议，发送到服务器
  * 3、循环读取本地文件，将文件打包发送到数据输出流中
  * 4、关闭文件，结束传输
@@ -209,9 +209,10 @@ public class UploadImg implements Runnable {
         int imgId = -1;
         try {
             rs.next();
-            imgId = Integer.valueOf(rs.getString("maxx")) + 1;
+            String num = rs.getString("maxx");
+            imgId = Integer.valueOf(num) + 1;
             rs.close();
-        } catch (SQLException e) {
+        } catch (Exception e) {
             e.printStackTrace();
         }finally {
             dbc.close();

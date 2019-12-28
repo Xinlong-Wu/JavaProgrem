@@ -103,7 +103,7 @@ public class LoginController {
             rs = loginInstruction.queryExcecute(currentInstruction);
 
 
-            if (rs.next()) {
+            if (rs!=null && rs.next()) {
                 String rightPassword = rs.getString(1);
                 if (rightPassword.equals(encryptedPassword)){
 
@@ -137,7 +137,7 @@ public class LoginController {
                 passwordWrong.setVisible(true);
             }
 
-        }catch (SQLException e){
+        }catch (Exception e){
             e.printStackTrace();
 
         }finally {

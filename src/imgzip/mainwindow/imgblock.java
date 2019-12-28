@@ -92,6 +92,7 @@ class ImgBlock extends BorderPane {
     private String url;
     private int index;
     private Boolean isUpload = false;
+    private Boolean isHttpSorce = false;
     private File file;
     private Boolean isAcceed = true;
 
@@ -116,11 +117,11 @@ class ImgBlock extends BorderPane {
         //判断Url是否来自网络
         if (imgUrl.startsWith("http:")){
             file=getNetUrlHttp(imgUrl);
+            isHttpSorce=true;
             if (file == null){
                 setAcceed(false);
                 return;
             }
-            this.isUpload = true;
         } else {
             file= new File(imgUrl);
         }
@@ -137,7 +138,7 @@ class ImgBlock extends BorderPane {
 
         //私有属性设定
         Image tmp ;
-        if(isUpload){
+        if(isHttpSorce){
             tmp = new Image(imgUrl);
         } else {
             tmp = new Image("file:"+imgUrl);

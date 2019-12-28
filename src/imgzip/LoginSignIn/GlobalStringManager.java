@@ -55,7 +55,9 @@ public class GlobalStringManager {
         picSequences.add(sequence);
     }
 
-
+    public static boolean removePic(String sequence) {
+        return picSequences.remove(sequence);
+    }
 
 
 }

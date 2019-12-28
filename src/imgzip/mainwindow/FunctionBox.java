@@ -2,6 +2,7 @@ package imgzip.mainwindow;
 
 import imgzip.FunctionPane;
 import imgzip.LoginSignIn.DataBaseController;
+import imgzip.LoginSignIn.GlobalStringManager;
 import imgzip.alertwindow.AlertButton;
 import imgzip.alertwindow.AlertWindow;
 import imgzip.mainpane.Course;
@@ -390,6 +391,14 @@ public class FunctionBox extends Scene {
             }
         });
 
+        //单击自动读取粘贴板
+        tfImgIdInput.setOnMouseClicked(e->{
+            String code = getclipboardtext();
+            if(!Pattern.matches(".*[^a-z|0-9].*",code )){
+                tfImgIdInput.setText(code);
+            }
+        });
+
         // 键盘快捷键
         // "打开  (Ctrk+O)"
         homePane.setOnKeyPressed(e -> {
@@ -490,6 +499,7 @@ public class FunctionBox extends Scene {
         AlertWindow alertWindow = new AlertWindow("正在上传","您的图片提取码:\n"+uuid);
         // 此处写警告弹窗的标题和内容
         // 用于新加按钮，可以新加多个，最后添加在VBox中
+        Stage stage = new Stage();
         alertWindow.anotherButton(vBox -> {
             AlertButton alertButton = new AlertButton("拷贝");        //写新加按钮的名字
             vBox.getChildren().add(alertButton);
@@ -497,9 +507,10 @@ public class FunctionBox extends Scene {
             alertButton.setOnAction(ee->{
                 setclipboardtext(uuid);
                 alertButton.setText("已复制到剪贴板上");
+                stage.close();
             });
         });
-        alertWindow.start(new Stage());
+        alertWindow.start(stage);
     }//upLoading
 
     /**
@@ -514,6 +525,15 @@ public class FunctionBox extends Scene {
         clip.setContent(clipboardContent);
     }//setclipboardtext
 
+    /**
+     * 读取剪贴板第一行
+     */
+    public static String getclipboardtext() {
+        Clipboard clip = Clipboard.getSystemClipboard();
+        String content= clip.getString();
+        return content;
+    }//setclipboardtext
+
     private void loadImgs(String uuid){
         boolean t = Pattern.matches(".*[^a-z|0-9].*",uuid );
         if(t){
@@ -522,9 +542,11 @@ public class FunctionBox extends Scene {
             return;
         }
         String[] fileName = getImgsUrl(uuid);
-        for (String s : fileName) {
-            System.out.println("http://www.wulongxin.com/javaP/javaProImgs/"+s);
-            addToBlockList("http://www.wulongxin.com/javaP/javaProImgs/"+s);
+        if(fileName!=null){
+            for (String s : fileName) {
+                System.out.println("http://www.wulongxin.com/javaP/javaProImgs/"+s);
+                addToBlockList("http://www.wulongxin.com/javaP/javaProImgs/"+s);
+            }
         }
         checkBlockList();
     }
@@ -538,15 +560,21 @@ public class FunctionBox extends Scene {
         DataBaseController dbc = new DataBaseController();
         String sql = "SELECT `imgUrl` AS `url` FROM `imgcount` where `groupUuid` = '"+uuid+"'";
         ResultSet rs = dbc.queryExcecute(sql);
+        int row = 0;
         String[] urls = null;
         try {
             rs.last();
-            int row = rs.getRow();
-            urls = new String[row];
-            rs.first();
-            for(int count = 0;count<row;count++) {
-                urls[count] = rs.getString(1);
-                rs.next();
+            row = rs.getRow();
+            if(row>0){
+                urls = new String[row];
+                rs.first();
+                for(int count = 0;count<row;count++) {
+                    urls[count] = rs.getString(1);
+                    rs.next();
+                }
+            }else {
+                AlertWindow uuidNotExist = new AlertWindow("文件提取码有误","文件提取码有误或已失效,请重试",1000);
+                uuidNotExist.start(new Stage());
             }
             rs.close();
         } catch (SQLException e) {
@@ -554,7 +582,23 @@ public class FunctionBox extends Scene {
             AlertWindow alertWindow = new AlertWindow("数据库登陆失败",e.getMessage());
             alertWindow.start(new Stage());
         }
+
+        //在数据库中删除已经下载的图片
+        if(row>0){
+
+            for (String url: urls) {
+                sql = "INSERT INTO `imgRecycle` (`fileName`) VALUES ('"+url+"')";
+                dbc.queryUpdate(sql);
+            }
+            sql = "DELETE FROM `UplodUser` WHERE `uuid` = '"+uuid+"'";
+            dbc.queryUpdate(sql);
+            sql = "DELETE FROM `imgcount` WHERE `groupUuid` = '"+uuid+"'";
+            dbc.queryUpdate(sql);
+        }
         dbc.close();
+
+        GlobalStringManager.removePic(uuid);
+
         return urls;
     }//getImgsUrl
 

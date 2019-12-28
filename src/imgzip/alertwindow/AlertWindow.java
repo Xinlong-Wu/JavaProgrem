@@ -34,6 +34,9 @@ public class AlertWindow extends Application {
     private VBox btBox = new VBox(10);
     private int time = -1;
 
+    /**
+     * 跳转项目网站模式
+     */
     public AlertWindow(){
         HBox tittle = new HBox(10);
         ImageView iminfo = new ImageView(new Image("res/icon/Information.png"));
@@ -72,6 +75,9 @@ public class AlertWindow extends Application {
         pane.getChildren().addAll(tittle,lbinfo,btBox);
     }
 
+    /**
+     * 自定义警告文本模式
+     */
     public AlertWindow(String alertTitle, String desc){
         this.alertTitle = alertTitle;
 
@@ -103,6 +109,9 @@ public class AlertWindow extends Application {
         pane.getChildren().addAll(tittle,lbinfo,btBox);
     }
 
+    /**
+     * 定时自动关闭模式
+     */
     public AlertWindow(String alertTitle, String desc,int delay){
         this.time = delay;
         this.alertTitle = alertTitle;
@@ -135,6 +144,10 @@ public class AlertWindow extends Application {
         pane.getChildren().addAll(tittle,lbinfo,btBox);
     }
 
+    /**
+     * 自定义第二个按钮行为，lambda表达式作为参数
+     * @param value
+     */
     public final void anotherButton(ButtonHandler<VBox> value) {
         VBox vBox = new VBox();
         vBox.getStyleClass().addAll("ppane");
@@ -145,6 +158,10 @@ public class AlertWindow extends Application {
         return btBox.getChildren();
     }
 
+    /**
+     * 警告窗口启动器
+     * @param primaryStage
+     */
     @Override
     public void start(Stage primaryStage) {
 
