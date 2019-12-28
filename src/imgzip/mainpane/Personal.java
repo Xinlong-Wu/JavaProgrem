@@ -16,6 +16,7 @@ import javafx.stage.Stage;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 /**
  @Author:  吴泳仪
@@ -33,6 +34,7 @@ public class Personal {
             Pane accountp = (Pane)root.lookup("#accountp");
             Pane emailp = (Pane)root.lookup("#emailp");
             Pane telp= (Pane)root.lookup("#telp");
+            TextArea pic= (TextArea) root.lookup("#pic");
 
             //新建一个DataBaseController类的实体
             DataBaseController loginInstruction = new DataBaseController();
@@ -59,6 +61,14 @@ public class Personal {
                     Label t = new Label(rs.getString(4));
                     t.setStyle("-fx-font-family: 'FangSong';-fx-font-size: 20;");
                     telp.getChildren().add(t);
+                    //把从GlobalStringManager中读出来的图片序列利用label显示在页面上
+
+                    ArrayList<String> sequence = new ArrayList<>();
+                    sequence = GlobalStringManager.getPicSequences();
+                    for(int i = 0 ; i < GlobalStringManager.getPicSequences().size();i++){
+//                        pic.appendText(sequence.get(i));
+                    }
+
                 }
 
             }catch (SQLException e){
