@@ -12,7 +12,9 @@ public class FileManger implements Runnable{
     static ExecutorService fileMangePool = Executors.newCachedThreadPool();
     private DataBaseController dbc;
     private String sql;
-
+    static {
+        Log4jPrintStream.redirectSystemOut();
+    }
     FileManger(){
         dbc = new DataBaseController();
         sql = "SELECT * FROM `imgRecycle`";

@@ -33,7 +33,7 @@ import java.util.concurrent.Executors;
  * @author 乌鑫龙
  * @date 2019/11/12
  */
-class ImgBlock extends BorderPane {
+public class ImgBlock extends BorderPane {
     /**
      * 静态参数加载各种资源图像
      * 静态变量：

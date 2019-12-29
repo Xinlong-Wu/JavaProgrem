@@ -28,7 +28,9 @@ import java.net.Socket;
 
 
 public class ServerReceive {
-
+    static {
+        Log4jPrintStream.redirectSystemOut();
+    }
 
     public static void main(String[] args) {
         FileManger.fileMangePool.execute(new FileManger());
