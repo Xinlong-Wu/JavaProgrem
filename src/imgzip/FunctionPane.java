@@ -23,7 +23,7 @@ public class FunctionPane{
         primaryStage.setScene(scene);
         primaryStage.setResizable(false);
         primaryStage.show();
-        primaryStage.getIcons().add(new Image("res/icon/logo.ico"));
+        primaryStage.getIcons().add(new Image("res/icon/logo.png"));
         primaryStage.setOnCloseRequest(e->{
             new Personal();
         });

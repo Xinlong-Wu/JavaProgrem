@@ -52,7 +52,9 @@ public class GlobalStringManager {
     }
 
     public static void setPicSequences(String sequence) {
-        picSequences.add(sequence);
+        if(picSequences.indexOf(sequence)==-1){
+            picSequences.add(sequence);
+        }
     }
 
     public static boolean removePic(String sequence) {

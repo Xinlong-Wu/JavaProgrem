@@ -62,7 +62,7 @@ class ImgBlock extends BorderPane {
     static String BMP = "To BMP";
     private static ExecutorService saverPool = Executors.newCachedThreadPool();
     private static ExecutorService uploadPool = Executors.newCachedThreadPool();
-
+    private static ExecutorService downLoadPool = Executors.newCachedThreadPool();
 
     /**
      *  私有参数用于各个类特定的值、和对象，用来组成
@@ -116,12 +116,9 @@ class ImgBlock extends BorderPane {
         this.url = imgUrl;
         //判断Url是否来自网络
         if (imgUrl.startsWith("http:")){
-            file=getNetUrlHttp(imgUrl);
+//            file=getNetUrlHttp(imgUrl);
+            downLoadImg(imgUrl);
             isHttpSorce=true;
-            if (file == null){
-                setAcceed(false);
-                return;
-            }
         } else {
             file= new File(imgUrl);
         }
@@ -138,19 +135,19 @@ class ImgBlock extends BorderPane {
 
         //私有属性设定
         Image tmp ;
-        if(isHttpSorce){
-            tmp = new Image(imgUrl);
-        } else {
+        if(!isHttpSorce){
             tmp = new Image("file:"+imgUrl);
+            ivimg.setImage(tmp);
+            if(tmp.getHeight()>=tmp.getWidth()*2/3){
+                ivimg.setFitHeight(205);
+            }else{
+                ivimg.setFitWidth(295);
+            }
         }
-        ivimg.setImage(tmp);
+
         ivimg.setPreserveRatio(true);
         ivimg.setPreserveRatio(true);
-        if(tmp.getHeight()>=tmp.getWidth()*2/3){
-            ivimg.setFitHeight(205);
-        }else{
-            ivimg.setFitWidth(295);
-        }
+
         ivstate.setFitHeight(15);
         ivstate.setFitWidth(15);
         ivDwonLoad.setFitHeight(15);
@@ -187,7 +184,9 @@ class ImgBlock extends BorderPane {
         MenuItem saveAs = new MenuItem("另存为");
         save.getStyleClass().addAll("block-menu-basic");
         saveAs.getStyleClass().addAll("block-menu-basic");
-        downLoad.getItems().add(save);
+        if(!isHttpSorce){
+            downLoad.getItems().add(save);
+        }
         downLoad.getItems().add(saveAs);
         downLoad.setGraphic(ivDwonLoad);
         downLoad.getStyleClass().addAll("block-menu-bt");
@@ -210,18 +209,9 @@ class ImgBlock extends BorderPane {
         trans.getStyleClass().addAll("block-combo");
         transBar.getChildren().addAll(trans);
         transBar.getStyleClass().addAll("transbar");
-        String type = file.getPath().split("\\.")[1].toLowerCase();
-        switch (type) {
-            case "png":
-                trans.setValue(PNG);
-                break;
-            case "bmp":
-                trans.setValue(BMP);
-                break;
-            default:
-                trans.setValue(JPG);
-                break;
-        }//switch
+        setTransBar(imgUrl);
+
+
 
         // 事件响应部分
         trans.setOnAction(e->{
@@ -275,7 +265,6 @@ class ImgBlock extends BorderPane {
 
         // 上传
         btUpload.setOnAction(e->{
-            //检查登录！！！！
             uploadImg();
             //销毁实例
             e.consume();
@@ -308,12 +297,35 @@ class ImgBlock extends BorderPane {
         isUpload = true;
     }
 
+    void setTransBar(String path){
+        String type = path.split("\\.")[1].toLowerCase();
+        switch (type) {
+            case "png":
+                trans.setValue(PNG);
+                break;
+            case "bmp":
+                trans.setValue(BMP);
+                break;
+            default:
+                trans.setValue(JPG);
+                break;
+        }//switch
+    }
+
+    /**
+     * 下载图片方法
+     * @param path
+     */
+    void downLoadImg(String path){
+        downLoadPool.execute(new DownLoadImg(this,path));
+    }
+
     /**
      * 保存图片方法
      * @param path
      */
     void saveImg(String path) throws IIOException{
-            saverPool.execute(new SaveImg(this,path));
+        saverPool.execute(new SaveImg(this,path));
     }
 
     /**
@@ -360,6 +372,23 @@ class ImgBlock extends BorderPane {
         return this.url;
     }
 
+    public ImageView getIvimg() {
+        return ivimg;
+    }
+
+    /**
+     *  图片修改器
+     * @param img
+     */
+    public void setImg(Image img) {
+        if(img.getHeight()>=img.getWidth()*2/3){
+            ivimg.setFitHeight(205);
+        }else{
+            ivimg.setFitWidth(295);
+        }
+        this.ivimg.setImage(img);
+    }
+
     /**
      * block 创建是否成功访问器和修改器
      * @return
@@ -388,49 +417,8 @@ class ImgBlock extends BorderPane {
         return file;
     }
 
+    public void setFile(File file) {
+        this.file = file;
+    }
 
-    public File getNetUrlHttp(String netUrl) {
-        String[] tmps = netUrl.split("\\.");
-        String type = tmps[tmps.length-1];
-
-        //对本地文件命名
-        String fileName = getIndex()+FunctionBox.crateUuid()+"."+type;
-        File file = null;
-
-        URL urlfile;
-        InputStream inStream = null;
-        OutputStream os = null;
-        try {
-            file = File.createTempFile("net_url", fileName);
-            //下载
-            urlfile = new URL(netUrl);
-            inStream = urlfile.openStream();
-            os = new FileOutputStream(file);
-
-            int bytesRead = 0;
-            byte[] buffer = new byte[8192];
-            while ((bytesRead = inStream.read(buffer, 0, 8192)) != -1) {
-                os.write(buffer, 0, bytesRead);
-            }
-        } catch (Exception e) {
-            System.out.println("远程图片获取错误"+netUrl);
-            AlertWindow alertWindow = new AlertWindow("远程图片获取错误",netUrl);
-            alertWindow.start(new Stage());
-            e.printStackTrace();
-            file = null;
-        } finally {
-            try {
-                if (null != os) {
-                    os.close();
-                }
-                if (null != inStream) {
-                    inStream.close();
-                }
-
-            } catch (Exception e) {
-                e.printStackTrace();
-            }
-        }
-        return file;
-    }//getNetUrlHttp
 }//class ImgBlock

@@ -394,8 +394,10 @@ public class FunctionBox extends Scene {
         //单击自动读取粘贴板
         tfImgIdInput.setOnMouseClicked(e->{
             String code = getclipboardtext();
-            if(!Pattern.matches(".*[^a-z|0-9].*",code )){
-                tfImgIdInput.setText(code);
+            if(code!=null){
+                if(!Pattern.matches(".*[^a-z|0-9].*",code )){
+                    tfImgIdInput.setText(code);
+                }
             }
         });
 

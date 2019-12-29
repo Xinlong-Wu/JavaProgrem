@@ -204,12 +204,12 @@ public class UploadImg implements Runnable {
 
     public String getImgId(){
         DataBaseController dbc = new DataBaseController();
-        String sql = "SELECT max(imgId) AS maxx FROM imgcount";
+        String sql = "SELECT Auto_increment FROM information_schema.TABLES WHERE Table_Schema= 'javaProgrem' AND table_name= 'imgcount'";
         ResultSet rs = dbc.queryExcecute(sql);
         int imgId = -1;
         try {
             rs.next();
-            String num = rs.getString("maxx");
+            String num = rs.getString(1);
             imgId = Integer.valueOf(num) + 1;
             rs.close();
         } catch (Exception e) {
